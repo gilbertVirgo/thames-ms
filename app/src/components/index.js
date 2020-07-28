@@ -22,7 +22,8 @@ export const Grid = styled.div`
 `;
 
 export const Heading = styled.h1`
-	margin-bottom: 25px;
+	margin-top: ${theme.gutter * 2}px;
+	margin-bottom: ${theme.gutter * 3}px;
 	font-weight: lighter;
 `;
 
