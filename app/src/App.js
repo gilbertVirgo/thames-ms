@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Redirect, Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Class from "./pages/Class";
+import Classes from "./pages/Classes";
+import Container from "react-bootstrap/Container";
+import Login from "./pages/Login";
+import Nav from "./components/Nav";
+import React from "react";
+
+const App = () => {
+	const [auth, setAuth] = React.useState(true);
+
+	return (
+		<BrowserRouter>
+			<Nav />
+
+			<Container>
+				<Route path="/class/:id" component={Class} />
+				<Route path="/classes" component={Classes} />
+
+				<Route path="/login" component={Login} />
+
+				{!auth && <Redirect from="*" to="/login" />}
+			</Container>
+		</BrowserRouter>
+	);
+};
 
 export default App;
