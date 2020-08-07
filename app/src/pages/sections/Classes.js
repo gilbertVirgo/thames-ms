@@ -8,9 +8,9 @@ import { useHistory } from "react-router-dom";
 export default () => {
 	const history = useHistory();
 
-	const [table, setTable] = React.useState([]);
 	const [loading, setLoading] = React.useState("Loading classes...");
-	const [error, setError] = React.useState(null);
+	const [error, setError] = React.useState();
+	const [table, setTable] = React.useState();
 
 	React.useEffect(() => {
 		(async function () {
@@ -31,24 +31,26 @@ export default () => {
 	return (
 		<Section error={error} loading={loading} title="Classes">
 			<Grid>
-				{table.map(({ fields }, index) => (
-					<Card
-						onClick={() => history.push(`/class/${fields.id}`)}
-						key={`class-${index}`}
-					>
-						<Card.Body>
-							<Title>{fields.Title}</Title>
-							<Paragraph>{fields.Year_Group}</Paragraph>
-						</Card.Body>
-						{fields.hasOwnProperty("Assignment_Title") && (
-							<Card.Footer>
-								{fields.Assignment_Title.length} active
-								assignment
-								{fields.Assignment_Title.length !== 1 && "s"}
-							</Card.Footer>
-						)}
-					</Card>
-				))}
+				{table &&
+					table.map(({ fields }, index) => (
+						<Card
+							onClick={() => history.push(`/class/${fields.id}`)}
+							key={`class-${index}`}
+						>
+							<Card.Body>
+								<Title>{fields.Title}</Title>
+								<Paragraph>{fields.Year_Group}</Paragraph>
+							</Card.Body>
+							{fields.hasOwnProperty("Assignment_Title") && (
+								<Card.Footer>
+									{fields.Assignment_Title.length} active
+									assignment
+									{fields.Assignment_Title.length !== 1 &&
+										"s"}
+								</Card.Footer>
+							)}
+						</Card>
+					))}
 			</Grid>
 		</Section>
 	);

@@ -30,7 +30,7 @@ const request = async ({ endpoint, method, data }) => {
 		if (res.data) return res.data;
 	} catch (err) {
 		if (!err.hasOwnProperty("response")) throw new Error(err.toString());
-		else throw new Error(err.response.data.content);
+		else throw new Error("Server error", err.response.data.content);
 	}
 };
 

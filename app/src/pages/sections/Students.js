@@ -7,8 +7,8 @@ import { useHistory } from "react-router-dom";
 
 export default () => {
 	const [loading, setLoading] = React.useState("Loading students...");
-	const [error, setError] = React.useState(null);
-	const [table, setTable] = React.useState([]);
+	const [error, setError] = React.useState();
+	const [table, setTable] = React.useState();
 
 	const history = useHistory();
 
@@ -19,6 +19,8 @@ export default () => {
 
 				if (!response.hasOwnProperty("content"))
 					throw new Error("Empty response");
+
+				console.log("students", response.content);
 
 				setTable(response.content);
 				setLoading(false);
@@ -31,23 +33,27 @@ export default () => {
 	return (
 		<Section title="Students" loading={loading} error={error}>
 			<Grid>
-				{table.map(({ fields }, index) => (
-					<Card
-						onClick={() => history.push(`/student/${fields.id}`)}
-						key={`student-${index}`}
-					>
-						<Card.Body>
-							<Title>
-								{fields.Surname}, {fields.Forename}
-							</Title>
-							<Paragraph>{fields.Year_Group}</Paragraph>
-						</Card.Body>
-						<Card.Footer>
-							{fields.Assignment_Title.length} active assignment
-							{fields.Assignment_Title.length !== 1 && "s"}
-						</Card.Footer>
-					</Card>
-				))}
+				{table &&
+					table.map(({ fields }, index) => (
+						<Card
+							onClick={() =>
+								history.push(`/student/${fields.id}`)
+							}
+							key={`student-${index}`}
+						>
+							<Card.Body>
+								<Title>
+									{fields.Surname}, {fields.Forename}
+								</Title>
+								<Paragraph>{fields.Year_Group}</Paragraph>
+							</Card.Body>
+							<Card.Footer>
+								{fields.Assignment_Title.length} active
+								assignment
+								{fields.Assignment_Title.length !== 1 && "s"}
+							</Card.Footer>
+						</Card>
+					))}
 			</Grid>
 		</Section>
 	);
