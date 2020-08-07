@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 import Assignment from "./pages/Assignment";
 import Class from "./pages/Class";
@@ -14,13 +14,19 @@ import useRole from "./hooks/useRole";
 const App = () => {
 	const [role] = useRole();
 
+	console.log(role);
+
 	return (
 		<BrowserRouter>
 			<Nav />
 
 			<Container>
 				<Switch>
-					<Route exact path="/" component={Dashboard} />
+					<Route
+						exact
+						path="/"
+						component={role.none ? Login : Dashboard}
+					/>
 
 					{role.staff && (
 						<Route path="/class/:id" component={Class} />
@@ -33,6 +39,7 @@ const App = () => {
 					)}
 
 					<Route path="/login" component={Login} />
+					{/* {role.none && <Redirect from="/" to="/login" />} */}
 					<Route component={NotFound} />
 				</Switch>
 			</Container>

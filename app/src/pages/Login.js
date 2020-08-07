@@ -29,7 +29,7 @@ const Login = () => {
 
 		if (success) {
 			localStorage.setItem("ts-role", content.role);
-			history.push("/");
+			window.location.reload();
 		} else setError(content);
 	};
 

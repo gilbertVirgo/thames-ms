@@ -11,8 +11,9 @@ const isJWTExpired = (token) =>
 const request = async ({ endpoint, method, data }) => {
 	const token = localStorage.getItem("google_auth_token");
 
-	if (isJWTExpired(token) && window.location.pathname !== "/login") {
-		window.location.href = "/login";
+	if (isJWTExpired(token) && window.location.pathname !== "/") {
+		window.localStorage.setItem("ts-role", null);
+		window.location.href = "/";
 		throw new Error("JWT Expired");
 	}
 
