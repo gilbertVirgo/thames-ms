@@ -3,8 +3,8 @@ import { Card, Grid, Title } from "../components";
 
 import API from "../api";
 import { Button } from "@material-ui/core";
-// import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
+import Header from "../components/Header";
 import React from "react";
 import Section from "../components/Section";
 import Table from "react-bootstrap/Table";
@@ -72,9 +72,7 @@ export default () => {
 
 	return (
 		<Section loading={loading} error={error}>
-			<Heading>
-				{record.Title}, {record.Year_Group}
-			</Heading>
+			<Header heading={record.Title} subheading={record.Year_Group} />
 
 			{record.hasOwnProperty("Assignment_Title") &&
 			record.Assignment_Title.length ? (

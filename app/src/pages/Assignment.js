@@ -8,6 +8,7 @@ import {
 
 import API from "../api";
 import Form from "react-bootstrap/Form";
+import Header from "../components/Header";
 import React from "react";
 import Section from "../components/Section";
 import theme from "../theme";
@@ -41,15 +42,10 @@ export default () => {
 		<Section loading={loading} error={error}>
 			{record && (
 				<React.Fragment>
-					<Heading style={{ marginBottom: "10px" }}>
-						{record.Title}
-					</Heading>
-					<Subheading
-						style={{ marginBottom: `${theme.gutter * 3}px` }}
-					>
-						{record.Class_Name}
-					</Subheading>
-					<hr />
+					<Header
+						heading={record.Title}
+						subheading={record.Class_Name}
+					/>
 					<Paragraph>{record.Content}</Paragraph>
 				</React.Fragment>
 			)}

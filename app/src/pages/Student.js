@@ -11,6 +11,7 @@ import API from "../api";
 import Assignments from "./sections/Assignments";
 import Badge from "react-bootstrap/Badge";
 import Form from "react-bootstrap/Form";
+import Header from "../components/Header";
 import React from "react";
 import Section from "../components/Section";
 import theme from "../theme";
@@ -44,15 +45,10 @@ export default () => {
 		<Section loading={loading} error={error}>
 			{record && (
 				<React.Fragment>
-					<Heading style={{ marginBottom: "10px" }}>
-						{record.Surname}, {record.Forename}
-					</Heading>
-					<Subheading
-						style={{ marginBottom: `${theme.gutter * 3}px` }}
-					>
-						{record.Year_Group}
-					</Subheading>
-					<hr />
+					<Header
+						title={`${record.Surname}, ${record.Forename}`}
+						subheading={record.Year_Group}
+					/>
 					<Section title="Behaviour">
 						<Badge variant="success">● {record.Green_Points}</Badge>{" "}
 						<Badge variant="danger">● {record.Red_Points}</Badge>
