@@ -12,4 +12,9 @@ export default {
 	gutter: 15,
 	breakpoint: createBreakpoint(breakpoints),
 	map: createMap(breakpoints),
+	color: {
+		danger: "#dc3545",
+		success: "#28a745",
+		secondary: "#6c757d",
+	},
 };

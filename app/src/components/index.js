@@ -21,10 +21,22 @@ export const Grid = styled.div`
 	${theme.breakpoint("md")`grid-template-columns: repeat(12, 1fr)`}
 `;
 
+const variantStyles = `
+	color: ${({ variant }) => theme.color[variant]}
+`;
+
+export const Subheading = styled.h2`
+	font-size: 20px;
+	color: ${theme.color.secondary};
+`;
+
 export const Heading = styled.h1`
+	font-size: 48px;
+	line-height: 56px;
 	margin-top: ${theme.gutter * 2}px;
 	margin-bottom: ${theme.gutter * 3}px;
 	font-weight: lighter;
+	${variantStyles}
 `;
 
 const captionStyles = `
@@ -36,7 +48,19 @@ const captionStyles = `
 
 export const Caption = styled.h5`
 	${captionStyles}
+	${variantStyles}
 `;
 export const TableCaption = styled.th`
 	${captionStyles}
+	${variantStyles}
+`;
+
+export const Title = styled.h5`
+	margin: 0 0 5px;
+`;
+
+export const Paragraph = styled.p`
+	font-size: 16px;
+	line-height: 23px;
+	${variantStyles}
 `;

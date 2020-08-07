@@ -1,20 +1,24 @@
 import { Caption, Heading, TableCaption } from "../components";
+import { Card, Grid, Title } from "../components";
 
-import ActivityIndicator from "../components/ActivityIndicator";
-import Button from "react-bootstrap/Button";
+import API from "../api";
+import { Button } from "@material-ui/core";
+// import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import React from "react";
+import Section from "../components/Section";
 import Table from "react-bootstrap/Table";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default () => {
 	const { id } = useParams();
-	const [requestStatus, setRequestStatus] = React.useState(null);
-	const [record, setRecord] = React.useState(null);
+	const [record, setRecord] = React.useState({
+		Title: "",
+	});
 	const [completed, setCompleted] = React.useState([]);
-	const [saveFeedback, setSaveFeedback] = React.useState(null);
 	const [loading, setLoading] = React.useState(true);
+	const [UID, setUID] = React.useState();
+	const [error, setError] = React.useState();
 
 	const handleToggleCompleted = (value) =>
 		setCompleted((completed) =>
@@ -31,80 +35,94 @@ export default () => {
 		record.assignment_id[record.Assignment_Title.indexOf(title)];
 
 	const handleSave = async () => {
-		const { data } = await axios.patch(
-			`http://localhost:8000/api/class/${id}`,
-			{
+		try {
+			await API.update(`class/${UID}`, {
 				// Remove completed assignments
 				assignment_id: record.Assignment_Title.filter(
 					(title) => !completed.includes(title)
 				).map(assignmentTitleToId),
-			}
-		);
+			});
+		} catch (err) {
+			setError(err.toString());
+		}
 
-		if (data.message) setSaveFeedback(data.message);
-
-		setLoading(true);
+		setLoading(true); // re-fetch
 	};
 
 	React.useEffect(() => {
 		if (loading) {
 			(async function () {
-				const { data, status } = await axios.get(
-					`http://localhost:8000/api/class/${id}`
-				);
+				try {
+					const response = await API.get(`class/${id}`);
 
-				if (data && data.hasOwnProperty("record"))
-					setRecord(data.record);
+					if (!response.hasOwnProperty("content"))
+						throw new Error("Empty response");
 
-				setLoading(false);
+					const { fields, id: uid } = response.content[0];
+
+					setRecord(fields);
+					setUID(uid);
+					setLoading(false);
+				} catch (err) {
+					setError(err.toString());
+				}
 			})();
 		}
 	}, [loading]);
 
-	return !loading ? (
-		<React.Fragment>
-			<Heading>{record.Title}</Heading>
+	return (
+		<Section loading={loading} error={error}>
+			<Heading>
+				{record.Title}, {record.Year_Group}
+			</Heading>
+
 			{record.hasOwnProperty("Assignment_Title") &&
 			record.Assignment_Title.length ? (
-				<Form.Group>
-					<Caption>Assignments</Caption>
-					<Table striped bordered>
-						<thead>
-							<tr>
-								<TableCaption>Title</TableCaption>
-								<TableCaption>Completed</TableCaption>
-							</tr>
-						</thead>
-						<tbody>
-							{record.Assignment_Title.map((title) => (
-								<tr>
-									<td>{title}</td>
-									<td>
-										<Form.Check
-											onChange={handleToggleCompleted.bind(
-												null,
-												title
-											)}
-										/>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</Table>
-				</Form.Group>
+				<Grid>
+					{record.Assignment_Title.map((title) => (
+						<Card>
+							<Card.Body>
+								<Title>{title}</Title>
+							</Card.Body>
+							<Card.Footer
+								style={{
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "end",
+								}}
+							>
+								<Form.Label style={{ margin: 0 }}>
+									Mark as completed
+								</Form.Label>
+								<Form.Check
+									style={{
+										display: "inline-block",
+										marginLeft: "10px",
+										verticalAlign: "middle",
+									}}
+									onChange={handleToggleCompleted.bind(
+										null,
+										title
+									)}
+								/>
+							</Card.Footer>
+						</Card>
+					))}
+				</Grid>
 			) : (
 				<p>No active assignments</p>
 			)}
 			<Form.Group>
 				{completed.length > 0 && (
-					<Button variant="light" onClick={handleSave}>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={handleSave}
+					>
 						Save
 					</Button>
 				)}
 			</Form.Group>
-			{saveFeedback && <p>{saveFeedback}</p>}
-		</React.Fragment>
-	) : (
-		<ActivityIndicator>Loading class</ActivityIndicator>
+		</Section>
 	);
 };
