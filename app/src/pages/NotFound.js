@@ -12,7 +12,7 @@ export default () => {
 		<Container>
 			<Title>Page not found</Title>
 			<Paragraph>
-				<Link to={`/${role.none ? "login" : ""}`}>
+				<Link to={`/`}>
 					Back to {role.none ? "login" : "dashboard"}
 				</Link>
 			</Paragraph>
