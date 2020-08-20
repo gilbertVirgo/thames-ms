@@ -24,10 +24,12 @@ const WelcomeContainer = styled(Container)`
 export default () => {
   return (
       <WelcomeContainer>
-        <Header
+        <Header style={{"margin": "0 auto", "text-align": "center", "padding-top": "20px"}}
           heading={"Thames Christian School"}
           subheading={"Please sign in to continue"}/>
-        <Login/>
+        <div style={{"margin": "0 auto", "align-items": "center", "padding-top": "20px"}}>
+          <Login/>
+        </div>
       </WelcomeContainer>
   )
 }
