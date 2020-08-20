@@ -25,6 +25,11 @@ export default () => {
 					<Nav.Link href="#link">Link</Nav.Link>
 				</Nav>
 			</Navbar.Collapse> */}
+			<div style={{ margin: "0 auto" }}>
+				<Home
+					style={{ width: "30px", height: "30px", "margin-right":"60px" }}
+				/>
+			</div>
 		</Navbar>
 	);
 };

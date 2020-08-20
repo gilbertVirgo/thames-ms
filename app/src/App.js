@@ -4,7 +4,7 @@ import Assignment from "./pages/Assignment";
 import Class from "./pages/Class";
 import Container from "react-bootstrap/Container";
 import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
+import Welcome from "./pages/Welcome";
 import Nav from "./components/Nav";
 import NotFound from "./pages/NotFound";
 import React from "react";
@@ -25,7 +25,7 @@ const App = () => {
 					<Route
 						exact
 						path="/"
-						component={role.none ? Login : Dashboard}
+						component={role.none ? Welcome : Dashboard}
 					/>
 
 					{role.staff && (
@@ -38,7 +38,7 @@ const App = () => {
 						<Route path="/student/:id" component={Student} />
 					)}
 
-					<Route path="/login" component={Login} />
+					<Route path="/login" component={Welcome} />
 					{/* {role.none && <Redirect from="/" to="/login" />} */}
 					<Route component={NotFound} />
 				</Switch>
