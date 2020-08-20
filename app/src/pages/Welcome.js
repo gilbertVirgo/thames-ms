@@ -6,7 +6,6 @@ import Login from "../components/Login"
 import Header from "../components/Header"
 //Imports from assets
 import Stock1 from "../assets/StockImage1.jpg"
-import Stock2 from "../assets/StockImage2.jpg"
 //import from bootstrap
 import Overlay from 'react-bootstrap/Overlay';
 import Image from 'react-bootstrap/Image';
@@ -17,24 +16,18 @@ import Col from "react-bootstrap/Col"
 import theme from "../theme";
 const { breakpoint } = theme;
 
+const WelcomeContainer = styled(Container)`
+  background-image: url(${Stock1});
+  height: 93vh;
+`
 
 export default () => {
   return (
-      <Container>
-        <Row>
-          <Col>
-            <Image src={Stock1} style={{"max-width":"300px", "height":"93vh"}}/>
-          </Col>
-          <Col>
-            <Header
-              heading={"Thames Christian School"}
-              subheading={"Please sign in to continue"}/>
-            <Login/>
-          </Col>
-          <Col>
-            <Image src={Stock2} style={{"max-width":"300px", "height":"93vh"}}/>
-          </Col>
-        </Row>
-      </Container>
+      <WelcomeContainer>
+        <Header
+          heading={"Thames Christian School"}
+          subheading={"Please sign in to continue"}/>
+        <Login/>
+      </WelcomeContainer>
   )
 }
