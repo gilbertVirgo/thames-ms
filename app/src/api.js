@@ -1,9 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 
-dotenv.config();
-
-const { REACT_APP_API_ROOT: root } = process.env;
+const root = 'http://localhost:8000/api'
 
 const isJWTExpired = (token) =>
 	JSON.parse(atob(token.split(".")[1])).exp * 1000 < Date.now();
