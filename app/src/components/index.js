@@ -5,11 +5,21 @@ import theme from "../theme";
 export const Card = styled(BootstrapCard)`
 	margin-bottom: ${theme.gutter}px;
 	grid-column: 1 / -1;
-	
+
 	${({ onClick }) => onClick && `cursor: pointer;`}
 
 	${theme.breakpoint("sm")`grid-column: span 3`}
 	${theme.breakpoint("md")`grid-column: span 4`}
+`;
+
+export const SideCard = styled(BootstrapCard)`
+	margin-bottom: ${theme.gutter}px;
+	grid-column: 1 / 2;
+
+	${({ onClick }) => onClick && `cursor: pointer;`}
+
+	${theme.breakpoint("sm")`grid-column: span 2`}
+	${theme.breakpoint("md")`grid-column: span 2`}
 `;
 
 export const Grid = styled.div`

@@ -1,5 +1,5 @@
 import { Caption, Heading, TableCaption } from "../components";
-import { Card, Grid, Title } from "../components";
+import { SideCard, Card, Grid, Title } from "../components";
 
 import API from "../api";
 import { Button } from "@material-ui/core";
@@ -59,7 +59,7 @@ export default () => {
 						throw new Error("Empty response");
 
 					const { fields, id: uid } = response.content[0];
-
+					console.log(response.content)
 					setRecord(fields);
 					setUID(uid);
 					setLoading(false);
@@ -82,6 +82,7 @@ export default () => {
 							<Card.Body>
 								<Title>{title}</Title>
 							</Card.Body>
+							{record.Student_name.map((value, index) => (
 							<Card.Footer
 								style={{
 									display: "flex",
@@ -89,21 +90,30 @@ export default () => {
 									justifyContent: "end",
 								}}
 							>
-								<Form.Label style={{ margin: 0 }}>
-									Mark as completed
-								</Form.Label>
-								<Form.Check
-									style={{
-										display: "inline-block",
-										marginLeft: "10px",
-										verticalAlign: "middle",
-									}}
-									onChange={handleToggleCompleted.bind(
-										null,
-										title
-									)}
-								/>
+									<Card.Body
+										style={{
+											"padding-top" : "0px",
+											"padding-bottom" : "2.5px",
+											"font-size": "15px"
+										}}>
+										{record.Student_name[index] + " " + record.Student_surname[index]}
+									</Card.Body>
+										<Form.Label style={{ margin: 0 }}>
+											Mark as completed
+										</Form.Label>
+									<Form.Check
+										style={{
+											display: "inline-block",
+											marginLeft: "10px",
+											verticalAlign: "middle",
+										}}
+										onChange={handleToggleCompleted.bind(
+											null,
+											title
+										)}
+									/>
 							</Card.Footer>
+								))}
 						</Card>
 					))}
 				</Grid>
