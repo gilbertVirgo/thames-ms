@@ -1,5 +1,5 @@
 import { Caption, Heading, TableCaption } from "../components";
-import { SideCard, Card, Grid, Title } from "../components";
+import { FullCard, Grid, Title } from "../components";
 
 import API from "../api";
 import { Button } from "@material-ui/core";
@@ -8,6 +8,9 @@ import Header from "../components/Header";
 import React from "react";
 import Section from "../components/Section";
 import Table from "react-bootstrap/Table";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl"
+import Dropdown from "react-bootstrap/DropDown"
 import { useParams } from "react-router-dom";
 
 export default () => {
@@ -78,26 +81,26 @@ export default () => {
 			record.Assignment_Title.length ? (
 				<Grid>
 					{record.Assignment_Title.map((title) => (
-						<Card>
-							<Card.Body>
+						<FullCard>
+							<FullCard.Body>
 								<Title>{title}</Title>
-							</Card.Body>
+							</FullCard.Body>
 							{record.Student_name.map((value, index) => (
-							<Card.Footer
+							<FullCard.Footer
 								style={{
 									display: "flex",
 									alignItems: "center",
 									justifyContent: "end",
 								}}
 							>
-									<Card.Body
+									<FullCard.Body
 										style={{
 											"padding-top" : "0px",
 											"padding-bottom" : "2.5px",
 											"font-size": "15px"
 										}}>
 										{record.Student_name[index] + " " + record.Student_surname[index]}
-									</Card.Body>
+									</FullCard.Body>
 										<Form.Label style={{ margin: 0 }}>
 											Mark as completed
 										</Form.Label>
@@ -112,9 +115,28 @@ export default () => {
 											title
 										)}
 									/>
-							</Card.Footer>
+									<Dropdown>
+									  <Dropdown.Toggle variant="success" id="dropdown-basic">
+									    Effort
+									  </Dropdown.Toggle>
+
+									  <Dropdown.Menu>
+									    <Dropdown.Item href="#/action-1">1 Star</Dropdown.Item>
+									    <Dropdown.Item href="#/action-2">2 Stars</Dropdown.Item>
+									    <Dropdown.Item href="#/action-3">3 Stars</Dropdown.Item>
+											<Dropdown.Item href="#/action-2">4 Stars</Dropdown.Item>
+											<Dropdown.Item href="#/action-3">5 Stars</Dropdown.Item>
+									  </Dropdown.Menu>
+									</Dropdown>
+									<InputGroup>
+										<InputGroup.Prepend>
+											<InputGroup.Text>Comment:</InputGroup.Text>
+										</InputGroup.Prepend>
+									 <FormControl as="textarea" aria-label="With textarea" />
+									</InputGroup>
+							</FullCard.Footer>
 								))}
-						</Card>
+						</FullCard>
 					))}
 				</Grid>
 			) : (
