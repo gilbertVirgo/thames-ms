@@ -46,7 +46,7 @@ export default () => {
 			{record && (
 				<React.Fragment>
 					<Header
-						title={`${record.Surname}, ${record.Forename}`}
+						heading={`${record.Surname}, ${record.Forename}`}
 						subheading={record.Year_Group}
 					/>
 					<Section title="Behaviour">
