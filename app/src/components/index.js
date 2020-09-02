@@ -9,27 +9,9 @@ export const Card = styled(BootstrapCard)`
 	${({ onClick }) => onClick && `cursor: pointer;`}
 
 	${theme.breakpoint("sm")`grid-column: span 3`}
-	${theme.breakpoint("md")`grid-column: span 4`}
-`;
-
-export const FullCard = styled(BootstrapCard)`
-	margin-bottom: ${theme.gutter}px;
-	grid-column: 1 / -1;
-
-	${({ onClick }) => onClick && `cursor: pointer;`}
-
-	${theme.breakpoint("sm")`grid-column: span 12`}
-	${theme.breakpoint("md")`grid-column: span 12`}
-`;
-
-export const SideCard = styled(BootstrapCard)`
-	margin-bottom: ${theme.gutter}px;
-	grid-column: 1 / 2;
-
-	${({ onClick }) => onClick && `cursor: pointer;`}
-
-	${theme.breakpoint("sm")`grid-column: span 2`}
-	${theme.breakpoint("md")`grid-column: span 2`}
+	${theme.breakpoint(
+		"md"
+	)`grid-column: span 4`}
 `;
 
 export const Grid = styled.div`
@@ -83,4 +65,12 @@ export const Paragraph = styled.p`
 	font-size: 16px;
 	line-height: 23px;
 	${variantStyles}
+`;
+
+export const Alert = styled.div`
+	background-color: ${theme.color.danger}40;
+	padding: ${theme.gutter}px;
+	box-sizing: border-box;
+	border-radius: 3px;
+	margin-bottom: ${theme.gutter * 2}px;
 `;

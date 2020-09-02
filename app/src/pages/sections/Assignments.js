@@ -4,9 +4,10 @@ import API from "../../api";
 import React from "react";
 import Section from "../../components/Section";
 import moment from "moment";
+import queryString from "query-string";
 import { useHistory } from "react-router-dom";
 
-export default () => {
+export default ({ query = null }) => {
 	const [loading, setLoading] = React.useState("Loading assignments...");
 	const [error, setError] = React.useState(null);
 	const [table, setTable] = React.useState([]);
@@ -16,7 +17,12 @@ export default () => {
 	React.useEffect(() => {
 		(async function () {
 			try {
-				const response = await API.get("assignments");
+				const response = await API.get(
+					"assignments" +
+						(query !== null
+							? `?${queryString.stringify(query)}`
+							: "")
+				);
 
 				if (!response.hasOwnProperty("content"))
 					throw new Error("Empty response");
@@ -29,7 +35,7 @@ export default () => {
 		})();
 	}, []);
 
-	const getDueMessage = (due) => {
+	const getStatus = (due) => {
 		due = moment(new Date(due));
 		const now = moment(new Date());
 		const diff = moment.duration(due.diff(now)).days();
@@ -45,20 +51,26 @@ export default () => {
 
 	return (
 		<Section title="Assignments" loading={loading} error={error}>
-			<Grid>
-				{table.map(({ fields }, index) => (
-					<Card
-						onClick={() => history.push(`/assignment/${fields.id}`)}
-						key={`assignment-${index}`}
-					>
-						<Card.Body>
-							<Title>{fields.Title}</Title>
-							<Paragraph>{fields.Class_Name}</Paragraph>
-						</Card.Body>
-						<Card.Footer>{getDueMessage(fields.Due)}</Card.Footer>
-					</Card>
-				))}
-			</Grid>
+			{table.length ? (
+				<Grid>
+					{table.map(({ fields }, index) => (
+						<Card
+							onClick={() =>
+								history.push(`/assignment/${fields.id}`)
+							}
+							key={`assignment-${index}`}
+						>
+							<Card.Body>
+								<Title>{fields.Title}</Title>
+								<Paragraph>{fields.Class_Name}</Paragraph>
+							</Card.Body>
+							<Card.Footer>{getStatus(fields.Due)}</Card.Footer>
+						</Card>
+					))}
+				</Grid>
+			) : (
+				<p>No active assignments</p>
+			)}
 		</Section>
 	);
 };

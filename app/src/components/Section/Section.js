@@ -1,7 +1,6 @@
-import { Caption, Paragraph } from "..";
+import { Alert, Caption, Paragraph } from "..";
 
 import ActivityIndicator from "../ActivityIndicator";
-import Alert from "react-bootstrap/Alert";
 import React from "react";
 import { Wrapper } from "./styles";
 
@@ -16,7 +15,7 @@ export const Section = ({ children, title, error, loading, ...props }) => {
 			)}
 		</Wrapper>
 	) : (
-		<Alert variant="danger">
+		<Alert>
 			<Caption>Error</Caption>
 			<Paragraph>{error}</Paragraph>
 		</Alert>

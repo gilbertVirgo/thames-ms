@@ -1,23 +1,18 @@
-import {
-	Caption,
-	Heading,
-	Paragraph,
-	Subheading,
-	TableCaption,
-} from "../components";
-
 import API from "../api";
-import Form from "react-bootstrap/Form";
 import Header from "../components/Header";
+import { Paragraph } from "../components";
 import React from "react";
+import ReviewAssignment from "./sections/ReviewAssignment";
 import Section from "../components/Section";
-import theme from "../theme";
 import { useParams } from "react-router-dom";
+import useRole from "../hooks/useRole";
 
 export default () => {
+	const [role] = useRole();
+
 	const { id } = useParams();
 	const [record, setRecord] = React.useState(null);
-	const [loading, setLoading] = React.useState(true);
+	const [loading, setLoading] = React.useState("Loading assignment data...");
 	const [error, setError] = React.useState();
 
 	React.useEffect(() => {
@@ -25,6 +20,8 @@ export default () => {
 			(async function () {
 				try {
 					const response = await API.get(`assignment/${id}`);
+
+					console.log({ response });
 
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
@@ -39,16 +36,18 @@ export default () => {
 	}, [loading]);
 
 	return (
-		<Section loading={loading} error={error}>
+		<React.Fragment>
 			{record && (
-				<React.Fragment>
-					<Header
-						heading={record.Title}
-						subheading={record.Class_Name}
-					/>
-					<Paragraph>{record.Content}</Paragraph>
-				</React.Fragment>
+				<Header heading={record.Title} subheading={record.Class_Name} />
 			)}
-		</Section>
+			<Section loading={loading} error={error} title="Summary">
+				{record && (
+					<div
+						dangerouslySetInnerHTML={{ __html: record.Content }}
+					></div>
+				)}
+			</Section>
+			{record && role.staff && <ReviewAssignment assignmentId={id} />}
+		</React.Fragment>
 	);
 };

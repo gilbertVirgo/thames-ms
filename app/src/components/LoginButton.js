@@ -1,12 +1,10 @@
 import API from "../api";
 import GoogleLogin from "react-google-login";
 import React from "react";
-import Section from "../components/Section";
+import Section from "./Section";
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
-	const history = useHistory();
-
+export default () => {
 	const [error, setError] = React.useState();
 	const [loading, setLoading] = React.useState();
 
@@ -17,20 +15,19 @@ const Login = () => {
 	const handleSuccess = async (user) => {
 		const { id_token } = user.getAuthResponse();
 
-		console.log({ id_token });
-
 		localStorage.setItem("google_auth_token", id_token);
 
 		const { success, content } = await API.get(
 			`token?id_token=${id_token}`
 		);
 
-		console.log(success, content);
-
 		if (success) {
 			localStorage.setItem("ts-role", content.role);
-			window.location.reload();
-		} else setError(content);
+			if (window.location.pathname !== "/") window.location.href = "/";
+			else window.location.reload();
+		} else {
+			setError(content);
+		}
 	};
 
 	const handleFailure = (response) => {
@@ -51,5 +48,3 @@ const Login = () => {
 		</Section>
 	);
 };
-
-export default Login;

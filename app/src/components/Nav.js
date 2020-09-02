@@ -2,22 +2,32 @@ import Button from "react-bootstrap/Button";
 import { ReactComponent as Home } from "../assets/icons/home.svg";
 import Navbar from "react-bootstrap/Navbar";
 import React from "react";
+import styled from "styled-components";
 import theme from "../theme";
 import { useHistory } from "react-router-dom";
+
+const Bar = styled(Navbar).attrs({ bg: "light", expand: "lg" })`
+	margin-bottom: ${theme.gutter}px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+`;
+
+const HomeIcon = styled(Home)`
+	position: absolute;
+	left: 15px;
+	top: 15px;
+	width: 30px;
+	height: 30px;
+`;
 
 export default () => {
 	const history = useHistory();
 
 	return (
-		<Navbar
-			bg="light"
-			expand="lg"
-			style={{ marginBottom: theme.gutter + "px" }}
-		>
-			<Home
-				style={{ width: "30px", height: "30px" }}
-				onClick={() => history.push("/")}
-			/>
+		<Bar>
+			<HomeIcon onClick={() => history.push("/")} />
 			{/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="mr-auto">
@@ -25,11 +35,7 @@ export default () => {
 					<Nav.Link href="#link">Link</Nav.Link>
 				</Nav>
 			</Navbar.Collapse> */}
-			{/* <div style={{ margin: "0 auto" }}>
-				<Home
-					style={{ width: "30px", height: "30px", "margin-right":"60px" }}
-				/>
-			</div> */}
-		</Navbar>
+			<img src={require("../assets/ts-logo.svg")} height={30} />
+		</Bar>
 	);
 };

@@ -12,10 +12,12 @@ export default () => {
 	const role = localStorage.getItem("ts-role");
 
 	const val = new String(role);
-	val.none = !role;
+	val.none = !["student", "parent", "staff"].includes(role);
 	val.student = role === "student";
 	val.parent = role === "parent";
 	val.staff = role === "staff";
+
+	console.log({ val });
 
 	return [val, setRole];
 };

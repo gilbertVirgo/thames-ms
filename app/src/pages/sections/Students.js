@@ -3,28 +3,33 @@ import { Card, Grid, Paragraph, Title } from "../../components";
 import API from "../../api";
 import React from "react";
 import Section from "../../components/Section";
+import queryString from "query-string";
 import { useHistory } from "react-router-dom";
 
-export default () => {
+export default ({ query = null }) => {
 	const [loading, setLoading] = React.useState("Loading students...");
 	const [error, setError] = React.useState();
-	const [table, setTable] = React.useState();
+	const [records, setRecords] = React.useState();
 
 	const history = useHistory();
 
 	React.useEffect(() => {
 		(async function () {
 			try {
-				const response = await API.get("students");
+				const response = await API.get(
+					"students" +
+						(query !== null
+							? `?${queryString.stringify(query)}`
+							: "")
+				);
 
 				if (!response.hasOwnProperty("content"))
 					throw new Error("Empty response");
 
-				console.log("students", response.content);
-
-				setTable(response.content);
+				setRecords(response.content);
 				setLoading(false);
 			} catch (err) {
+				console.error(err);
 				setError(err.toString());
 			}
 		})();
@@ -33,8 +38,8 @@ export default () => {
 	return (
 		<Section title="Students" loading={loading} error={error}>
 			<Grid>
-				{table &&
-					table.map(({ fields }, index) => (
+				{records &&
+					records.map(({ fields }, index) => (
 						<Card
 							onClick={() =>
 								history.push(`/student/${fields.id}`)

@@ -7,6 +7,9 @@ export const Wrapper = styled.div`
 		`
 		background-color: ${theme.color.danger}40;
 	`}
-	
+
+	padding-bottom: ${theme.gutter}px;
+	border-bottom: 1px solid ${theme.color.light};
+
 	margin-bottom: ${theme.gutter * 2}px;
 `;

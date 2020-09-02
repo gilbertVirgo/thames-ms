@@ -1,7 +1,9 @@
 import axios from "axios";
 import dotenv from "dotenv";
 
-const root = 'http://localhost:8000/api'
+dotenv.config();
+
+const { REACT_APP_API_ROOT: root } = process.env;
 
 const isJWTExpired = (token) =>
 	JSON.parse(atob(token.split(".")[1])).exp * 1000 < Date.now();
@@ -9,9 +11,12 @@ const isJWTExpired = (token) =>
 const request = async ({ endpoint, method, data }) => {
 	const token = localStorage.getItem("google_auth_token");
 
-	if (isJWTExpired(token) && window.location.pathname !== "/") {
+	if (isJWTExpired(token)) {
 		window.localStorage.setItem("ts-role", null);
-		window.location.href = "/";
+
+		if (window.location.pathname !== "/login")
+			window.location.href = "/login";
+
 		throw new Error("JWT Expired");
 	}
 

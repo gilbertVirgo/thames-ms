@@ -3,9 +3,10 @@ import { Card, Grid, Paragraph, Title } from "../../components";
 import API from "../../api";
 import React from "react";
 import { Section } from "../../components/Section/Section";
+import queryString from "query-string";
 import { useHistory } from "react-router-dom";
 
-export default () => {
+export default ({ query = null }) => {
 	const history = useHistory();
 
 	const [loading, setLoading] = React.useState("Loading classes...");
@@ -15,7 +16,12 @@ export default () => {
 	React.useEffect(() => {
 		(async function () {
 			try {
-				const response = await API.get("classes");
+				const response = await API.get(
+					"classes" +
+						(query !== null
+							? `?${queryString.stringify(query)}`
+							: "")
+				);
 
 				if (!response.hasOwnProperty("content"))
 					throw new Error("Empty response");
@@ -41,12 +47,10 @@ export default () => {
 								<Title>{fields.Title}</Title>
 								<Paragraph>{fields.Year_Group}</Paragraph>
 							</Card.Body>
-							{fields.hasOwnProperty("Assignment_Title") && (
+							{fields.hasOwnProperty("Assignment_Count") && (
 								<Card.Footer>
-									{fields.Assignment_Title.length} active
-									assignment
-									{fields.Assignment_Title.length !== 1 &&
-										"s"}
+									{fields.Assignment_Count} active assignment
+									{fields.Assignment_Count !== 1 && "s"}
 								</Card.Footer>
 							)}
 						</Card>
