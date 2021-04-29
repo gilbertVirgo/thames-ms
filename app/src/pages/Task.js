@@ -7,7 +7,7 @@ export default () => {
 	return (
 		<React.Fragment>
             <TaskHeader    
-                subject="Math" 
+                subject="Maths" 
                 week ="Mon"
                 date="29th Mar"
                 number="20-40"

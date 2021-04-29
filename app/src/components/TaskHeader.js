@@ -20,7 +20,7 @@ const Wrapper = styled.div`
         "icon subject week number"
         "icon subject date time";
 
-    grid-template-columns: 36px 66px 105px 105px;
+    grid-template-columns: 36px 56px 105px 105px;
     grid-template-rows: 23px 18px 14px;
     row-gap: 0;
     column-gap: 10px;
@@ -45,16 +45,20 @@ const SubjectImage = styled.div`
 
 const Subject = styled.h4`
     grid-area: subject;
+    margin: 0;
 
     font-weight: bold;
     font-size: 15px;
     line-height: 14px;
 
     color: #4E4E4E;
+    
 `;
 
 const Title = styled.h6`
     grid-area: due;
+    margin: 0;
+
     font-weight: bold;
     font-size: 13px;
     line-height: 14px;
@@ -70,6 +74,7 @@ const Title = styled.h6`
 
 const Content1 = styled.h3`
     grid-area: week; 
+    margin: 0;
 
     font-weight: bold;
     font-size: 18px;
@@ -86,6 +91,7 @@ const Content1 = styled.h3`
 
 const Content2 = styled.h3`
     grid-area: date; 
+    margin: 0;
 
     font-weight: bold;
     font-size: 13px;
