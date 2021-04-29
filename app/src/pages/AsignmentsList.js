@@ -21,11 +21,6 @@ const CompletedWrapper = styled.div`
     overflow: auto;
 `;
 
-const Padding = styled.div`
-    height: 60px;
-    width: 100%;
-`;
-
 export default () => {
 	return (
 		<React.Fragment>
