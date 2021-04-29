@@ -7,13 +7,13 @@ const Wrapper = styled.div`
     padding: 19px 30px;
 
     width:100vw;
-    height: 100vh;
+    height: calc(100vh - 137px);
 
     background: #F8F8F8;
 `;
 
 const Content = styled.div`
-    font-weight: 800;
+    font-weight: 600;
     font-size: 15px;
     line-height: 20px;
 
@@ -23,7 +23,7 @@ const Content = styled.div`
     padding: 0;
 
     h1,h2,h3,h4,h5,h6{
-
+        font-weight: 800;
     }
 
     p{
@@ -55,13 +55,36 @@ const CompleteToggle = styled.div`
     font-weight: 800;
     font-size: 15px;
     line-height: 20px;
+
+    display: grid;
+    grid-template-columns: 219px 35px;
+    column-gap: 10px;
 `;
 
-const ToogleImage = styled.img`
+const ToogleImage = styled.button`
+    width: 35px;
+    height: 21px;
+
+    appearance: none;
+    border: none;
+
+    background-image: url("${require("../assets/icons/toggle - off.svg")}");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: transparent;
 
 `;
 
 const TaskContent = ({content}) => {
+    // const Image_ToogleOff = require("../assets/icons/toggle - off.svg");
+    // const Image_ToogleOn = require("../assets/icons/toggle - on.svg");
+    // const [toggle, setToggle] = React.useState(false);
+
+    // const SwitchToggle =()=>{
+    //     setToggle(!toggle);
+
+    // }
 	return (
 		<Wrapper>
             <Content>
@@ -70,6 +93,10 @@ const TaskContent = ({content}) => {
             </Content>
 		    <CompleteToggle>
                  Have you completed the task?   
+            
+                <ToogleImage 
+                    // onClick={SwitchToggle()}
+                    />
             </CompleteToggle>
 		</Wrapper>
 	);
