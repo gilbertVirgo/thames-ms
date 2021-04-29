@@ -1,6 +1,7 @@
 import React from "react";
 import CountDateButton from "../components/CountDateButton";
 import ListItem from "../components/ListItem";
+import ListHeader from "../components/ListHeader";
 import styled from "styled-components";
 import Menu from "../components/Menu";
 
@@ -29,11 +30,9 @@ export default () => {
 	return (
 		<React.Fragment>
             <TasksWrapper>
-                <ListItem heading
-                    title="Tasks"
-                ><CountDateButton>Count Down</CountDateButton>
-                </ListItem> 
-                <Padding />
+                <ListHeader title="Tasks">
+                <CountDateButton>Count Down</CountDateButton>
+                </ListHeader>
 
                 <ListItem
                     title="Math"
@@ -95,11 +94,10 @@ export default () => {
             </TasksWrapper>
             
             <CompletedWrapper>
-                <ListItem heading
+                <ListHeader 
                     title="Completed"
                     style={{border:"none"}}
-                ></ListItem>
-                <Padding />
+                ></ListHeader>
 
                 <ListItem complete
                     title="Assignment 1"

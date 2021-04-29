@@ -26,26 +26,6 @@ const Wrapper = styled.div`
 
     background-color: white;
 
-
-    ${({heading})=>heading && `
-        position: fixed;
-        height: 60px;
-        padding: 14.5px 14px;
-        border-bottom: 2px solid #AAAAAA;
-        ${Title}{
-            font-weight: 800;
-            font-size: 25px;
-
-            color: #4E4E4E;
-        }
-        ${Date}{
-            display: none;
-        } 
-        ${ViewMore}{
-            display: none;
-        }
-    `}
-
     ${({reminder})=>reminder && `
         ${Title}{
             color: #E8927C;
@@ -109,11 +89,10 @@ const ViewMore = styled.button`
 
 `;
 
-const ListItem = ({ title, date, onOpen, heading, reminder, complete, checked, children, ...props }) => {
+const ListItem = ({ title, date, onOpen, reminder, complete, checked, children, ...props }) => {
 	return (
 		<Wrapper
             {...props}
-            heading={heading}
             reminder={reminder}
             complete={complete}
             checked={checked}
