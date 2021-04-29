@@ -11,14 +11,20 @@ import NotFound from "./pages/NotFound";
 import React from "react";
 import Student from "./pages/Student";
 import useRole from "./hooks/useRole";
+import AssignmentsList from "./pages/AsignmentsList";
+import Task from "./pages/Task";
 
 const App = () => {
 	const [role] = useRole();
 
 	return (
 		<BrowserRouter>
-			<Nav />
+			<Route path="/app" component={AssignmentsList} />
+			<Route path="/task" component={Task} />
 
+
+
+			{/* <Nav /> */}
 			<Container>
 				<Switch>
 					<Route
@@ -26,6 +32,7 @@ const App = () => {
 						path="/"
 						component={role.none ? Login : Dashboard}
 					/>
+					
 
 					{!role.none && (
 						<Route path="/assignment/:id" component={Assignment} />
@@ -46,9 +53,11 @@ const App = () => {
 
 					<Route path="/login" component={Login} />
 					{/* {role.none && <Redirect from="/" to="/login" />} */}
-					<Route component={NotFound} />
+					{/* <Route component={NotFound} /> */}
 				</Switch>
 			</Container>
+
+
 		</BrowserRouter>
 	);
 };
