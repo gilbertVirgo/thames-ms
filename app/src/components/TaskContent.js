@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import {Grid} from "./index";
 
 const Wrapper = styled.div`
 	box-sizing: border-box;
@@ -8,7 +7,7 @@ const Wrapper = styled.div`
     padding: 19px 30px;
 
     width:100vw;
-    height: 100%;
+    height: 100vh;
 
     background: #F8F8F8;
 `;
