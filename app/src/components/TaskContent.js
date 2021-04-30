@@ -34,10 +34,6 @@ const ContentWapper = styled.div`
         margin-bottom: 18px;
     }
 
-    a{
-
-    }
-
     ul, ol{
         font-weight: normal;
         margin-bottom: 18px;
@@ -52,7 +48,23 @@ const ContentWapper = styled.div`
 
 
 const Attachment = styled.div`
+    width: 100%;
+    height: 100%;
 
+    display: grid;
+    grid-template-columns: 20px 227px;
+    column-gap: 7px;
+`;
+
+const AttachmentImage = styled.div`
+    width: 20px;
+    height: 20px;
+
+    background-image: url("${require("../assets/icons/paperclip.svg")}");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: transparent;
 `;
 
 const CompleteToggle = styled.div`
