@@ -13,7 +13,7 @@ export default () => {
                 number="20-40"
                 time="Minutes"
             />
-            <TaskContent content ="here should be some content"/>
+            <TaskContent content=""/>
             <Menu />
 		</React.Fragment>
 	);

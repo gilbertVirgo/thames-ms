@@ -22,6 +22,10 @@ const CompletedWrapper = styled.div`
 `;
 
 export default () => {
+
+    const OpenTask = () =>{
+       
+    }
 	return (
 		<React.Fragment>
             <TasksWrapper>
@@ -32,6 +36,7 @@ export default () => {
                 <ListItem
                     title="Math"
                     date="Mon, 29th Mar"
+                    onOpen={OpenTask()}
                 ></ListItem>
                 <ListItem reminder
                     title="Bring calculator"

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     background: #F8F8F8;
 `;
 
-const Content = styled.div`
+const ContentWapper = styled.div`
     font-weight: 600;
     font-size: 15px;
     line-height: 20px;
@@ -24,14 +24,28 @@ const Content = styled.div`
 
     h1,h2,h3,h4,h5,h6{
         font-weight: 800;
+        font-size: 15px;
+        line-height: 20px;
+        margin-bottom: 5px;
     }
 
     p{
-        font-weight: 600;
+        font-weight: normal;
+        margin-bottom: 18px;
     }
 
-    input{
+    a{
 
+    }
+
+    ul, ol{
+        font-weight: normal;
+        margin-bottom: 18px;
+        padding-left: 25px;
+    }
+
+    li{
+        margin-bottom: 5px;
     }
 
 `;
@@ -61,7 +75,7 @@ const CompleteToggle = styled.div`
     column-gap: 10px;
 `;
 
-const ToogleImage = styled.button`
+const ToggleImage = styled.button`
     width: 35px;
     height: 21px;
 
@@ -77,27 +91,37 @@ const ToogleImage = styled.button`
 `;
 
 const TaskContent = ({content}) => {
-    // const Image_ToogleOff = require("../assets/icons/toggle - off.svg");
-    // const Image_ToogleOn = require("../assets/icons/toggle - on.svg");
-    // const [toggle, setToggle] = React.useState(false);
+    const [toggle, setToggle] = React.useState(false);
+    const SwitchToggle = () =>{
 
-    // const SwitchToggle =()=>{
-    //     setToggle(!toggle);
+    }
 
-    // }
 	return (
 		<Wrapper>
-            <Content>
-                {content}
+            <form>
+                <ContentWapper>
+                    <h4> Description</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placerat maecenas montes, nunc tellus gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h1> Check List</h1>
+                    <ol>
+                        <li>Find attachment </li>
+                        <li>Complete questions 1, 2 & 3</li>
+                    </ol> 
+
+                    <h3>Attachments</h3>
+                    <a href="/images/myw3schoolsimage.jpg" download>Dowload here</a>
+                    
+                    {content}
+                    
+                </ContentWapper>
+                <CompleteToggle>
+                    Have you completed the task?   
                 
-            </Content>
-		    <CompleteToggle>
-                 Have you completed the task?   
-            
-                <ToogleImage 
-                    // onClick={SwitchToggle()}
-                    />
-            </CompleteToggle>
+                    <ToggleImage id="togleImg"
+                        onClick={SwitchToggle()}
+                        />
+                </CompleteToggle>
+            </form>
 		</Wrapper>
 	);
 };
