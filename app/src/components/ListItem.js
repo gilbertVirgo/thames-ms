@@ -66,7 +66,10 @@ const Title = styled.h6`
 	grid-column: span 3;
 	color: #4e4e4e;
 	margin: 0;
-	padding: 0;
+	padding: 0;  
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; 
 `;
 
 const Date = styled.h6`
