@@ -44,7 +44,7 @@ export default ({ assignmentId }) => {
 		});
 
 		const {
-			Handed_In,
+			Teacher_Checked,
 			Late,
 			Effort,
 			Grade,
@@ -57,7 +57,7 @@ export default ({ assignmentId }) => {
 			setLoading("Updating reviews...");
 
 			const response = await API.update(`review/${review_id}`, {
-				Handed_In,
+				Teacher_Checked,
 				Late,
 				Effort,
 				Grade,
@@ -110,11 +110,11 @@ export default ({ assignmentId }) => {
 								</td>
 								<td key={`td-${2}`}>
 									<Form.Check
-										value={fields.Handed_In}
-										checked={fields.Handed_In}
+										value={fields.Teacher_Checked}
+										checked={fields.Teacher_Checked}
 										onChange={({ target }) =>
 											editReview(fields.id, {
-												Handed_In: target.checked,
+												Teacher_Checked: target.checked,
 											})
 										}
 									/>

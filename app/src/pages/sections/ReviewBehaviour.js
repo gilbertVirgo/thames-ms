@@ -23,10 +23,10 @@ export default () => {
 			setLoading("Submitting form...");
 
 			const response = await API.create("behaviour", {
-				Green_Points: parseInt(green, 10),
-				Red_Points: parseInt(red, 10),
-				Comments: comments,
 				student_id: [id],
+				Comments: comments,
+				Red_Points: parseInt(red, 10),
+				Green_Points: parseInt(green, 10),
 			});
 
 			if (!response.hasOwnProperty("content"))

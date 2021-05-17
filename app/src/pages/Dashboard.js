@@ -14,12 +14,12 @@ export default () => {
 
 	return (
 		<React.Fragment>
-			<Heading>Dashboard</Heading>
+			{/* <Heading>Dashboard</Heading> */}
 
 			{role.student && (
 				<React.Fragment>
 					<Assignments />
-					<Behaviour />
+					{/* <Behaviour /> */}
 				</React.Fragment>
 			)}
 			{role.parent && <Students />}

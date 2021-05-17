@@ -15,9 +15,8 @@ export default () => {
 	const history = useHistory();
 
 	const [submitLoading, setSubmitLoading] = React.useState(false);
-	const [classesLoading, setClassesLoading] = React.useState(
-		"Loading classes..."
-	);
+	const [classesLoading, setClassesLoading] =
+		React.useState("Loading classes...");
 	const [error, setError] = React.useState();
 	const [table, setTable] = React.useState();
 
@@ -104,6 +103,8 @@ export default () => {
 		})();
 	}, []);
 
+	console.log({ table });
+
 	return (
 		<React.Fragment>
 			{submitLoading && (
@@ -121,6 +122,8 @@ export default () => {
 							const class_id =
 								target.options[target.selectedIndex].value;
 
+							console.log({ table, class_id });
+
 							editRecord({
 								class_id: [class_id],
 								student_id: table.find(
@@ -131,8 +134,8 @@ export default () => {
 					>
 						<option value="">-- Select a class --</option>
 						{table &&
-							table.map(({ fields }) => (
-								<option value={fields.id}>
+							table.map(({ id, fields }) => (
+								<option value={id}>
 									{fields.Title}, {fields.Year_Group}
 								</option>
 							))}
