@@ -7,6 +7,11 @@ import Section from "../components/Section";
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
 
+import Menu from "../components/Menu";
+import TaskContent from "../components/TaskContent";
+import TaskHeader from "../components/TaskHeader";
+import cheerio from "cheerio";
+
 export default () => {
 	const [role] = useRole();
 
@@ -14,6 +19,7 @@ export default () => {
 	const [record, setRecord] = React.useState(null);
 	const [loading, setLoading] = React.useState("Loading assignment data...");
 	const [error, setError] = React.useState();
+	const [$, set$] = React.useState();
 
 	React.useEffect(() => {
 		if (loading) {
@@ -26,7 +32,13 @@ export default () => {
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
 
-					setRecord(response.content[0].fields);
+					const record = response.content[0].fields;
+					const $ = cheerio.load(record.Content);
+
+					$("a").prepend(`<img src='${require("../assets/icons/paperclip.svg")}' />`);
+					
+					setRecord(record);
+					set$($);
 					setLoading(false);
 				} catch (err) {
 					setError(err.toString());
@@ -35,19 +47,29 @@ export default () => {
 		}
 	}, [loading]);
 
+
+
+    
+
 	return (
 		<React.Fragment>
 			{record && (
-				<Header heading={record.Title} subheading={record.Class_Name} />
+				<TaskHeader    
+                subject={record.Class_Name}
+                week ="Mon"
+                date="29th Mar"
+                number="20-40"
+                time="Minutes"
+            />
 			)}
-			<Section loading={loading} error={error} title="Summary">
-				{record && (
-					<div
-						dangerouslySetInnerHTML={{ __html: record.Content }}
-					></div>
-				)}
-			</Section>
+			{record && $ && (
+				<TaskContent loading={loading} error={error} 
+					title={record.Title}> 	
+					<div dangerouslySetInnerHTML={{__html: $.html()}} />				
+				</TaskContent>
+			)}
 			{record && role.staff && <ReviewAssignment assignmentId={id} />}
+			<Menu />
 		</React.Fragment>
 	);
 };
