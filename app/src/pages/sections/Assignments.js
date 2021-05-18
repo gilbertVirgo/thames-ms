@@ -31,9 +31,29 @@ const CompletedWrapper = styled.div`
 export default ({ query = null }) => {
 	const [loading, setLoading] = React.useState("Loading assignments...");
 	const [error, setError] = React.useState(null);
+	const [dueButtonText, setDueButtonText] = React.useState("Count Down");
 	const [table, setTable] = React.useState([]);
+	const [dueDateSwitch, setDueDateSwitch] = React.useState(false);
+
 
 	const history = useHistory();
+
+	const translateDate = (date) => {
+		if(dueButtonText === "Count Down") {
+			return moment(new Date(date)).format("ll")
+		} else {
+			date = moment(new Date(date));
+			const now = moment(new Date());
+			const diff = moment.duration(date.diff(now)).days();
+			if (diff > 0) {
+				return `${Math.abs(diff)} day${diff !== 1 ? "s" : ""}`;
+			} else if (diff < 0) {
+				return `Overdue`;
+			} else if (diff == 0) {
+				return `Today`;
+			}
+		}
+	}
 
 	React.useEffect(() => {
 		(async function () {
@@ -53,6 +73,7 @@ export default ({ query = null }) => {
 				console.log("table", response.content);
 
 				setTable(response.content);
+				setDueButtonText(dueButtonText)
 				setLoading(false);
 			} catch (err) {
 				setError(err.toString());
@@ -60,17 +81,12 @@ export default ({ query = null }) => {
 		})();
 	}, []);
 
-	const getStatus = (due) => {
-		due = moment(new Date(due));
-		const now = moment(new Date());
-		const diff = moment.duration(due.diff(now)).days();
-
-		if (diff > 0) {
-			return `Due in ${Math.abs(diff)} day${diff !== 1 ? "s" : ""}`;
-		} else if (diff < 0) {
-			return `Due ${Math.abs(diff)} day${diff !== -1 ? "s" : ""} ago`;
-		} else {
-			return `Due today`;
+	const getStatus = () => {
+		setDueDateSwitch(!dueDateSwitch);
+		if(dueDateSwitch===false){
+			setDueButtonText("Due")
+		}else{
+			setDueButtonText("Count Down")
 		}
 	};
 
@@ -79,13 +95,13 @@ export default ({ query = null }) => {
 		<React.Fragment>
 			<TasksWrapper>
 				<ListHeader title="Tasks">
-					<CountDateButton>Count Down</CountDateButton>
+					<CountDateButton onClick={()=>getStatus()}>{dueButtonText}</CountDateButton>
 				</ListHeader>
 				{table.length ? (
 					table.map(({ fields }, index) => (
 						<ListItem
 							title={fields.Title}
-							date={fields.Due}
+							date={translateDate(fields.Due)}
 							onClick={() =>
 								history.push(`/assignment/${fields.id}`)
 							}
