@@ -26,6 +26,10 @@ const Wrapper = styled.div`
 
 	background-color: white;
 
+	&:hover{
+		cursor: pointer;
+	}
+
 	${({ reminder }) =>
 		reminder &&
 		`
@@ -76,6 +80,10 @@ const Date = styled.h6`
 	/* grid-area: date; */
 	grid-column: span 3;
 	color: #5cbde5;
+	/* color: ${({dueColor}) => dueColor ? "#CE0F69" : "#5cbde5"}; */
+
+	 /* background:
+ */
 	margin: 0;
 	padding: 0;
 `;
@@ -115,7 +123,7 @@ const ListItem = ({
 			checked={checked}
 		>
 			<Title>{title}</Title>
-			<Date> {date} </Date>
+			<Date id="due"> {date} </Date>
 			<ViewMore OnClick={onOpen} />
 			{children}
 		</Wrapper>
