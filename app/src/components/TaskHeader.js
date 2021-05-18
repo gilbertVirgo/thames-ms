@@ -5,10 +5,10 @@ import {Grid} from "./index";
 const Wrapper = styled.div`
 	box-sizing: border-box;
     padding: 0;
-    padding: 7.5px 22.5px;
+    padding: 8px 22px;
 
     width: 100vw;
-    height: 72px;
+    height: 74px;
 
     background: #FFFFFF;
     border-bottom: 2px solid #AAAAAA;
@@ -20,7 +20,8 @@ const Wrapper = styled.div`
         "icon subject week number"
         "icon subject date time";
 
-    grid-template-columns: 36px 56px 105px 105px;
+    grid-template-columns: 11% 18% 34% 34%;
+    /* 36px 56px 105px 105px; */
     grid-template-rows: 23px 18px 14px;
     row-gap: 0;
     column-gap: 10px;

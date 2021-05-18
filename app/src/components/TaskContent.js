@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const Wrapper = styled.div`
 	box-sizing: border-box;
     padding: 0;
     padding: 19px 30px;
 
     width:100vw;
-    height: calc(100vh - 137px);
+    height: calc(100vh - 152px);
 
     background: #F8F8F8;
 `;
@@ -44,6 +45,16 @@ const ContentWapper = styled.div`
         margin-bottom: 5px;
     }
 
+    a{
+        margin: 18px 10px;
+        display: block;
+
+        img{
+            padding-right: 9px;
+        }
+
+    }
+
 `;
 
 
@@ -68,10 +79,11 @@ const AttachmentImage = styled.div`
 `;
 
 const CompleteToggle = styled.div`
-    margin-top: 38px;
+    margin: 38px auto;
     padding: 18px 23px;
     width: 100%;
-    height: 62px;
+    max-width: 315px;
+    /* height: 62px; */
 
     border-radius: 3px;
     background: #FFFFFF;
@@ -83,7 +95,8 @@ const CompleteToggle = styled.div`
     line-height: 20px;
 
     display: grid;
-    grid-template-columns: 219px 35px;
+    grid-template-columns: 84% 16%;
+    /* 219px 35px; */
     column-gap: 10px;
 `;
 
@@ -93,6 +106,7 @@ const ToggleImage = styled.button`
 
     appearance: none;
     border: none;
+    align-self: center;
 
     background-image: url("${require("../assets/icons/toggle - off.svg")}");
     background-repeat: no-repeat;
@@ -102,28 +116,34 @@ const ToggleImage = styled.button`
 
 `;
 
-const TaskContent = ({content}) => {
+const TaskContent = ({title, children}) => {
     const [toggle, setToggle] = React.useState(false);
     const SwitchToggle = () =>{
 
     }
 
+    // const content = "<div><p>Hello<a href='/images/myw3schoolsimage.jpg'>Pdf english task 1</a> <a href='/images/myw3schoolsimage.jpg'>Pdf english task 2</a>Placerat maecenas montes, nunc tellus gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><a href='test'>test</a></div>"
+
+   
+
 	return (
 		<Wrapper>
             <form>
                 <ContentWapper>
-                    <h4> Description</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placerat maecenas montes, nunc tellus gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h1>{title}</h1>
+                    {/* {content} */}
+
+                    {children}
+                    {/* <h4> Description</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="/images/myw3schoolsimage.jpg" download>href</a>
+                    Placerat maecenas montes, nunc tellus gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <h1> Check List</h1>
                     <ol>
                         <li>Find attachment </li>
                         <li>Complete questions 1, 2 & 3</li>
-                    </ol> 
+                    </ol>   */}
 
-                    <h3>Attachments</h3>
-                    <a href="/images/myw3schoolsimage.jpg" download>Dowload here</a>
                     
-                    {content}
                     
                 </ContentWapper>
                 <CompleteToggle>

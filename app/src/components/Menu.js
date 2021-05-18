@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
     box-sizing: border-box;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
     height: 65px;
+    max-height: 65px;
+    min-height: 65px;
     width: 100vw;
 
     text-align: center;
@@ -38,7 +40,6 @@ const Menu = () => {
 		<Wrapper>
             <NavItem image={require("../assets/icons/book-open.svg")} />
             <NavItem image={require("../assets/icons/profile.svg")} />
-
 		</Wrapper>
 	);
 };
