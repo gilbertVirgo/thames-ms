@@ -24,9 +24,9 @@ const Wrapper = styled.button`
 `;
 
 
-const CountDateButton = ({ children }) => {
+const CountDateButton = ({ children, ...props }) => {
 	return (
-		<Wrapper>
+		<Wrapper {...props}>
 			{children}
 		</Wrapper>
 	);
