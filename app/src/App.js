@@ -27,7 +27,7 @@ const App = () => {
 			<Route exact path="/" component={role.none ? Login : Dashboard} />
 
 			{/* <Nav /> */}
-			<Container>
+			{/* <Container> */}
 				<Switch>
 					{/* <Route
 						exact
@@ -56,7 +56,7 @@ const App = () => {
 					{/* {role.none && <Redirect from="/" to="/login" />} */}
 					{/* <Route component={NotFound} /> */}
 				</Switch>
-			</Container>
+			{/* </Container> */}
 		</BrowserRouter>
 	);
 };
