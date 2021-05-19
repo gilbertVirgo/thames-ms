@@ -109,8 +109,9 @@ export default ({ query = null }) => {
 					<CountDateButton onClick={()=>getStatus()}>{dueButtonText}</CountDateButton>
 				</ListHeader>
 				{table.length ? (
-					table
-					// .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+					table.sort((a, b) => 
+						new Date(a.fields.Assignment_Due) - new Date(b.fields.Assignment_Due)
+					)
 						.map(({ fields }, index) => (
 						<ListItem
 							reminder={fields.Is_Reminder}
