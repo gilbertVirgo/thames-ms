@@ -66,7 +66,7 @@ export default ({ query = null }) => {
 				// Looks like a call to /reviews might make more sense. Just need to add fields in for the title of the assignment etc...
 
 				const response = await API.get(
-					"assignments" +
+					"reviews" +
 						(query !== null
 							? `?${queryString.stringify(query)}`
 							: "")
@@ -75,9 +75,10 @@ export default ({ query = null }) => {
 				if (!response.hasOwnProperty("content"))
 					throw new Error("Empty response");
 
-				console.log("table", response.content);
+				
 
 				setTable(response.content);
+				console.log("table", response.content);
 				setDueButtonText(dueButtonText)
 				setLoading(false);
 			} catch (err) {
@@ -105,8 +106,10 @@ export default ({ query = null }) => {
 				{table.length ? (
 					table.map(({ fields }, index) => (
 						<ListItem
-							title={fields.Title}
-							date={translateDate(fields.Due)}
+							reminder={fields.is_Reminder}
+							hide={fields.Student_Checked}
+							title={fields.Class_Name}
+							date={translateDate(fields.Assignment_Due)}
 							onClick={() =>
 								history.push(`/assignment/${fields.id}`)
 							}
@@ -125,9 +128,11 @@ export default ({ query = null }) => {
 				{table.length ? (
 					table.map(({ fields }, index) => (
 						<ListItem
-							title={fields.Title}
-							date={translateCompleteDate(fields.Due)}
-							reminder
+							hide={fields.is_Reminder && !fields.Teacher_Checked && !fields.Student_Checked}
+							// checked={fields.Teacher_Checked}
+							complete={fields.Student_Checked}
+							title={fields.Class_Name}
+							date={translateCompleteDate(fields.Assignment_Due)}
 							onClick={() =>
 								history.push(`/assignment/${fields.id}`)
 							}
