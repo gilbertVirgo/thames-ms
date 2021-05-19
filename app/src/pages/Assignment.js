@@ -32,8 +32,6 @@ export default () => {
 				try {
 					const response = await API.get(`assignment/${id}`);
 
-					console.log({ response });
-
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
 
@@ -41,9 +39,8 @@ export default () => {
 					const $ = cheerio.load(record.Content);
 
 					$("a").prepend(`<img src='${require("../assets/icons/paperclip.svg")}' />`);
-					
 					setRecord(record);
-					console.log("the Record", record);
+					
 					set$($);
 					setLoading(false);
 				} catch (err) {
