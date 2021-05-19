@@ -100,7 +100,7 @@ const CompleteToggle = styled.div`
     column-gap: 10px;
 `;
 
-const ToggleImage = styled.button`
+const ToggleButton = styled.button`
     width: 35px;
     height: 21px;
 
@@ -116,9 +116,17 @@ const ToggleImage = styled.button`
 
 `;
 
-const TaskContent = ({title, children}) => {
+const TaskContent = ({title, children, onSendForm, ...props}) => {
     const [toggle, setToggle] = React.useState(false);
     const SwitchToggle = () =>{
+        console.log("this is the toggle", toggle);
+        setToggle(!toggle)
+        if (toggle==false){
+            console.log("toggle is on", toggle);
+
+        }else{
+            console.log("toggle is off", toggle);
+        }
 
     }
 
@@ -149,8 +157,8 @@ const TaskContent = ({title, children}) => {
                 <CompleteToggle>
                     Have you completed the task?   
                 
-                    <ToggleImage id="togleImg"
-                        onClick={SwitchToggle()}
+                    <ToggleButton id="togleImg" {...props}
+                        onClick={onSendForm}
                         />
                 </CompleteToggle>
             </form>

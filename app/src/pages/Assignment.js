@@ -17,7 +17,7 @@ export default () => {
 	const [record, setRecord] = React.useState(null);
 	const [loading, setLoading] = React.useState("Loading assignment data...");
 	const [error, setError] = React.useState();
-	const [$, set$] = React.useState();
+	const [content, setContent] = React.useState("");
 
 	const translateDate = (date) => {
 		return moment(new Date(date)).format("MMM Do YY"); 	
@@ -26,6 +26,24 @@ export default () => {
 	const translateDatetoWeek = (date) =>{
 		return moment(new Date(date)).format('dddd');	
 	}
+
+	const [toggle, setToggle] = React.useState(false);
+    const SwitchToggle = () => {
+        console.log("this is the toggle", toggle);
+        setToggle(!toggle)
+        // if (toggle==false){
+        //     console.log("toggle is on", toggle);
+
+        // }else{
+        //     console.log("toggle is off", toggle);
+        // }
+    }
+
+	const parseHTML = (html) => {
+		console.log("html", html);
+		return html.replace("<html><head></head><body>", "").replace("</body></html>", "");
+	}
+
 	React.useEffect(() => {
 		if (loading) {
 			(async function () {
@@ -39,9 +57,11 @@ export default () => {
 					const $ = cheerio.load(record.Content);
 
 					$("a").prepend(`<img src='${require("../assets/icons/paperclip.svg")}' />`);
-					setRecord(record);
 					
-					set$($);
+					setRecord(record);
+					console.log(record);
+					
+					setContent(parseHTML($.html()));
 					setLoading(false);
 				} catch (err) {
 					setError(err.toString());
@@ -50,24 +70,24 @@ export default () => {
 		}
 	}, [loading]);
 
-	return (
+	
+
+	return !loading ? (
 		<React.Fragment>
-			{record && (
 				<TaskHeader    
-                subject={record.Title}
-                week ={translateDatetoWeek(record.Due)}
-                date={translateDate(record.Due)}
-                number="20-40"
-                time="Minutes"
-            />
-			)}
-			{record && $ && (
-				<TaskContent loading={loading} error={error}> 	
-					<div dangerouslySetInnerHTML={{__html: $.html()}} />				
+					subject={record.Title}
+					week ={translateDatetoWeek(record.Due)}
+					date={translateDate(record.Due)}
+					number={record.Expected_Time_Unit}
+					time={record.Expected_Time}
+            	/>
+				<TaskContent 
+					loading={loading} error={error}
+					onSendForm={()=>SwitchToggle()}> 	
+					<div dangerouslySetInnerHTML={{__html: content }} />				
 				</TaskContent>
-			)}
-			{record && role.staff && <ReviewAssignment assignmentId={id} />}
+			{role.staff && <ReviewAssignment assignmentId={id} />}
 			<Menu />
 		</React.Fragment>
-	);
+	) : "Loading...";
 };

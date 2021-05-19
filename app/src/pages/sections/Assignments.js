@@ -78,7 +78,6 @@ export default ({ query = null }) => {
 				console.log("table", response.content);
 
 				setTable(response.content);
-				console.log(table[0])
 				setDueButtonText(dueButtonText)
 				setLoading(false);
 			} catch (err) {
