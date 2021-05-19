@@ -55,6 +55,15 @@ export default ({ query = null }) => {
 		}
 	}
 
+	const CheckOverdueRreminder = (date) => {
+		date = moment(new Date(date));
+			const now = moment(new Date());
+			const diff = moment.duration(date.diff(now)).days();
+			if (diff < 0) {
+				return `Overdue`;
+			}
+	}
+
 	const translateCompleteDate = (date) => {
 		return moment(new Date(date)).format("MMM Do YY"); 	
 	}
@@ -115,7 +124,7 @@ export default ({ query = null }) => {
 						.map(({ fields }, index) => (
 						<ListItem
 							reminder={fields.Is_Reminder}
-							hide={fields.Student_Checked || fields.Teacher_Checked}
+							hide={fields.Student_Checked || fields.Teacher_Checked || (fields.Is_Reminder && CheckOverdueRreminder(fields.Assignment_Due))}
 							title={fields.Class_Name}
 							date={translateDate(fields.Assignment_Due)}
 							onClick={() =>
