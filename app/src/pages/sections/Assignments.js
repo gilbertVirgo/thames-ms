@@ -55,6 +55,11 @@ export default ({ query = null }) => {
 		}
 	}
 
+	const translateCompleteDate = (date) => {
+		return moment(new Date(date)).format("MMM Do YY"); 	
+	}
+
+
 	React.useEffect(() => {
 		(async function () {
 			try {
@@ -73,6 +78,7 @@ export default ({ query = null }) => {
 				console.log("table", response.content);
 
 				setTable(response.content);
+				console.log(table[0])
 				setDueButtonText(dueButtonText)
 				setLoading(false);
 			} catch (err) {
@@ -121,7 +127,7 @@ export default ({ query = null }) => {
 					table.map(({ fields }, index) => (
 						<ListItem
 							title={fields.Title}
-							date={fields.Due}
+							date={translateCompleteDate(fields.Due)}
 							reminder
 							onClick={() =>
 								history.push(`/assignment/${fields.id}`)
