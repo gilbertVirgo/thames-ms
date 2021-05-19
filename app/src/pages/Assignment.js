@@ -1,11 +1,9 @@
 import API from "../api";
-import Header from "../components/Header";
-import { Paragraph } from "../components";
 import React from "react";
 import ReviewAssignment from "./sections/ReviewAssignment";
-import Section from "../components/Section";
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
+import moment from "moment";
 
 import Menu from "../components/Menu";
 import TaskContent from "../components/TaskContent";
@@ -21,6 +19,13 @@ export default () => {
 	const [error, setError] = React.useState();
 	const [$, set$] = React.useState();
 
+	const translateDate = (date) => {
+		return moment(new Date(date)).format("MMM Do YY"); 	
+	}
+
+	const translateDatetoWeek = (date) =>{
+		return moment(new Date(date)).format('dddd');	
+	}
 	React.useEffect(() => {
 		if (loading) {
 			(async function () {
@@ -38,6 +43,7 @@ export default () => {
 					$("a").prepend(`<img src='${require("../assets/icons/paperclip.svg")}' />`);
 					
 					setRecord(record);
+					console.log("the Record", record);
 					set$($);
 					setLoading(false);
 				} catch (err) {
@@ -47,17 +53,13 @@ export default () => {
 		}
 	}, [loading]);
 
-
-
-    
-
 	return (
 		<React.Fragment>
 			{record && (
 				<TaskHeader    
                 subject={record.Class_Name}
-                week ="Mon"
-                date="29th Mar"
+                week ={translateDatetoWeek(record.Due)}
+                date={translateDate(record.Due)}
                 number="20-40"
                 time="Minutes"
             />
