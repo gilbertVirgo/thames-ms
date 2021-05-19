@@ -75,7 +75,7 @@ export default () => {
 	return !loading ? (
 		<React.Fragment>
 				<TaskHeader    
-					subject={record.Title}
+					subject={record.Class_Name}
 					week ={translateDatetoWeek(record.Due)}
 					date={translateDate(record.Due)}
 					number={record.Expected_Time_Unit}
