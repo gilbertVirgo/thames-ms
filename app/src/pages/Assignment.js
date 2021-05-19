@@ -1,14 +1,13 @@
 import API from "../api";
+import Menu from "../components/Menu";
 import React from "react";
 import ReviewAssignment from "./sections/ReviewAssignment";
-import { useParams } from "react-router-dom";
-import useRole from "../hooks/useRole";
-import moment from "moment";
-
-import Menu from "../components/Menu";
 import TaskContent from "../components/TaskContent";
 import TaskHeader from "../components/TaskHeader";
 import cheerio from "cheerio";
+import moment from "moment";
+import { useParams } from "react-router-dom";
+import useRole from "../hooks/useRole";
 
 export default () => {
 	const [role] = useRole();
@@ -20,29 +19,31 @@ export default () => {
 	const [content, setContent] = React.useState("");
 
 	const translateDate = (date) => {
-		return moment(new Date(date)).format("MMM Do YY"); 	
-	}
+		return moment(new Date(date)).format("MMM Do YY");
+	};
 
-	const translateDatetoWeek = (date) =>{
-		return moment(new Date(date)).format('dddd');	
-	}
+	const translateDatetoWeek = (date) => {
+		return moment(new Date(date)).format("dddd");
+	};
 
 	const [toggle, setToggle] = React.useState(false);
-    const SwitchToggle = () => {
-        console.log("this is the toggle", toggle);
-        setToggle(!toggle)
-        // if (toggle==false){
-        //     console.log("toggle is on", toggle);
+	const SwitchToggle = () => {
+		console.log("this is the toggle", toggle);
+		setToggle(!toggle);
+		// if (toggle==false){
+		//     console.log("toggle is on", toggle);
 
-        // }else{
-        //     console.log("toggle is off", toggle);
-        // }
-    }
+		// }else{
+		//     console.log("toggle is off", toggle);
+		// }
+	};
 
 	const parseHTML = (html) => {
 		console.log("html", html);
-		return html.replace("<html><head></head><body>", "").replace("</body></html>", "");
-	}
+		return html
+			.replace("<html><head></head><body>", "")
+			.replace("</body></html>", "");
+	};
 
 	React.useEffect(() => {
 		if (loading) {
@@ -56,11 +57,13 @@ export default () => {
 					const record = response.content[0].fields;
 					const $ = cheerio.load(record.Content);
 
-					$("a").prepend(`<img src='${require("../assets/icons/paperclip.svg")}' />`);
-					
+					$("a").prepend(
+						`<img src='${require("../assets/icons/paperclip.svg")}' />`
+					);
+
 					setRecord(record);
 					console.log(record);
-					
+
 					setContent(parseHTML($.html()));
 					setLoading(false);
 				} catch (err) {
@@ -70,24 +73,26 @@ export default () => {
 		}
 	}, [loading]);
 
-	
-
 	return !loading ? (
 		<React.Fragment>
-				<TaskHeader    
-					subject={record.Class_Name}
-					week ={translateDatetoWeek(record.Due)}
-					date={translateDate(record.Due)}
-					number={record.Expected_Time_Unit}
-					time={record.Expected_Time}
-            	/>
-				<TaskContent 
-					loading={loading} error={error}
-					onSendForm={()=>SwitchToggle()}> 	
-					<div dangerouslySetInnerHTML={{__html: content }} />				
-				</TaskContent>
+			<TaskHeader
+				subject={record.Class_Name}
+				week={translateDatetoWeek(record.Due)}
+				date={translateDate(record.Due)}
+				number={record.Expected_Time_Unit}
+				time={record.Expected_Time}
+			/>
+			<TaskContent
+				loading={loading}
+				error={error}
+				onSendForm={() => SwitchToggle()}
+			>
+				<div dangerouslySetInnerHTML={{ __html: content }} />
+			</TaskContent>
 			{role.staff && <ReviewAssignment assignmentId={id} />}
 			<Menu />
 		</React.Fragment>
-	) : "Loading...";
+	) : (
+		"Loading..."
+	);
 };
