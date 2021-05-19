@@ -130,7 +130,7 @@ const TaskContent = ({title, children}) => {
 		<Wrapper>
             <form>
                 <ContentWapper>
-                    <h1>{title}</h1>
+                    {/* <h1>{title}</h1> */}
                     {/* {content} */}
 
                     {children}

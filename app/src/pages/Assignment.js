@@ -57,7 +57,7 @@ export default () => {
 		<React.Fragment>
 			{record && (
 				<TaskHeader    
-                subject={record.Class_Name}
+                subject={record.Title}
                 week ={translateDatetoWeek(record.Due)}
                 date={translateDate(record.Due)}
                 number="20-40"
@@ -65,8 +65,7 @@ export default () => {
             />
 			)}
 			{record && $ && (
-				<TaskContent loading={loading} error={error} 
-					title={record.Title}> 	
+				<TaskContent loading={loading} error={error}> 	
 					<div dangerouslySetInnerHTML={{__html: $.html()}} />				
 				</TaskContent>
 			)}
