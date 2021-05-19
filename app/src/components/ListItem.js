@@ -63,6 +63,12 @@ const Wrapper = styled.div`
             background-image: url("${require("../assets/icons/check.svg")}");
         }   
     `}
+
+	${({ hide }) =>
+		hide &&
+		`
+        display: none;   
+    `}
 `;
 
 const Title = styled.h6`
@@ -114,6 +120,7 @@ const ListItem = ({
 	complete,
 	checked,
 	children,
+	hide,
 	...props
 }) => {
 	return (
@@ -122,6 +129,7 @@ const ListItem = ({
 			reminder={reminder}
 			complete={complete}
 			checked={checked}
+			hide={hide}
 		>
 			<Title>{title}</Title>
 			<Date id="due"> {date} </Date>
