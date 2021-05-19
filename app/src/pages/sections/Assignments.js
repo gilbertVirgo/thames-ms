@@ -78,6 +78,11 @@ export default ({ query = null }) => {
 				
 
 				setTable(response.content);
+				// const sortedDate = response.content.fields.sort((a,b)=>{
+				// 	return content.fields[a].Assignment_Due - content.fields[b].Assignment_Due;
+				// });
+				// console.log("Sorted table",sortedDate);
+				// setTable(sortedDate);
 				console.log("table", response.content);
 				setDueButtonText(dueButtonText)
 				setLoading(false);
@@ -104,10 +109,12 @@ export default ({ query = null }) => {
 					<CountDateButton onClick={()=>getStatus()}>{dueButtonText}</CountDateButton>
 				</ListHeader>
 				{table.length ? (
-					table.map(({ fields }, index) => (
+					table
+					// .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+						.map(({ fields }, index) => (
 						<ListItem
-							reminder={fields.is_Reminder}
-							hide={fields.Student_Checked}
+							reminder={fields.Is_Reminder}
+							hide={fields.Student_Checked || fields.Teacher_Checked}
 							title={fields.Class_Name}
 							date={translateDate(fields.Assignment_Due)}
 							onClick={() =>
@@ -128,9 +135,9 @@ export default ({ query = null }) => {
 				{table.length ? (
 					table.map(({ fields }, index) => (
 						<ListItem
-							hide={fields.is_Reminder && !fields.Teacher_Checked && !fields.Student_Checked}
-							// checked={fields.Teacher_Checked}
-							complete={fields.Student_Checked}
+							hide={!fields.Student_Checked}
+							checked={fields.Teacher_Checked && fields.Student_Checked}
+							complete={fields.Student_Checked && !fields.Teacher_Checked}
 							title={fields.Class_Name}
 							date={translateCompleteDate(fields.Assignment_Due)}
 							onClick={() =>
