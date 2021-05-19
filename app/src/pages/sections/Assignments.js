@@ -68,6 +68,15 @@ export default ({ query = null }) => {
 		return moment(new Date(date)).format("MMM Do YY"); 	
 	}
 
+	const CheckReminderTitle = (isReminder, class_name, title) => {
+		if(isReminder){
+			return title;
+		}else{
+			return class_name;
+		}
+		
+	}
+
 
 	React.useEffect(() => {
 		(async function () {
@@ -125,7 +134,8 @@ export default ({ query = null }) => {
 						<ListItem
 							reminder={fields.Is_Reminder}
 							hide={fields.Student_Checked || fields.Teacher_Checked || (fields.Is_Reminder && CheckOverdueRreminder(fields.Assignment_Due))}
-							title={fields.Class_Name}
+							// title={fields.Class_Name}
+							title={CheckReminderTitle(fields.Is_Reminder, fields.Class_Name, fields.Assignment_Title)}
 							date={translateDate(fields.Assignment_Due)}
 							onClick={() =>
 								history.push(`/assignment/${fields.id}`)
@@ -148,7 +158,8 @@ export default ({ query = null }) => {
 							hide={!fields.Student_Checked}
 							checked={fields.Teacher_Checked && fields.Student_Checked}
 							complete={fields.Student_Checked && !fields.Teacher_Checked}
-							title={fields.Class_Name}
+							// title={fields.Class_Name}
+							title={CheckReminderTitle(fields.Is_Reminder, fields.Class_Name, fields.Assignment_Title)}
 							date={translateCompleteDate(fields.Assignment_Due)}
 							onClick={() =>
 								history.push(`/assignment/${fields.id}`)
