@@ -110,7 +110,10 @@ const ToggleButton = styled.button`
 	border: none;
 	align-self: center;
 
-	background-image: url("${require("../assets/icons/toggle - off.svg")}");
+	background-image: url("${({ checked }) =>
+		checked
+			? require("../assets/icons/toggle - on.svg")
+			: require("../assets/icons/toggle - off.svg")}");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -118,25 +121,24 @@ const ToggleButton = styled.button`
 `;
 
 const TaskContent = ({ title, complete, children, onChange, ...props }) => {
-	const [toggle, setToggle] = React.useState(complete);
-	const SwitchToggle = () => {
-		console.log("this is the toggle", toggle);
-		setToggle(!toggle);
-		if (toggle == false) {
-			console.log("toggle is on", toggle);
-		} else {
-			console.log("toggle is off", toggle);
-		}
-	};
+	const [checked, setChecked] = React.useState(complete);
 
-	// const content = "<div><p>Hello<a href='/images/myw3schoolsimage.jpg'>Pdf english task 1</a> <a href='/images/myw3schoolsimage.jpg'>Pdf english task 2</a>Placerat maecenas montes, nunc tellus gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><a href='test'>test</a></div>"
+	const handleChange = () => {
+		setChecked(!checked);
+		onChange();
+	};
 
 	return (
 		<Wrapper>
 			<ContentWapper>{children}</ContentWapper>
 			<CompleteToggle>
 				Have you completed the task?
-				<ToggleButton id="togleImg" {...props} onClick={onChange} />
+				<ToggleButton
+					id="togleImg"
+					checked={checked}
+					{...props}
+					onClick={handleChange}
+				/>
 			</CompleteToggle>
 		</Wrapper>
 	);

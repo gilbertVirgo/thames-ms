@@ -46,11 +46,14 @@ export default () => {
 				try {
 					const response = await API.get(`assignment/${id}`);
 
+					console.log("Assignment call successful");
+
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
 
-					const record = response.content[0].fields;
+					console.log({ id });
 
+					const record = response.content[0].fields;
 					const {
 						content: [
 							{
@@ -58,6 +61,8 @@ export default () => {
 							},
 						],
 					} = await API.get(`reviews?assignment_id=${id}`);
+
+					console.log("Reviews call successful");
 
 					setReviewId(reviewId);
 					setStudentCompleted(Student_Checked);
@@ -75,6 +80,8 @@ export default () => {
 		await API.update(`review/${reviewId}`, {
 			Student_Checked: !studentCompleted,
 		});
+
+		setStudentCompleted(!studentCompleted);
 	};
 
 	return !loading ? (
