@@ -149,7 +149,9 @@ export default ({ query = null }) => {
 								)}
 								date={translateDate(fields.Assignment_Due)}
 								onClick={() =>
-									history.push(`/assignment/${fields.id}`)
+									history.push(
+										`/assignment/${fields.assignment_id}`
+									)
 								}
 								key={`assignment-${index}`}
 							/>
@@ -182,7 +184,9 @@ export default ({ query = null }) => {
 							)}
 							date={translateCompleteDate(fields.Assignment_Due)}
 							onClick={() =>
-								history.push(`/assignment/${fields.id}`)
+								history.push(
+									`/assignment/${fields.assignment_id}`
+								)
 							}
 							key={`assignment-${index}`}
 						/>
