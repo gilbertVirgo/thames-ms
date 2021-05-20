@@ -171,6 +171,7 @@ export default ({ query = null }) => {
 					<p>No active assignments</p>
 				)}
 			</CompletedWrapper>
+			<Menu />
 		</React.Fragment>
 	);
 };

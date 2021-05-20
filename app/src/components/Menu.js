@@ -38,7 +38,7 @@ const NavItem = styled.div`
 const Menu = () => {
 	return (
 		<Wrapper>
-            <NavItem image={require("../assets/icons/book-open.svg")} />
+            <a href="/"><NavItem image={require("../assets/icons/book-open.svg")} /></a>
             <NavItem image={require("../assets/icons/profile.svg")} />
 		</Wrapper>
 	);
