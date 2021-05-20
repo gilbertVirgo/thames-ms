@@ -1,0 +1,6 @@
+Notes:
+
+- Something goes wrong when choosing a class on 'createAssignment'
+- I need to modify createAssignment so that it creates an assignment review (with all the necessary stuff)
+- Once this is done, I need to change the tasks view so that it pulls in the assignment reviews (/reviews)
+- Then I can simply sort them into the necessary groups (simple!)

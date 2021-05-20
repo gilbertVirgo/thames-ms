@@ -35,12 +35,11 @@ export default ({ query = null }) => {
 	const [table, setTable] = React.useState([]);
 	const [dueDateSwitch, setDueDateSwitch] = React.useState(false);
 
-
 	const history = useHistory();
 
 	const translateDate = (date) => {
-		if(dueButtonText === "Count Down") {
-			return moment(new Date(date)).format("ll")
+		if (dueButtonText === "Count Down") {
+			return moment(new Date(date)).format("ll");
 		} else {
 			date = moment(new Date(date));
 			const now = moment(new Date());
@@ -53,30 +52,28 @@ export default ({ query = null }) => {
 				return `Today`;
 			}
 		}
-	}
+	};
 
 	const CheckOverdueRreminder = (date) => {
 		date = moment(new Date(date));
-			const now = moment(new Date());
-			const diff = moment.duration(date.diff(now)).days();
-			if (diff < 0) {
-				return `Overdue`;
-			}
-	}
+		const now = moment(new Date());
+		const diff = moment.duration(date.diff(now)).days();
+		if (diff < 0) {
+			return `Overdue`;
+		}
+	};
 
 	const translateCompleteDate = (date) => {
-		return moment(new Date(date)).format("MMM Do YY"); 	
-	}
+		return moment(new Date(date)).format("MMM Do YY");
+	};
 
 	const CheckReminderTitle = (isReminder, class_name, title) => {
-		if(isReminder){
+		if (isReminder) {
 			return title;
-		}else{
+		} else {
 			return class_name;
 		}
-		
-	}
-
+	};
 
 	React.useEffect(() => {
 		(async function () {
@@ -93,8 +90,6 @@ export default ({ query = null }) => {
 				if (!response.hasOwnProperty("content"))
 					throw new Error("Empty response");
 
-				
-
 				setTable(response.content);
 				// const sortedDate = response.content.fields.sort((a,b)=>{
 				// 	return content.fields[a].Assignment_Due - content.fields[b].Assignment_Due;
@@ -102,7 +97,7 @@ export default ({ query = null }) => {
 				// console.log("Sorted table",sortedDate);
 				// setTable(sortedDate);
 				console.log("table", response.content);
-				setDueButtonText(dueButtonText)
+				setDueButtonText(dueButtonText);
 				setLoading(false);
 			} catch (err) {
 				setError(err.toString());
@@ -112,10 +107,10 @@ export default ({ query = null }) => {
 
 	const getStatus = () => {
 		setDueDateSwitch(!dueDateSwitch);
-		if(dueDateSwitch===false){
-			setDueButtonText("Due")
-		}else{
-			setDueButtonText("Count Down")
+		if (dueDateSwitch === false) {
+			setDueButtonText("Due");
+		} else {
+			setDueButtonText("Count Down");
 		}
 	};
 
@@ -124,25 +119,43 @@ export default ({ query = null }) => {
 		<React.Fragment>
 			<TasksWrapper>
 				<ListHeader title="Tasks">
-					<CountDateButton onClick={()=>getStatus()}>{dueButtonText}</CountDateButton>
+					<CountDateButton onClick={() => getStatus()}>
+						{dueButtonText}
+					</CountDateButton>
 				</ListHeader>
 				{table.length ? (
-					table.sort((a, b) => 
-						new Date(a.fields.Assignment_Due) - new Date(b.fields.Assignment_Due)
-					)
+					table
+						.sort(
+							(a, b) =>
+								new Date(a.fields.Assignment_Due) -
+								new Date(b.fields.Assignment_Due)
+						)
 						.map(({ fields }, index) => (
-						<ListItem
-							reminder={fields.Is_Reminder}
-							hide={fields.Student_Checked || fields.Teacher_Checked || (fields.Is_Reminder && CheckOverdueRreminder(fields.Assignment_Due))}
-							// title={fields.Class_Name}
-							title={CheckReminderTitle(fields.Is_Reminder, fields.Class_Name, fields.Assignment_Title)}
-							date={translateDate(fields.Assignment_Due)}
-							onClick={() =>
-								history.push(`/assignment/${fields.id}`)
-							}
-							key={`assignment-${index}`}
-						/>
-					))
+							<ListItem
+								reminder={fields.Is_Reminder}
+								hide={
+									fields.Student_Checked ||
+									fields.Teacher_Checked ||
+									(fields.Is_Reminder &&
+										CheckOverdueRreminder(
+											fields.Assignment_Due
+										))
+								}
+								// title={fields.Class_Name}
+								title={CheckReminderTitle(
+									fields.Is_Reminder,
+									fields.Class_Name,
+									fields.Assignment_Title
+								)}
+								date={translateDate(fields.Assignment_Due)}
+								onClick={() =>
+									history.push(
+										`/assignment/${fields.assignment_id}`
+									)
+								}
+								key={`assignment-${index}`}
+							/>
+						))
 				) : (
 					<p>No active assignments</p>
 				)}
@@ -156,13 +169,24 @@ export default ({ query = null }) => {
 					table.map(({ fields }, index) => (
 						<ListItem
 							hide={!fields.Student_Checked}
-							checked={fields.Teacher_Checked && fields.Student_Checked}
-							complete={fields.Student_Checked && !fields.Teacher_Checked}
+							checked={
+								fields.Teacher_Checked && fields.Student_Checked
+							}
+							complete={
+								fields.Student_Checked &&
+								!fields.Teacher_Checked
+							}
 							// title={fields.Class_Name}
-							title={CheckReminderTitle(fields.Is_Reminder, fields.Class_Name, fields.Assignment_Title)}
+							title={CheckReminderTitle(
+								fields.Is_Reminder,
+								fields.Class_Name,
+								fields.Assignment_Title
+							)}
 							date={translateCompleteDate(fields.Assignment_Due)}
 							onClick={() =>
-								history.push(`/assignment/${fields.id}`)
+								history.push(
+									`/assignment/${fields.assignment_id}`
+								)
 							}
 							key={`assignment-${index}`}
 						/>
