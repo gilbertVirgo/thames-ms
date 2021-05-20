@@ -17,6 +17,8 @@ export default () => {
 	const [loading, setLoading] = React.useState("Loading assignment data...");
 	const [error, setError] = React.useState();
 	const [content, setContent] = React.useState("");
+	const [studentCompleted, setStudentCompleted] = React.useState();
+	const [reviewId, setReviewId] = React.useState();
 
 	const translateDate = (date) => {
 		return moment(new Date(date)).format("MMM Do YY");
@@ -26,21 +28,14 @@ export default () => {
 		return moment(new Date(date)).format("dddd");
 	};
 
-	const [toggle, setToggle] = React.useState(false);
-	const SwitchToggle = () => {
-		console.log("this is the toggle", toggle);
-		setToggle(!toggle);
-		// if (toggle==false){
-		//     console.log("toggle is on", toggle);
+	const parseContent = (content) => {
+		const $ = cheerio.load(content);
 
-		// }else{
-		//     console.log("toggle is off", toggle);
-		// }
-	};
+		$("a").prepend(
+			`<img src='${require("../assets/icons/paperclip.svg")}' />`
+		);
 
-	const parseHTML = (html) => {
-		console.log("html", html);
-		return html
+		return $.html()
 			.replace("<html><head></head><body>", "")
 			.replace("</body></html>", "");
 	};
@@ -55,16 +50,19 @@ export default () => {
 						throw new Error("Empty response");
 
 					const record = response.content[0].fields;
-					const $ = cheerio.load(record.Content);
 
-					$("a").prepend(
-						`<img src='${require("../assets/icons/paperclip.svg")}' />`
-					);
+					const {
+						content: [
+							{
+								fields: { Student_Checked, id: reviewId },
+							},
+						],
+					} = await API.get(`reviews?assignment_id=${id}`);
 
+					setReviewId(reviewId);
+					setStudentCompleted(Student_Checked);
 					setRecord(record);
-					console.log(record);
-
-					setContent(parseHTML($.html()));
+					setContent(parseContent(record.Content));
 					setLoading(false);
 				} catch (err) {
 					setError(err.toString());
@@ -72,6 +70,12 @@ export default () => {
 			})();
 		}
 	}, [loading]);
+
+	const handleCompletedChange = async () => {
+		await API.update(`review/${reviewId}`, {
+			Student_Checked: !studentCompleted,
+		});
+	};
 
 	return !loading ? (
 		<React.Fragment>
@@ -85,7 +89,8 @@ export default () => {
 			<TaskContent
 				loading={loading}
 				error={error}
-				onSendForm={() => SwitchToggle()}
+				complete={studentCompleted}
+				onChange={handleCompletedChange}
 			>
 				<div dangerouslySetInnerHTML={{ __html: content }} />
 			</TaskContent>
