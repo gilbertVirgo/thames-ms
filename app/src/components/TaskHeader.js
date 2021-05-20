@@ -37,7 +37,8 @@ const SubjectImage = styled.div`
     width: 36px;
     height: 36px;
 
-    background-image: url("${require("../assets/icons/Calculator.svg")}");
+    background-image:  url(${({ image }) => image});
+    /* url("${require("../assets/icons/Calculator.svg")}"); */
     background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center; 
@@ -107,10 +108,10 @@ const Content2 = styled.h3`
     `}    
 `;
 
-const TaskHeader = ({icon, subject, week, date, number, time}) => {
+const TaskHeader = ({icon, subject, week, date, number, time, image}) => {
 	return (
 		<Wrapper>
-            <SubjectImage />
+            <SubjectImage image={image}/>
             <Subject>{subject}</Subject>
 
             <Title>Due:</Title>

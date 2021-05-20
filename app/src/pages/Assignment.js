@@ -18,6 +18,8 @@ export default () => {
 	const [loading, setLoading] = React.useState("Loading assignment data...");
 	const [error, setError] = React.useState();
 	const [content, setContent] = React.useState("");
+	const [subject, setSubject] = React.useState();
+
 
 	const translateDate = (date) => {
 		return moment(new Date(date)).format("MMM Do YY"); 	
@@ -59,7 +61,10 @@ export default () => {
 					$("a").prepend(`<img src='${require("../assets/icons/paperclip.svg")}' />`);
 					
 					setRecord(record);
-					console.log(record);
+
+					let subject = await API.get(`class`);
+					setSubject(subject);
+					console.log("Subject: ",subject);
 					
 					setContent(parseHTML($.html()));
 					setLoading(false);
@@ -74,7 +79,8 @@ export default () => {
 
 	return !loading ? (
 		<React.Fragment>
-				<TaskHeader    
+				<TaskHeader  
+					image={subject.fields.Class_Icon}  
 					subject={record.Class_Name}
 					week ={translateDatetoWeek(record.Due)}
 					date={translateDate(record.Due)}
