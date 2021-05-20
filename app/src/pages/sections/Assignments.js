@@ -54,8 +54,25 @@ export default ({ query = null }) => {
 		}
 	};
 
+	const CheckOverdueRreminder = (date) => {
+		date = moment(new Date(date));
+		const now = moment(new Date());
+		const diff = moment.duration(date.diff(now)).days();
+		if (diff < 0) {
+			return `Overdue`;
+		}
+	};
+
 	const translateCompleteDate = (date) => {
 		return moment(new Date(date)).format("MMM Do YY");
+	};
+
+	const CheckReminderTitle = (isReminder, class_name, title) => {
+		if (isReminder) {
+			return title;
+		} else {
+			return class_name;
+		}
 	};
 
 	React.useEffect(() => {
@@ -108,20 +125,31 @@ export default ({ query = null }) => {
 				</ListHeader>
 				{table.length ? (
 					table
-						// .sort((a, b) => a.itemM > b.itemM ? 1 : -1)
+						.sort(
+							(a, b) =>
+								new Date(a.fields.Assignment_Due) -
+								new Date(b.fields.Assignment_Due)
+						)
 						.map(({ fields }, index) => (
 							<ListItem
 								reminder={fields.Is_Reminder}
 								hide={
 									fields.Student_Checked ||
-									fields.Teacher_Checked
+									fields.Teacher_Checked ||
+									(fields.Is_Reminder &&
+										CheckOverdueRreminder(
+											fields.Assignment_Due
+										))
 								}
-								title={fields.Class_Name}
+								// title={fields.Class_Name}
+								title={CheckReminderTitle(
+									fields.Is_Reminder,
+									fields.Class_Name,
+									fields.Assignment_Title
+								)}
 								date={translateDate(fields.Assignment_Due)}
 								onClick={() =>
-									history.push(
-										`/assignment/${fields.assignment_id[0]}`
-									)
+									history.push(`/assignment/${fields.id}`)
 								}
 								key={`assignment-${index}`}
 							/>
@@ -146,7 +174,12 @@ export default ({ query = null }) => {
 								fields.Student_Checked &&
 								!fields.Teacher_Checked
 							}
-							title={fields.Class_Name}
+							// title={fields.Class_Name}
+							title={CheckReminderTitle(
+								fields.Is_Reminder,
+								fields.Class_Name,
+								fields.Assignment_Title
+							)}
 							date={translateCompleteDate(fields.Assignment_Due)}
 							onClick={() =>
 								history.push(`/assignment/${fields.id}`)
