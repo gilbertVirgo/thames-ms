@@ -42,12 +42,13 @@ const App = () => {
 						<Route path="/class/:id" component={Class} />
 					)}
 					{role.staff && (
-						<Route
-							path="/createAssignment"
-							component={CreateAssignment}
-						/>
+						<Container>
+							<Route
+								path="/createAssignment"
+								component={CreateAssignment}
+							/>
+						</Container>
 					)}
-
 					<Route path="/login" component={Login} />
 					{/* {role.none && <Redirect from="/" to="/login" />} */}
 					{/* <Route component={NotFound} /> */}
