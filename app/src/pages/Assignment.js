@@ -9,6 +9,7 @@ import moment from "moment";
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
 
+
 export default () => {
 	const [role] = useRole();
 
@@ -46,12 +47,8 @@ export default () => {
 				try {
 					const response = await API.get(`assignment/${id}`);
 
-					console.log("Assignment call successful");
-
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
-
-					console.log({ id });
 
 					const record = response.content[0].fields;
 					const {
@@ -62,13 +59,13 @@ export default () => {
 						],
 					} = await API.get(`reviews?assignment_id=${id}`);
 
-					console.log("Reviews call successful");
-
 					setReviewId(reviewId);
 					setStudentCompleted(Student_Checked);
 					setRecord(record);
 					setContent(parseContent(record.Content));
 					setLoading(false);
+
+
 				} catch (err) {
 					setError(err.toString());
 				}
@@ -87,6 +84,7 @@ export default () => {
 	return !loading ? (
 		<React.Fragment>
 			<TaskHeader
+				image={record.Class_Icon[0].url}
 				subject={record.Class_Name}
 				week={translateDatetoWeek(record.Due)}
 				date={translateDate(record.Due)}
