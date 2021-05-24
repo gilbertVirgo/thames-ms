@@ -9,7 +9,6 @@ import moment from "moment";
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
 
-
 export default () => {
 	const [role] = useRole();
 
@@ -47,6 +46,8 @@ export default () => {
 				try {
 					const response = await API.get(`assignment/${id}`);
 
+					console.log("Assignment call successful");
+
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
 
@@ -64,8 +65,6 @@ export default () => {
 					setRecord(record);
 					setContent(parseContent(record.Content));
 					setLoading(false);
-
-
 				} catch (err) {
 					setError(err.toString());
 				}
