@@ -22,6 +22,8 @@ export default () => {
 
 	const [record, setRecord] = React.useState({});
 
+	console.log("Hello?");
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
@@ -90,6 +92,8 @@ export default () => {
 	React.useEffect(() => {
 		(async function () {
 			try {
+				console.log("Starting...");
+
 				const response = await API.get("classes");
 
 				if (!response.hasOwnProperty("content"))
@@ -98,12 +102,14 @@ export default () => {
 				setTable(response.content);
 				setClassesLoading(false);
 
-				console.log("Table is here", );
+				console.log("Table is here", { table: response.content });
 			} catch (err) {
 				setError(err.toString());
 			}
 		})();
 	}, []);
+
+	console.log("I'm here");
 
 	return (
 		<React.Fragment>
@@ -187,11 +193,15 @@ export default () => {
 					<Form.Row>
 						<Col>
 							<Form.Label>Expected Time Unit</Form.Label>
-							<Form.Control as="select" required
+							<Form.Control
+								as="select"
+								required
 								onChange={({ target }) =>
-									editRecord({ Expected_Time_Unit: target.value })
+									editRecord({
+										Expected_Time_Unit: target.value,
+									})
 								}
-								>
+							>
 								<option>Minutes</option>
 								<option>Hours</option>
 							</Form.Control>
@@ -207,7 +217,6 @@ export default () => {
 							/>
 						</Col>
 					</Form.Row>
-					
 				</Section>
 				<Section>
 					<Button type="submit" variant="secondary">

@@ -44,17 +44,18 @@ const App = () => {
 				)}
 
 				{role.staff && (
-					<Container>
-						<Route path="/class/:id" component={Class} />
-					</Container>
+					// <Container>
+					<Route path="/class/:id" component={Class} />
+					// </Container>
 				)}
 				{role.staff && (
-					<Container>
-						<Route
-							path="/createAssignment"
-							component={CreateAssignment}
-						/>
-					</Container>
+					// <Container>
+					<Route
+						path="/createAssignment"
+						// component={() => <p>Hi</p>}
+						component={CreateAssignment}
+					/>
+					// </Container>
 				)}
 				<Route path="/login" component={Login} />
 				{/* {role.none && <Redirect from="/" to="/login" />} */}
