@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Nav from "./components/Nav";
 import NotFound from "./pages/NotFound";
 import React from "react";
+import StaffAssignment from "./pages/StaffAssignment";
 import Student from "./pages/Student";
 import Test from "./pages/Test";
 import useRole from "./hooks/useRole";
@@ -20,41 +21,46 @@ const App = () => {
 		<BrowserRouter>
 			<Route path="/test" component={Test} />
 
+			{/* <Route exact path="/" component={role.none ? Login : Dashboard} /> */}
 			<Route exact path="/" component={role.none ? Login : Dashboard} />
 
 			{/* <Nav /> */}
 			{/* <Container> */}
-				<Switch>
-					{/* <Route
+			<Switch>
+				{/* <Route
 						exact
 						path="/"
 						component={role.none ? Login : Dashboard}
 					/> */}
 
-					{!role.none && (
-						<Route path="/assignment/:id" component={Assignment} />
-					)}
-					{!role.none && (
-						<Route path="/student/:id" component={Student} />
-					)}
+				{(role.student || role.parent) && (
+					<Route path="/assignment/:id" component={Assignment} />
+				)}
+				{role.staff && (
+					<Route path="/assignment/:id" component={StaffAssignment} />
+				)}
+				{!role.none && (
+					<Route path="/student/:id" component={Student} />
+				)}
 
-					{role.staff && (
-						<Container>
-							<Route path="/class/:id" component={Class} />
-						</Container>
-					)}
-					{role.staff && (
-						<Container>
-							<Route
-								path="/createAssignment"
-								component={CreateAssignment}
-							/>
-						</Container>
-					)}
-					<Route path="/login" component={Login} />
-					{/* {role.none && <Redirect from="/" to="/login" />} */}
-					{/* <Route component={NotFound} /> */}
-				</Switch>
+				{role.staff && (
+					// <Container>
+					<Route path="/class/:id" component={Class} />
+					// </Container>
+				)}
+				{role.staff && (
+					// <Container>
+					<Route
+						path="/createAssignment"
+						// component={() => <p>Hi</p>}
+						component={CreateAssignment}
+					/>
+					// </Container>
+				)}
+				<Route path="/login" component={Login} />
+				{/* {role.none && <Redirect from="/" to="/login" />} */}
+				{/* <Route component={NotFound} /> */}
+			</Switch>
 			{/* </Container> */}
 		</BrowserRouter>
 	);

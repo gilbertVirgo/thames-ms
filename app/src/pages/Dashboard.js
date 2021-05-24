@@ -12,16 +12,11 @@ import useRole from "../hooks/useRole";
 export default () => {
 	const [role] = useRole();
 
+	console.log({ role });
+
 	return (
 		<React.Fragment>
-			{/* <Heading>Dashboard</Heading> */}
-
-			{role.student && (
-				<React.Fragment>
-					<Assignments />
-					{/* <Behaviour /> */}
-				</React.Fragment>
-			)}
+			{role.student && <Assignments />}
 			{role.parent && <Students />}
 			{role.staff && (
 				<React.Fragment>

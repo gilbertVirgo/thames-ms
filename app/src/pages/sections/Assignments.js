@@ -96,11 +96,6 @@ export default ({ query = null }) => {
 					throw new Error("Empty response");
 
 				setTable(response.content);
-				// const sortedDate = response.content.fields.sort((a,b)=>{
-				// 	return content.fields[a].Assignment_Due - content.fields[b].Assignment_Due;
-				// });
-				// console.log("Sorted table",sortedDate);
-				// setTable(sortedDate);
 				console.log("table", response.content);
 				setDueButtonText(dueButtonText);
 				setLoading(false);
@@ -119,8 +114,7 @@ export default ({ query = null }) => {
 		}
 	};
 
-	return (
-		// <Section title="Assignments" loading={loading} error={error}>
+	return !loading ? (
 		<React.Fragment>
 			<TasksWrapper>
 				<ListHeader title="Tasks">
@@ -153,7 +147,14 @@ export default ({ query = null }) => {
 									fields.Assignment_Title
 								)}
 								date={translateDate(fields.Assignment_Due)}
-								overdue={translateDate(fields.Assignment_Due)=="Overdue" || translateDate(fields.Assignment_Due)=="Today" || translateDate(fields.Assignment_Due)=="Tomorrow"}
+								overdue={
+									translateDate(fields.Assignment_Due) ==
+										"Overdue" ||
+									translateDate(fields.Assignment_Due) ==
+										"Today" ||
+									translateDate(fields.Assignment_Due) ==
+										"Tomorrow"
+								}
 								onClick={() =>
 									history.push(
 										`/assignment/${fields.assignment_id}`
@@ -203,5 +204,7 @@ export default ({ query = null }) => {
 			</CompletedWrapper>
 			<Menu />
 		</React.Fragment>
+	) : (
+		"Loading..."
 	);
 };
