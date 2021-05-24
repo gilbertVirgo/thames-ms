@@ -148,6 +148,7 @@ export default ({ query = null }) => {
 									fields.Assignment_Title
 								)}
 								date={translateDate(fields.Assignment_Due)}
+								overdue={translateDate(fields.Assignment_Due)=="Overdue" || translateDate(fields.Assignment_Due)=="Today"}
 								onClick={() =>
 									history.push(
 										`/assignment/${fields.assignment_id}`
