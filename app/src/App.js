@@ -39,7 +39,9 @@ const App = () => {
 					)}
 
 					{role.staff && (
-						<Route path="/class/:id" component={Class} />
+						<Container>
+							<Route path="/class/:id" component={Class} />
+						</Container>
 					)}
 					{role.staff && (
 						<Container>
