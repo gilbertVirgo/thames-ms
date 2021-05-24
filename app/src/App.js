@@ -21,18 +21,8 @@ const App = () => {
 		<BrowserRouter>
 			<Route path="/test" component={Test} />
 
-			{/* <Route exact path="/" component={role.none ? Login : Dashboard} /> */}
 			<Route exact path="/" component={role.none ? Login : Dashboard} />
-
-			{/* <Nav /> */}
-			{/* <Container> */}
 			<Switch>
-				{/* <Route
-						exact
-						path="/"
-						component={role.none ? Login : Dashboard}
-					/> */}
-
 				{(role.student || role.parent) && (
 					<Route path="/assignment/:id" component={Assignment} />
 				)}
@@ -43,19 +33,12 @@ const App = () => {
 					<Route path="/student/:id" component={Student} />
 				)}
 
+				{role.staff && <Route path="/class/:id" component={Class} />}
 				{role.staff && (
-					// <Container>
-					<Route path="/class/:id" component={Class} />
-					// </Container>
-				)}
-				{role.staff && (
-					// <Container>
 					<Route
 						path="/createAssignment"
-						// component={() => <p>Hi</p>}
 						component={CreateAssignment}
 					/>
-					// </Container>
 				)}
 				<Route path="/login" component={Login} />
 				{/* {role.none && <Redirect from="/" to="/login" />} */}
