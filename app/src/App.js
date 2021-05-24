@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Nav from "./components/Nav";
 import NotFound from "./pages/NotFound";
 import React from "react";
+import StaffAssignment from "./pages/StaffAssignment";
 import Student from "./pages/Student";
 import Test from "./pages/Test";
 import useRole from "./hooks/useRole";
@@ -32,8 +33,11 @@ const App = () => {
 						component={role.none ? Login : Dashboard}
 					/> */}
 
-				{!role.none && (
+				{(role.student || role.parent) && (
 					<Route path="/assignment/:id" component={Assignment} />
+				)}
+				{role.staff && (
+					<Route path="/assignment/:id" component={StaffAssignment} />
 				)}
 				{!role.none && (
 					<Route path="/student/:id" component={Student} />

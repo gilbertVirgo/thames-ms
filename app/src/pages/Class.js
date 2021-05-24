@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import Header from "../components/Header";
 import React from "react";
 import Section from "../components/Section";
+import StaffAssignments from "./sections/StaffAssignments";
 import Students from "./sections/Students";
 import Table from "react-bootstrap/Table";
 import { useParams } from "react-router-dom";
@@ -48,7 +49,7 @@ export default () => {
 					subheading={record.Year_Group}
 				/>
 			)}
-			<Assignments
+			<StaffAssignments
 				query={{
 					class_id: id,
 				}}

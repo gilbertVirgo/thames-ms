@@ -114,8 +114,6 @@ export default ({ query = null }) => {
 		}
 	};
 
-	console.log("Render...", { loading });
-
 	return !loading ? (
 		<React.Fragment>
 			<TasksWrapper>
@@ -149,7 +147,14 @@ export default ({ query = null }) => {
 									fields.Assignment_Title
 								)}
 								date={translateDate(fields.Assignment_Due)}
-								overdue={translateDate(fields.Assignment_Due)=="Overdue" || translateDate(fields.Assignment_Due)=="Today" || translateDate(fields.Assignment_Due)=="Tomorrow"}
+								overdue={
+									translateDate(fields.Assignment_Due) ==
+										"Overdue" ||
+									translateDate(fields.Assignment_Due) ==
+										"Today" ||
+									translateDate(fields.Assignment_Due) ==
+										"Tomorrow"
+								}
 								onClick={() =>
 									history.push(
 										`/assignment/${fields.assignment_id}`
