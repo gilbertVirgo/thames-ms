@@ -91,11 +91,6 @@ export default ({ query = null }) => {
 					throw new Error("Empty response");
 
 				setTable(response.content);
-				// const sortedDate = response.content.fields.sort((a,b)=>{
-				// 	return content.fields[a].Assignment_Due - content.fields[b].Assignment_Due;
-				// });
-				// console.log("Sorted table",sortedDate);
-				// setTable(sortedDate);
 				console.log("table", response.content);
 				setDueButtonText(dueButtonText);
 				setLoading(false);
@@ -114,8 +109,9 @@ export default ({ query = null }) => {
 		}
 	};
 
-	return (
-		// <Section title="Assignments" loading={loading} error={error}>
+	console.log("Render...", { loading });
+
+	return !loading ? (
 		<React.Fragment>
 			<TasksWrapper>
 				<ListHeader title="Tasks">
@@ -197,5 +193,7 @@ export default ({ query = null }) => {
 			</CompletedWrapper>
 			<Menu />
 		</React.Fragment>
+	) : (
+		"Loading..."
 	);
 };

@@ -20,41 +20,42 @@ const App = () => {
 		<BrowserRouter>
 			<Route path="/test" component={Test} />
 
+			{/* <Route exact path="/" component={role.none ? Login : Dashboard} /> */}
 			<Route exact path="/" component={role.none ? Login : Dashboard} />
 
 			{/* <Nav /> */}
 			{/* <Container> */}
-				<Switch>
-					{/* <Route
+			<Switch>
+				{/* <Route
 						exact
 						path="/"
 						component={role.none ? Login : Dashboard}
 					/> */}
 
-					{!role.none && (
-						<Route path="/assignment/:id" component={Assignment} />
-					)}
-					{!role.none && (
-						<Route path="/student/:id" component={Student} />
-					)}
+				{!role.none && (
+					<Route path="/assignment/:id" component={Assignment} />
+				)}
+				{!role.none && (
+					<Route path="/student/:id" component={Student} />
+				)}
 
-					{role.staff && (
-						<Container>
-							<Route path="/class/:id" component={Class} />
-						</Container>
-					)}
-					{role.staff && (
-						<Container>
-							<Route
-								path="/createAssignment"
-								component={CreateAssignment}
-							/>
-						</Container>
-					)}
-					<Route path="/login" component={Login} />
-					{/* {role.none && <Redirect from="/" to="/login" />} */}
-					{/* <Route component={NotFound} /> */}
-				</Switch>
+				{role.staff && (
+					<Container>
+						<Route path="/class/:id" component={Class} />
+					</Container>
+				)}
+				{role.staff && (
+					<Container>
+						<Route
+							path="/createAssignment"
+							component={CreateAssignment}
+						/>
+					</Container>
+				)}
+				<Route path="/login" component={Login} />
+				{/* {role.none && <Redirect from="/" to="/login" />} */}
+				{/* <Route component={NotFound} /> */}
+			</Switch>
 			{/* </Container> */}
 		</BrowserRouter>
 	);
