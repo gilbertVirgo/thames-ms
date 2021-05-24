@@ -7,6 +7,7 @@ const Wrapper = styled.div`
 	padding: 19px 30px;
 
 	width: 100vw;
+	max-width: 540px;
 	height: calc(100vh - 152px);
 
 	background: #f8f8f8;

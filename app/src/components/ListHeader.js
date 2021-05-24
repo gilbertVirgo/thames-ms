@@ -16,6 +16,7 @@ const Wrapper = styled.div`
     height: 60px;
     padding: 14.5px 14px;
     width: 100%;
+    max-width: 540px;
 
     border-bottom: 2px solid #AAAAAA;
     

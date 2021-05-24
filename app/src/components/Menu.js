@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     max-height: 65px;
     min-height: 65px;
     width: 100vw;
+    max-width: 540px;
 
     text-align: center;
     border-top: 2px solid #AAAAAA;
