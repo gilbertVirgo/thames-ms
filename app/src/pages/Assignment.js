@@ -87,8 +87,8 @@ export default () => {
 				subject={record.Class_Name}
 				week={translateDatetoWeek(record.Due)}
 				date={translateDate(record.Due)}
-				number={record.Expected_Time_Unit}
-				time={record.Expected_Time}
+				number={record.Expected_Time}
+				time={record.Expected_Time_Unit}
 			/>
 			<TaskContent
 				loading={loading}
