@@ -44,11 +44,16 @@ export default ({ query = null }) => {
 			date = moment(new Date(date));
 			const now = moment(new Date());
 			const diff = moment.duration(date.diff(now)).days();
+			const diffHours = moment.duration(date.diff(now)).hours();
 			if (diff > 0) {
 				return `${Math.abs(diff)} day${diff !== 1 ? "s" : ""}`;
 			} else if (diff < 0) {
 				return `Overdue`;
+			} else if (diffHours > 0 && diffHours <= 24) {
+				console.log("this is Diff housrs", diffHours);
+				return `Tomorrow`;
 			} else if (diff == 0) {
+				console.log("this is Diff", diff);
 				return `Today`;
 			}
 		}
@@ -148,7 +153,7 @@ export default ({ query = null }) => {
 									fields.Assignment_Title
 								)}
 								date={translateDate(fields.Assignment_Due)}
-								overdue={translateDate(fields.Assignment_Due)=="Overdue" || translateDate(fields.Assignment_Due)=="Today"}
+								overdue={translateDate(fields.Assignment_Due)=="Overdue" || translateDate(fields.Assignment_Due)=="Today" || translateDate(fields.Assignment_Due)=="Tomorrow"}
 								onClick={() =>
 									history.push(
 										`/assignment/${fields.assignment_id}`
