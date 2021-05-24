@@ -37,7 +37,7 @@ const SubjectImage = styled.div`
     width: 36px;
     height: 36px;
 
-    background-image:  url(${({ image }) => image});
+    background-image: url(${({ image }) => image});
     /* url("${require("../assets/icons/Calculator.svg")}"); */
     background-repeat: no-repeat;
 	background-size: cover;

@@ -21,7 +21,7 @@ const TasksWrapper = styled.div`
 `;
 
 const CompletedWrapper = styled.div`
-	height: 50vh;
+	height: calc(50vh - 65px);
 	padding: 0;
 	margin: 0;
 	position: sticky;

@@ -51,8 +51,6 @@ export default () => {
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
 
-					console.log({ id });
-
 					const record = response.content[0].fields;
 					const {
 						content: [
@@ -61,8 +59,6 @@ export default () => {
 							},
 						],
 					} = await API.get(`reviews?assignment_id=${id}`);
-
-					console.log("Reviews call successful");
 
 					setReviewId(reviewId);
 					setStudentCompleted(Student_Checked);
@@ -87,6 +83,7 @@ export default () => {
 	return !loading ? (
 		<React.Fragment>
 			<TaskHeader
+				image={record.Class_Icon[0].url}
 				subject={record.Class_Name}
 				week={translateDatetoWeek(record.Due)}
 				date={translateDate(record.Due)}
