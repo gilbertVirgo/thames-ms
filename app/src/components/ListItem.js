@@ -64,6 +64,14 @@ const Wrapper = styled.div`
         }   
     `}
 
+	${({ overdue }) =>
+		overdue &&
+		`
+        ${Date}{
+            color: #CE0F69;
+        } 
+    `}
+
 	${({ hide }) =>
 		hide &&
 		`
@@ -121,6 +129,7 @@ const ListItem = ({
 	checked,
 	children,
 	hide,
+	overdue,
 	...props
 }) => {
 	return (
@@ -130,6 +139,7 @@ const ListItem = ({
 			complete={complete}
 			checked={checked}
 			hide={hide}
+			overdue={overdue}
 		>
 			<Title>{title}</Title>
 			<Date id="due"> {date} </Date>
