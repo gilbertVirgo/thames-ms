@@ -1,8 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import Sparkles from "../components/Sparkles";
-// import {ConfettiCannon} from "../components/Confetti";
-
 const Wrapper = styled.div`
 	box-sizing: border-box;
 	padding: 0;
@@ -109,6 +107,8 @@ const CompleteToggle = styled.div`
 	grid-template-columns: 84% 16%;
 	/* 219px 35px; */
 	column-gap: 10px;
+
+	
 `;
 
 const ToggleButton = styled.button`
@@ -131,7 +131,6 @@ const ToggleButton = styled.button`
 
 const TaskContent = ({ title, complete, children, onChange, ...props }) => {
 	const [checked, setChecked] = React.useState(complete);
-	const [effect, setEffect] = React.useState(false);
 
 	const handleChange = () => {
 		setChecked(!checked);
@@ -142,18 +141,17 @@ const TaskContent = ({ title, complete, children, onChange, ...props }) => {
 		<Wrapper>
 			<ContentWapper>{children}</ContentWapper>
 			<Sparkles effect={checked}>
-			{/* <ConfettiCannon> */}
 				<ToggleWrapper>
-				<CompleteToggle>
-					Have you completed the task?
-					<ToggleButton
-						id="togleImg"
-						checked={checked}
-						{...props}
-						onClick={handleChange}
-					/>
-				</CompleteToggle></ToggleWrapper>
-			{/* </ConfettiCannon> */}
+					<CompleteToggle >
+						Have you completed the task?
+						<ToggleButton
+							id="togleImg"
+							checked={checked}
+							{...props}
+							onClick={handleChange}
+						/>
+					</CompleteToggle>
+				</ToggleWrapper>
 			</Sparkles>
 		</Wrapper>
 	);
