@@ -85,7 +85,7 @@ export default () => {
 		});
 
 		console.log("Edit => ", copy);
-
+		console.log("Props", props);
 		setRecord(copy);
 	};
 
@@ -100,9 +100,11 @@ export default () => {
 					throw new Error("Empty response");
 
 				setTable(response.content);
+				console.log("This is the response", response.content);
 				setClassesLoading(false);
 
 				console.log("Table is here", { table: response.content });
+				
 			} catch (err) {
 				setError(err.toString());
 			}
@@ -198,12 +200,13 @@ export default () => {
 								required
 								onChange={({ target }) =>
 									editRecord({
-										Expected_Time_Unit: target.value,
+										Expected_Time_Unit: target.options[target.selectedIndex].value,
 									})
 								}
-							>
-								<option>Minutes</option>
-								<option>Hours</option>
+							>	
+								<option value="">-- Select a time unit --</option>
+								<option value="Minutes">Minutes</option>
+								<option value="Hours">Hours</option>
 							</Form.Control>
 						</Col>
 						<Col>
