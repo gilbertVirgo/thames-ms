@@ -32,7 +32,7 @@ export default () => {
 		const $ = cheerio.load(content);
 
 		$("a").prepend(
-			`<img src='${require("../assets/icons/paperclip.svg")}' />`
+			`<h1>Attachments</h1><img src='${require("../assets/icons/paperclip.svg")}' />`
 		);
 
 		return $.html()
