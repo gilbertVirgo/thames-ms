@@ -29,19 +29,43 @@ const Wrapper = styled.div`
 const NavItem = styled.div`
     width: 24px;
     height: 24px;
-    background-image: url("${({ image }) => image}");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+    background-image: url("${({ activeAssignment }) =>
+		activeAssignment
+			? require("../assets/icons/book-open.svg")
+			: require("../assets/icons/book-off.svg")}");
+    ${({avatar})=>avatar && `
+        background-image: url("${({ activeAvatar }) =>
+		activeAvatar
+			? require("../assets/icons/Avatar.svg")
+			: require("../assets/icons/Avatar-off.svg")}");
+    `}
+
+    
+
+`;
+
+const NavProfile = styled.div`
+    width: 24px;
+    height: 24px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+    background-image: url("${({ activeAvatar }) =>
+		activeAvatar
+			? require("../assets/icons/Avatar.svg")
+			: require("../assets/icons/Avatar-off.svg")}");
+   
 `;
 
 
-const Menu = () => {
-
+const Menu = ({activeAssignment, activeAvatar}) => {
 	return (
 		<Wrapper>
-            <a href="/"><NavItem image={require("../assets/icons/book-open.svg")} /></a>
-            <a href="/profile"><NavItem image={require("../assets/icons/profile.svg")} /></a>
+            <a href="/"><NavItem activeAssignment={activeAssignment} /></a>
+            <a href="/profile"><NavProfile activeAvatar={activeAvatar} /></a>
 		</Wrapper>
 	);
 };

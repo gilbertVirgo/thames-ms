@@ -208,7 +208,7 @@ export default ({ query = null }) => {
 					<p>No active assignments</p>
 				)}
 			</CompletedWrapper>
-			<Menu />
+			<Menu activeAssignment={true} activeAvatar={false} />
 		</React.Fragment>
 	) : (
 		"Loading..."

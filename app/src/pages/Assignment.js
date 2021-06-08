@@ -99,7 +99,7 @@ export default () => {
 				<div dangerouslySetInnerHTML={{ __html: content }} />
 			</TaskContent>
 			{role.staff && <ReviewAssignment assignmentId={id} />}
-			<Menu />
+			<Menu activeAssignment={true} activeAvatar={false}/>
 		</React.Fragment>
 	) : (
 		"Loading..."

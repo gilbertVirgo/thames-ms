@@ -2,7 +2,7 @@ import API from "../api";
 import Menu from "../components/Menu";
 import React from "react";
 import ReviewAssignment from "./sections/ReviewAssignment";
-import TaskContent from "../components/TaskContent";
+import ProfileContent from "../components/ProfileContent";
 import TaskHeader from "../components/TaskHeader";
 import ProfileHeader from "../components/ProfileHeader";
 import cheerio from "cheerio";
@@ -89,16 +89,10 @@ export default () => {
                 points="125"
 			/>
 
-			{/* <TaskContent
-				loading={loading}
-				error={error}
-				complete={studentCompleted}
-				onChange={handleCompletedChange}
-			>
-				<div dangerouslySetInnerHTML={{ __html: content }} />
-			</TaskContent> */}
-			{/* {role.staff && <ReviewAssignment assignmentId={id} />} */}
-			<Menu />
+            <ProfileContent>
+
+            </ProfileContent>
+            <Menu activeAssignment={false} activeAvatar={true}/>
 		</React.Fragment>
 	);
 };
