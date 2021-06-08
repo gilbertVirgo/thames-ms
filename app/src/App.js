@@ -13,6 +13,7 @@ import StaffAssignment from "./pages/StaffAssignment";
 import Student from "./pages/Student";
 import Test from "./pages/Test";
 import useRole from "./hooks/useRole";
+import Profile from "./pages/Profile";
 
 const App = () => {
 	const [role] = useRole();
@@ -25,6 +26,10 @@ const App = () => {
 			<Switch>
 				{(role.student || role.parent) && (
 					<Route path="/assignment/:id" component={Assignment} />
+				)}
+
+				{(role.student || role.parent) && (
+					<Route path="/profile" component={Profile} />
 				)}
 				{role.staff && (
 					<Route path="/assignment/:id" component={StaffAssignment} />
