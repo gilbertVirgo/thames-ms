@@ -173,7 +173,13 @@ export default ({ query = null }) => {
 					style={{ border: "none" }}
 				></ListHeader>
 				{table.length ? (
-					table.map(({ fields }, index) => (
+					table
+						.sort(
+							(a, b) =>
+								new Date(b.fields.Assignment_Due) -
+								new Date(a.fields.Assignment_Due)
+						)
+						.map(({ fields }, index) => (
 						<ListItem
 							hide={!fields.Student_Checked}
 							checked={
@@ -202,7 +208,7 @@ export default ({ query = null }) => {
 					<p>No active assignments</p>
 				)}
 			</CompletedWrapper>
-			<Menu />
+			<Menu activeAssignment={true} activeAvatar={false} />
 		</React.Fragment>
 	) : (
 		"Loading..."

@@ -32,7 +32,7 @@ export default () => {
 		const $ = cheerio.load(content);
 
 		$("a").prepend(
-			`<img src='${require("../assets/icons/paperclip.svg")}' />`
+			`<h1>Attachments</h1><img src='${require("../assets/icons/paperclip.svg")}' />`
 		);
 
 		return $.html()
@@ -99,7 +99,7 @@ export default () => {
 				<div dangerouslySetInnerHTML={{ __html: content }} />
 			</TaskContent>
 			{role.staff && <ReviewAssignment assignmentId={id} />}
-			<Menu />
+			<Menu activeAssignment={true} activeAvatar={false}/>
 		</React.Fragment>
 	) : (
 		"Loading..."

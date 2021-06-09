@@ -54,9 +54,11 @@ const ContentWapper = styled.div`
 	a {
 		margin: 18px 10px;
 		display: block;
+		color: #4e4e4e;
 
 		img {
-			padding-right: 9px;
+			padding-right: 7px;
+			padding-left: 10px;
 		}
 	}
 `;
