@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd app
+cd /home/ubuntu/thames-ms/app
 git pull git@github.com:Roundtable-Design/thames-ms.git master
 npm i
 npm run build
