@@ -1,176 +1,139 @@
+import { Edit } from "@material-ui/icons";
 import React from "react";
 import styled, {keyframes} from "styled-components";
 
 const Wrapper = styled.div`
 	box-sizing: border-box;
 	padding: 0;
-	padding: 0;
+	margin: 0;
 
 	width: 100vw;
 	max-width: 540px;
-	height: calc(100vh - 130px);
+	height: 100%;
 
 	background: #E8E6DF;
 
 `;
+const Achievement = styled.div`
+	background-color: #99D6EA;
+    padding: 36px 39px;
+    margin: 0;
+`;
 
-const StudentInfoWrapper = styled.div`
-	padding: 36px 30px 36px 39px;
+const Title = styled.h6`
+    font-style: normal;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 20px;
+
+    color: #4E4E4E;
+
+    margin: 0;
+    margin-bottom: 4px;
+`;
+
+const Content = styled.div`
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+
+    color: #4E4E4E;
+    background: #FFFFFF;
+    border-radius: 3px;
+    padding: 10px;
+`;
+const GeneralLinks = styled.div`
+	padding: 29px 30px;
 	margin: 0;
 
+    ${Title}{
+        margin-bottom: 9px;
+    }
+`;
+
+const Link = styled.div`
+	padding: 0;
+	margin: 0;
+    margin-bottom: 10px;
+
+    width: 100%;
+    height: 20px;
+
 	display: grid;
-    grid-template-rows: 64px 64px;
-    row-gap: 12px;
+    grid-template-columns: 31px auto;
+    column-gap: 7px;
 
 	font-style: normal;
-	font-size: 15px;
-	line-height: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
 
-	color: #4E4E4E;
-`;
+    a{
+        color: #002E5D;
+        margin: 0;
+    }
+    
 
-const ClassInfo = styled.div`
-	display: grid;
-	grid-template-areas: 
-        "class tutor"
-        "year name"; 
-	column-gap: 40px;
-	row-gap: 5px;
-    grid-template-columns: 13% 42%;
-	grid-template-rows: 19px 40px;
-`;
-
-const EmailInfo = styled.div`
-	display: grid;
-	grid-template-areas: 
-        "title"
-        "email"; 
-	row-gap: 5px;
-	grid-template-rows: 19px 40px;
-`;
-
-const InfoTitle = styled.h5`
-	grid-area: class;
-	margin: 0;
-	
-	font-weight: 800;
-
-	${({tutor})=>tutor && `
-        grid-area: tutor; 
-    `}
-	${({email})=>email && `
-        grid-area: title; 
-    `}
-`;
-
-const InfoContent = styled.p`
-	grid-area: year;
-	background: #FFFFFF;
-	border-radius: 3px;
-	padding: 10px;
-	margin: 0;
-
-	font-weight: 600;
-
-	${({tutor})=>tutor && `
-        grid-area: name; 
-    `}
-	${({email})=>email && `
-        grid-area: email; 
-    `}
-`;
-
-const ContentWapper = styled.div`
-	font-weight: 600;
-	font-size: 15px;
-	line-height: 20px;
-
-	color: #4e4e4e;
-
-	margin: 0;
-	padding: 0;
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		font-weight: 800;
-		font-size: 15px;
-		line-height: 20px;
-		margin-bottom: 5px;
-	}
-
-	p {
-		font-weight: normal;
-		margin-bottom: 18px;
-	}
-
-	ul,
-	ol {
-		font-weight: normal;
-		margin-bottom: 18px;
-		padding-left: 25px;
-	}
-
-	li {
-		margin-bottom: 5px;
-	}
-
-	a {
-		margin: 18px 10px;
-		display: block;
-		color: #4e4e4e;
-
-		img {
-			padding-right: 7px;
-			padding-left: 10px;
-		}
-	}
-`;
-
-const Attachment = styled.div`
-	width: 100%;
-	height: 100%;
-
-	display: grid;
-	grid-template-columns: 20px 227px;
-	column-gap: 7px;
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+        color: #002E5D;
+        cursor: pointer;
+    }
 `;
 
 const AttachmentImage = styled.div`
 	width: 20px;
 	height: 20px;
+    justify-self: end;
 
-	background-image: url("${require("../assets/icons/paperclip.svg")}");
+	background-image: url("${require("../assets/icons/paperclip-pink.svg")}");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
 	background-color: transparent;
 `;
 
+// $("a").prepend(
+//     `<h1>Attachments</h1><img src='${require("../assets/icons/paperclip.svg")}' />`
+// );
 
+const  data=[
+    {
+        link: "",
+        title: "first link",
+    },
+    {
+        link: "",
+        title: "first link",
+    },
+    {
+        link: "",
+        title: "first link",
+    }
+]
 
-
-const ProfileContent = ({  }) => {
+const ProfileContent = ({achievement, children}) => {
 
 	return (
 		<Wrapper>
-			<StudentInfoWrapper>
-				<ClassInfo>
-					<InfoTitle>Year</InfoTitle>
-					<InfoContent>9</InfoContent>
-
-					<InfoTitle tutor>Form Tutor</InfoTitle>
-					<InfoContent tutor>Mr Reid</InfoContent>
-
-				</ClassInfo>
-				<EmailInfo>
-					<InfoTitle email>Email</InfoTitle>
-					<InfoContent email>jjsmith@thameschristiancollege.org.uk</InfoContent>
-				</EmailInfo>
-			</StudentInfoWrapper>
+			<Achievement>
+                <Title>Achievement</Title>
+                <Content>{achievement}</Content>
+            </Achievement>
+            <GeneralLinks>
+                <Title>Useful Information</Title>
+                {data.map(({link, title})=>(
+                    <Link>
+                        <AttachmentImage />
+                        <a href={link}>{title}</a>
+                    </Link>
+                ))}
+                {/* <Link>
+                    <AttachmentImage />
+                    {children}
+                </Link> */}
+            </GeneralLinks>
 		</Wrapper>
 	);
 };
