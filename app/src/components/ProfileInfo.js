@@ -3,21 +3,16 @@ import styled, {keyframes} from "styled-components";
 
 const Wrapper = styled.div`
 	box-sizing: border-box;
-	padding: 0;
+	padding: 36px 30px 36px 39px;
 	margin: 0;
 
-	width: 100vw;
-	max-width: 540px;
+	width: 100%;
+	/* max-width: 540px; */
 	height: 212px;
 	 /* calc(100vh - 130px); */
 
 	background: #E8E6DF;
-
-`;
-
-const StudentInfoWrapper = styled.div`
-	padding: 36px 30px 36px 39px;
-	margin: 0;
+	color: #4E4E4E;
 
 	display: grid;
     grid-template-rows: 64px 64px;
@@ -27,7 +22,7 @@ const StudentInfoWrapper = styled.div`
 	font-size: 15px;
 	line-height: 20px;
 
-	color: #4E4E4E;
+
 `;
 
 const ClassInfo = styled.div`
@@ -37,7 +32,7 @@ const ClassInfo = styled.div`
         "year name"; 
 	column-gap: 40px;
 	row-gap: 5px;
-    grid-template-columns: 13% 42%;
+    grid-template-columns: 15% 42%;
 	grid-template-rows: 19px 40px;
 `;
 
@@ -85,20 +80,18 @@ const ProfileInfo = ({year, tutor, email  }) => {
 
 	return (
 		<Wrapper>
-			<StudentInfoWrapper>
-				<ClassInfo>
-					<InfoTitle>Year</InfoTitle>
-					<InfoContent>{year}</InfoContent>
+			<ClassInfo>
+				<InfoTitle>Year</InfoTitle>
+				<InfoContent>{year}</InfoContent>
 
-					<InfoTitle tutor>Form Tutor</InfoTitle>
-					<InfoContent tutor>{tutor}</InfoContent>
+				<InfoTitle tutor>Form Tutor</InfoTitle>
+				<InfoContent tutor>{tutor}</InfoContent>
 
-				</ClassInfo>
-				<EmailInfo>
-					<InfoTitle email>Email</InfoTitle>
-					<InfoContent email>{email}</InfoContent>
-				</EmailInfo>
-			</StudentInfoWrapper>
+			</ClassInfo>
+			<EmailInfo>
+				<InfoTitle email>Email</InfoTitle>
+				<InfoContent email>{email}</InfoContent>
+			</EmailInfo>
 		</Wrapper>
 	);
 };

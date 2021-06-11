@@ -7,9 +7,9 @@ const Wrapper = styled.div`
 	padding: 0;
 	margin: 0;
 
-	width: 100vw;
-	max-width: 540px;
-	height: 100%;
+	width: 100%;//100vw;
+	/* max-width: 540px; */
+	height: calc(100vh - 65px);
 
 	background: #E8E6DF;
 
@@ -44,7 +44,17 @@ const Content = styled.div`
     padding: 10px;
 `;
 const GeneralLinks = styled.div`
-	padding: 29px 30px;
+	padding: 30px;
+	margin: 0;
+
+    ${Title}{
+        margin-bottom: 9px;
+    }
+`;
+
+const Reports = styled.div`
+	padding: 0 30px;
+    padding-bottom: 30px;
 	margin: 0;
 
     ${Title}{
@@ -129,11 +139,16 @@ const ProfileContent = ({achievement, children}) => {
                         <a href={link}>{title}</a>
                     </Link>
                 ))}
-                {/* <Link>
-                    <AttachmentImage />
-                    {children}
-                </Link> */}
             </GeneralLinks>
+            <Reports>
+                <Title>Reports</Title>
+                {data.map(({link, title})=>(
+                    <Link>
+                        <AttachmentImage />
+                        <a href={link}>{title}</a>
+                    </Link>
+                ))}
+            </Reports>
 		</Wrapper>
 	);
 };

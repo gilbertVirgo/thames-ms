@@ -4,23 +4,18 @@ import Grid from "./"
 
 const Wrapper = styled.div`
 	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-
-	width: 100vw;
-	max-width: 540px;
-	height: 100%;
-
-	background: #E6EEE1;
-
-`;
-
-const CommendationsGrid = styled.div`
 	padding: 29px 30px;
 	margin: 0;
 
-	display: grid;
-    column-gap: 78px;
+	width:  100%;//100vw;
+	/* max-width: 540px; */
+	height: auto;
+
+	background: #E6EEE1;
+    display: ${({show}) => show ? "grid" : "none"};
+
+    
+    column-gap: 40px;//78px;
     row-gap: 40px;
     grid-template-columns: 1fr 1fr; //83px 83px;
     justify-items: center;
@@ -28,6 +23,7 @@ const CommendationsGrid = styled.div`
     
 	font-style: normal;
 	color: #4E4E4E;
+
 `;
 
 const CommendationItem = styled.div`
@@ -86,18 +82,16 @@ const comms =[
 
 
 
-const ProfileCommendations = () => {
+const ProfileCommendations = ({show, ...props}) => {
 
 	return (
-		<Wrapper>
-            <CommendationsGrid>
-                {comms.map(({title})=>(
-                    <CommendationItem>
-                        <CommendationIcon />
-                        <Title>{title}</Title>
-                    </CommendationItem>
-                ))}
-            </CommendationsGrid>
+		<Wrapper {...props} show={show}>
+            {comms.map(({title})=>(
+                <CommendationItem>
+                    <CommendationIcon />
+                    <Title>{title}</Title>
+                </CommendationItem>
+            ))}
 		</Wrapper>
 	);
 };
