@@ -14,15 +14,17 @@ import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
 
 const ContentWrapper = styled.div`
-	height: calc(100vh - 65px);
+	height: calc(100vh - 130px);
 	width: 100vw;
 	max-width: 540px;
 
 	padding: 0;
 	margin: 0;
-	
+
 	position: relative;
 	overflow: auto;
+
+	background: #E8E6DF;
 `;
 
 const Wrapper = styled.div`
@@ -30,6 +32,7 @@ const Wrapper = styled.div`
     padding: 0;
     margin: 0;
 	overflow: hidden;
+	height: 100vh;
 
 `;
 
@@ -54,9 +57,10 @@ export default () => {
 		if (loading) {
 			(async function () {
 				try {
-					const response = await API.get(`student/${id}`);
+					const response = await API.get(`/me`);
+					// const response = await API.get(`student/${id}`);
 
-					console.log("student call successful");
+					console.log("This is me", response);
 
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
@@ -81,6 +85,7 @@ export default () => {
 
 	return(
 		<React.Fragment>
+		<Wrapper>
 			<ProfileHeader
                 name="My name"
 				// {`${record.Forename} ${record.Surname}`}
@@ -100,6 +105,7 @@ export default () => {
 				/>
 			</ContentWrapper>
             <Menu activeAssignment={false} activeAvatar={true}/>
+			</Wrapper>
 		</React.Fragment>
 	);
 };
