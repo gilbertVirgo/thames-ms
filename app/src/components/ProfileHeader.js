@@ -19,7 +19,7 @@ const Wrapper = styled.div`
         "icon subject name points"
         "icon subject name number";
 
-    grid-template-columns: 8% 12% 40% 31%;
+    grid-template-columns: 10% 15% 38% 27%;
     grid-template-rows: 19px 18px;
     row-gap: 0;
     column-gap: 11px;

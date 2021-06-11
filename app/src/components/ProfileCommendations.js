@@ -1,5 +1,7 @@
+import { LaptopWindows } from "@material-ui/icons";
 import React from "react";
 import styled, {keyframes} from "styled-components";
+
 import Grid from "./"
 
 const Wrapper = styled.div`
@@ -81,13 +83,19 @@ const comms =[
 ]
 
 
-
 const ProfileCommendations = ({show, ...props}) => {
+    const [total, setTotal] = React.useState(0);
+    React.useEffect(() => {
+		(async function () {
+			const total = Object.keys(comms).length; 
+            setTotal(total);
+		})();	
+	}, []);
 
 	return (
 		<Wrapper {...props} show={show}>
-            {comms.map(({title})=>(
-                <CommendationItem>
+            {comms.map(({title}, index)=>(
+                <CommendationItem key={index}>
                     <CommendationIcon />
                     <Title>{title}</Title>
                 </CommendationItem>

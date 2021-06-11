@@ -43,8 +43,10 @@ export default () => {
 	const [loading, setLoading] = React.useState(true);
 	const [error, setError] = React.useState();
 
-	const [year, setYear] = React.useState(10);
+	const [year, setYear] = React.useState(5);
 	const [show, setShow] = React.useState(false);
+	const [systemTitle, setSystemTitle] =  React.useState("Points:");
+	const [commendationsTotal, setCommendationsTotal] = React.useState(0);
 	
 
 	React.useEffect(() => {
@@ -52,6 +54,7 @@ export default () => {
 		if(year > 9){
 			console.log(year);
 			setShow(true);
+			setSystemTitle("Commendations:")
 		}
 
 		if (loading) {
@@ -89,7 +92,7 @@ export default () => {
 			<ProfileHeader
                 name="My name"
 				// {`${record.Forename} ${record.Surname}`}
-                pointssystem ="Commendations:"
+                pointssystem={systemTitle}
                 points="125"
 			/>
 			<ContentWrapper>
@@ -99,7 +102,7 @@ export default () => {
 					tutor="smone"
 					email="email.co.uk"
 				/>
-				<ProfileCommendations show={show}/>
+				<ProfileCommendations total show={show}/>
 				<ProfileContent 
 					achievement="James has shown great leadership qualities in DofE preperations. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci purus purus diam, gravida nunc accumsan odio eleifend. "
 				/>
