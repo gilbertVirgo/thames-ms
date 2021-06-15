@@ -93,7 +93,7 @@ const ProfileCommendations = ({show, ...props}) => {
 	}, []);
 
 	return (
-		<Wrapper {...props} show={show}>
+		<Wrapper {...props} show={show} total={total}>
             {comms.map(({title}, index)=>(
                 <CommendationItem key={index}>
                     <CommendationIcon />
