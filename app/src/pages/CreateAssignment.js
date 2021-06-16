@@ -104,14 +104,11 @@ export default () => {
 				setClassesLoading(false);
 
 				console.log("Table is here", { table: response.content });
-				
 			} catch (err) {
 				setError(err.toString());
 			}
 		})();
 	}, []);
-
-	console.log("I'm here");
 
 	return (
 		<React.Fragment>
@@ -200,11 +197,15 @@ export default () => {
 								required
 								onChange={({ target }) =>
 									editRecord({
-										Expected_Time_Unit: target.options[target.selectedIndex].value,
+										Expected_Time_Unit:
+											target.options[target.selectedIndex]
+												.value,
 									})
 								}
-							>	
-								<option value="">-- Select a time unit --</option>
+							>
+								<option value="">
+									-- Select a time unit --
+								</option>
 								<option value="Minutes">Minutes</option>
 								<option value="Hours">Hours</option>
 							</Form.Control>
