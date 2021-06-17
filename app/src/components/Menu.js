@@ -60,12 +60,42 @@ const NavProfile = styled.div`
    
 `;
 
+const Counters= styled.div`
+    position: absolute;
+    top: -3px;
+    right: -7px;
 
-const Menu = ({activeAssignment, activeAvatar}) => {
+    width: 15px;
+    height: 15px;
+
+    background: ${({assignmentColor}) => assignmentColor ? "#5CBDE5" : "#40C1AC"}; 
+    border-radius: 50px;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 7px;
+    line-height: 14px;
+    color: #4E4E4E;
+
+`;
+
+
+const MenuWrapper=styled.a`
+    position: relative;
+`;
+
+
+const Menu = ({activeAssignment, activeAvatar, assignmentCounter, pointsCounter}) => {
 	return (
 		<Wrapper>
-            <a href="/"><NavItem activeAssignment={activeAssignment} /></a>
-            <a href="/profile"><NavProfile activeAvatar={activeAvatar} /></a>
+            <MenuWrapper href="/">
+                <NavItem activeAssignment={activeAssignment} />
+                <Counters assignmentColor={true}>6</Counters>
+            </MenuWrapper>
+            <MenuWrapper href="/profile">
+                <NavProfile activeAvatar={activeAvatar} />
+                <Counters assignmentColor={false}>130</Counters>
+            </MenuWrapper>
 		</Wrapper>
 	);
 };

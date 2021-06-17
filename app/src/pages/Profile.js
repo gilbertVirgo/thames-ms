@@ -50,7 +50,6 @@ export default () => {
 	
 
 	React.useEffect(() => {
-		// delete later
 		if(year > 9){
 			console.log(year);
 			setShow(true);
@@ -60,25 +59,23 @@ export default () => {
 		if (loading) {
 			(async function () {
 				try {
-					const response = await API.get(`/me`);
-					// const response = await API.get(`student/${id}`);
-
-					console.log("This is me", response);
+					// const response = await API.get(`/me`);
+					const response = await API.get(`student/${id}`);
 
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
 
-					console.log(response);
+					console.log("I'm here", response);
 
 					setRecord(response.content[0].fields);
 					console.log("Record is", record);
 					setLoading(false);
 
 					
-					if(year < 9){
-						console.log(year);
-						setShow(true);
-					}
+					// if(year < 9){
+					// 	console.log(year);
+					// 	setShow(true);
+					// }
 				} catch (err) {
 					setError(err.toString());
 				}
@@ -107,7 +104,7 @@ export default () => {
 					achievement="James has shown great leadership qualities in DofE preperations. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci purus purus diam, gravida nunc accumsan odio eleifend. "
 				/>
 			</ContentWrapper>
-            <Menu activeAssignment={false} activeAvatar={true}/>
+            <Menu activeAssignment={false} activeAvatar={true} />
 			</Wrapper>
 		</React.Fragment>
 	);

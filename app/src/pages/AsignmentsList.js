@@ -136,7 +136,7 @@ export default () => {
                     date="Mon, 29th Mar"
                 ></ListItem>
             </CompletedWrapper>
-            <Menu />
+            <Menu activeAssignment={true} activeAvatar={false} />
 		</React.Fragment>
 	);
 };
