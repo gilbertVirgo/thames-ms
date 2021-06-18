@@ -1,6 +1,7 @@
 import { Edit } from "@material-ui/icons";
 import React from "react";
 import styled, {keyframes} from "styled-components";
+import API from "../api";
 
 const Wrapper = styled.div`
 	box-sizing: border-box;
@@ -74,6 +75,10 @@ const Link = styled.div`
     grid-template-columns: 31px auto;
     column-gap: 7px;
 
+    ${({report})=>report && `
+        display: block; 
+    `}
+
 	font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -82,8 +87,14 @@ const Link = styled.div`
     a{
         color: #002E5D;
         margin: 0;
+        margin-bottom: 10px;
+        display: block;
+
+        img {
+			padding-right: 7px;
+			padding-left: 11px;
+		}
     }
-    
 
     &:focus, &:hover, &:visited, &:link, &:active {
         text-decoration: none;
@@ -91,6 +102,8 @@ const Link = styled.div`
         cursor: pointer;
     }
 `;
+
+
 
 const AttachmentImage = styled.div`
 	width: 20px;
@@ -104,9 +117,6 @@ const AttachmentImage = styled.div`
 	background-color: transparent;
 `;
 
-// $("a").prepend(
-//     `<h1>Attachments</h1><img src='${require("../assets/icons/paperclip.svg")}' />`
-// );
 
 const  data=[
     {
@@ -123,33 +133,62 @@ const  data=[
     }
 ]
 
-const ProfileContent = ({achievement, children}) => {
 
-	return (
-		<Wrapper>
+
+const ProfileContent = ({children, achievement, report, ...props}) => {
+    const [record, setRecord] = React.useState(null);
+	const [loading, setLoading] = React.useState(true);
+	const [error, setError] = React.useState();
+
+    React.useEffect(() => {
+        if (loading) {
+            (async function () {
+                try {
+                    const response = await API.get(`/general`);
+
+                    if (!response.hasOwnProperty("content"))
+                        throw new Error("Empty response");
+
+                    const record = response.content;
+                    setRecord(record);
+
+                    setLoading(false);
+                    
+                } catch (err) {
+                    setError(err.toString());
+                }
+            })();
+        }
+    }, [loading]);
+
+	return !loading ? (
+		<Wrapper {...props}>
 			<Achievement>
                 <Title>Achievement</Title>
                 <Content>{achievement}</Content>
             </Achievement>
             <GeneralLinks>
                 <Title>Useful Information</Title>
-                {data.map(({link, title})=>(
+                {record.map(({fields})=>(
                     <Link>
                         <AttachmentImage />
-                        <a href={link}>{title}</a>
+                        <a href={fields.Link}>{fields.Name}</a>
                     </Link>
                 ))}
             </GeneralLinks>
             <Reports>
                 <Title>Reports</Title>
-                {data.map(({link, title})=>(
-                    <Link>
-                        <AttachmentImage />
-                        <a href={link}>{title}</a>
+                {/* {reports.map(({link, title})=>( */}
+                    <Link report={report}>
+                        {children}
+                        {/* <AttachmentImage />
+                        <a href={link}>{repo}</a> */}
                     </Link>
-                ))}
+                {/* ))} */}
             </Reports>
 		</Wrapper>
+	) : (
+		"Loading..."
 	);
 };
 

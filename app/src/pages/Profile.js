@@ -4,7 +4,7 @@ import React from "react";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfilePoints from "../components/ProfilePoints";
-import ProfileCommendations from "../components/ProfileCommendations";
+import ProfileCommendations, {CommendationsWrapper} from "../components/ProfileCommendations";
 import ProfileContent from "../components/ProfileContent";
 import styled from "styled-components";
 
@@ -43,39 +43,63 @@ export default () => {
 	const [loading, setLoading] = React.useState(true);
 	const [error, setError] = React.useState();
 
-	const [year, setYear] = React.useState(5);
 	const [show, setShow] = React.useState(false);
 	const [systemTitle, setSystemTitle] =  React.useState("Points:");
-	const [commendationsTotal, setCommendationsTotal] = React.useState(0);
+	const [systemCounter, setSystemCounter] = React.useState(0);
+	const [commendations, setCommendations] = React.useState();
+	const [reports, setReports] = React.useState();
+	const [achievement, setAchievement] = React.useState("");
 	
-
-	React.useEffect(() => {
-		if(year > 9){
-			console.log(year);
+	const CheckYear = (year, points, comms) =>{
+		const string = year.toString();
+		const number = string.replace(/\D/g, "");
+		console.log("My year :", number)
+		setSystemCounter(points);
+		if(number > 9){
 			setShow(true);
 			setSystemTitle("Commendations:")
+			setSystemCounter(comms);
 		}
+	}
 
+	const parseContent = (content) => {
+		const $ = cheerio.load(content);
+
+		$("a").prepend(
+			`<img src='${require("../assets/icons/paperclip-pink.svg")}' />`
+		);
+
+		return $.html()
+			.replace("<html><head></head><body>", "")
+			.replace("</body></html>", "");
+	};
+
+
+
+	React.useEffect(() => {
 		if (loading) {
 			(async function () {
 				try {
-					// const response = await API.get(`/me`);
-					const response = await API.get(`student/${id}`);
+					const response = await API.get(`/me`);
+					// const response = await API.get(`student/${id}`);
 
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
 
-					console.log("I'm here", response);
-
-					setRecord(response.content[0].fields);
+					const record = response.content[0].fields;
+					setRecord(record);
+					
 					console.log("Record is", record);
+
+					CheckYear(record.Year_Group, record.Green_Points, record.Commendations.length);
+					setAchievement(parseContent(record.Achievement));
+					setReports(parseContent(record.Reports));
+					console.log("reports", record.Reports);
+					setCommendations(record.Name);
+					console.log("Comms: ", record.Commendations_Name);
+
 					setLoading(false);
 
-					
-					// if(year < 9){
-					// 	console.log(year);
-					// 	setShow(true);
-					// }
 				} catch (err) {
 					setError(err.toString());
 				}
@@ -83,29 +107,39 @@ export default () => {
 		}
 	}, [loading]);
 
-	return(
+	return !loading ? (
 		<React.Fragment>
 		<Wrapper>
 			<ProfileHeader
-                name="My name"
+                name={record.Forename +" "+ record.Surname}
 				// {`${record.Forename} ${record.Surname}`}
                 pointssystem={systemTitle}
-                points="125"
+                points={systemCounter}
 			/>
 			<ContentWrapper>
-				<ProfilePoints show={show} points="125" />
+				<ProfilePoints show={show} points={systemCounter} />
 				<ProfileInfo 
-					year={year} //{record.Year_Group}
-					tutor="smone"
-					email="email.co.uk"
+					year={record.Year_Group}
+					tutor={record.Tutor}
+					email={record.Email}
 				/>
-				<ProfileCommendations total show={show}/>
-				<ProfileContent 
-					achievement="James has shown great leadership qualities in DofE preperations. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci purus purus diam, gravida nunc accumsan odio eleifend. "
-				/>
+				
+				<CommendationsWrapper show={show}>
+					{/* {commendations.map(( Name ) => (
+						<ProfileCommendations title='Name' />
+					))} */}
+				</CommendationsWrapper>
+					
+				<ProfileContent achievement={achievement} report>
+					<div dangerouslySetInnerHTML={{ __html: reports }} />
+				</ProfileContent>
+					{/* achievement={record.Achievement} */}
+				 
 			</ContentWrapper>
-            <Menu activeAssignment={false} activeAvatar={true} />
+            <Menu activeAssignment={false} activeAvatar={true} assignmentCounter="6" />
 			</Wrapper>
 		</React.Fragment>
+	) : (
+		"Loading..."
 	);
 };
