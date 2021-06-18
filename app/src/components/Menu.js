@@ -86,7 +86,14 @@ const MenuWrapper=styled.a`
 
 
 const Menu = ({activeAssignment, activeAvatar, assignmentCounter, pointsCounter}) => {
-	return (
+	
+    React.useEffect(() => {
+		(async function () {
+			
+		})();
+	}, []);
+    
+    return (
 		<Wrapper>
             <MenuWrapper href="/">
                 <NavItem activeAssignment={activeAssignment} />
