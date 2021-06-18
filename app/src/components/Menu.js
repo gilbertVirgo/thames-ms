@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import API from "../api";
+
 
 const Wrapper = styled.div`
     box-sizing: border-box;
@@ -86,10 +88,29 @@ const MenuWrapper=styled.a`
 
 
 const Menu = ({activeAssignment, activeAvatar, assignmentCounter, pointsCounter}) => {
-	
+	const [record, setRecord] = React.useState(null);
+    const [count, setCount] = React.useState();
+    const [totalAssignment, setTotalAssignment] = React.useState(0);
+
     React.useEffect(() => {
 		(async function () {
 			
+            const {content: [me]} = await API.get(`/me`);
+            let {content: reviews} = await API.get(`/reviews`);
+
+            let reviewsCount = reviews.filter(({fields}) =>!fields.Student_Checked && !fields.Is_Reminder
+            ).length
+
+            setTotalAssignment(reviewsCount);
+            
+            setRecord(me);
+
+            setCount(me.fields.Green_Points);
+
+            if(me.fields.Year_Group.toString().replace(/\D/g, "") > 9){
+                setCount(me.fields.Commendations.length);
+            }
+                
 		})();
 	}, []);
     
@@ -97,11 +118,11 @@ const Menu = ({activeAssignment, activeAvatar, assignmentCounter, pointsCounter}
 		<Wrapper>
             <MenuWrapper href="/">
                 <NavItem activeAssignment={activeAssignment} />
-                <Counters assignmentColor={true}>6</Counters>
+                <Counters assignmentColor={true}>{totalAssignment}</Counters>
             </MenuWrapper>
             <MenuWrapper href="/profile">
                 <NavProfile activeAvatar={activeAvatar} />
-                <Counters assignmentColor={false}>130</Counters>
+                <Counters assignmentColor={false}>{count}</Counters>
             </MenuWrapper>
 		</Wrapper>
 	);
