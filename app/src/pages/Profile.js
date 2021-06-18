@@ -46,7 +46,7 @@ export default () => {
 	const [show, setShow] = React.useState(false);
 	const [systemTitle, setSystemTitle] =  React.useState("Points:");
 	const [systemCounter, setSystemCounter] = React.useState(0);
-	const [commendations, setCommendations] = React.useState();
+	const [commendations, setCommendations] = React.useState([]);
 	const [reports, setReports] = React.useState();
 	const [achievement, setAchievement] = React.useState("");
 	
@@ -95,8 +95,7 @@ export default () => {
 					setAchievement(parseContent(record.Achievement));
 					setReports(parseContent(record.Reports));
 					console.log("reports", record.Reports);
-					setCommendations(record.Name);
-					console.log("Comms: ", record.Commendations_Name);
+					setCommendations(record.Commendations_Name);
 
 					setLoading(false);
 
@@ -125,9 +124,11 @@ export default () => {
 				/>
 				
 				<CommendationsWrapper show={show}>
-					{/* {commendations.map(( Name ) => (
-						<ProfileCommendations title='Name' />
-					))} */}
+				{commendations.length ? (
+					commendations.map(commendation => ( 
+					<ProfileCommendations>{commendation}</ProfileCommendations>
+				))
+				):('')}
 				</CommendationsWrapper>
 					
 				<ProfileContent achievement={achievement} report>

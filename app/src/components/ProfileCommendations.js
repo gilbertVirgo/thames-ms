@@ -34,6 +34,9 @@ const CommendationItem = styled.div`
     row-gap: 10px;
 
     justify-self: center;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
 
     padding: 0;
     margin: 0;
@@ -83,17 +86,13 @@ const comms =[
 ]
 
 
-const ProfileCommendations = ({show, title,  ...props}) => {
+const ProfileCommendations = ({children}) => {
 
 	return (
-		// <CommendationsWrapper {...props} show={show} total={total}>
-            // {{list}.map(({title}, index)=>(
-                <CommendationItem >
-                    <CommendationIcon />
-                    <Title>{title}</Title>
-                </CommendationItem>
-            // ))}
-		// </CommendationsWrapper>
+        <CommendationItem>
+            <CommendationIcon />
+            <Title>{children}</Title>
+        </CommendationItem>
 	);
 };
 
