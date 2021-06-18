@@ -4,7 +4,7 @@ import styled, {keyframes} from "styled-components";
 
 import Grid from "./"
 
-const Wrapper = styled.div`
+export const CommendationsWrapper = styled.div`
 	box-sizing: border-box;
 	padding: 29px 30px;
 	margin: 0;
@@ -83,24 +83,17 @@ const comms =[
 ]
 
 
-const ProfileCommendations = ({show, ...props}) => {
-    const [total, setTotal] = React.useState(0);
-    React.useEffect(() => {
-		(async function () {
-			const total = Object.keys(comms).length; 
-            setTotal(total);
-		})();	
-	}, []);
+const ProfileCommendations = ({show, title,  ...props}) => {
 
 	return (
-		<Wrapper {...props} show={show} total={total}>
-            {comms.map(({title}, index)=>(
-                <CommendationItem key={index}>
+		// <CommendationsWrapper {...props} show={show} total={total}>
+            // {{list}.map(({title}, index)=>(
+                <CommendationItem >
                     <CommendationIcon />
                     <Title>{title}</Title>
                 </CommendationItem>
-            ))}
-		</Wrapper>
+            // ))}
+		// </CommendationsWrapper>
 	);
 };
 
