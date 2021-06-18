@@ -10,7 +10,8 @@ const Wrapper = styled.div`
 
 	width: 100%;//100vw;
 	/* max-width: 540px; */
-	height: calc(100vh - 65px);
+	height: 100%;
+    /* calc(100vh - 65px); */
 
 	background: #E8E6DF;
 
