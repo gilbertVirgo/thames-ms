@@ -137,7 +137,7 @@ export default () => {
 					{/* achievement={record.Achievement} */}
 				 
 			</ContentWrapper>
-            <Menu activeAssignment={false} activeAvatar={true} assignmentCounter="6" />
+            <Menu activeAssignment={false} activeAvatar={true} />
 			</Wrapper>
 		</React.Fragment>
 	) : (
