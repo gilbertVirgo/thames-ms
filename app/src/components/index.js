@@ -28,8 +28,12 @@ const variantStyles = `
 `;
 
 export const Subheading = styled.h2`
+	/* font-family: Avenir; */
+	font-style: normal;
+	font-weight: normal;
 	font-size: 20px;
-	color: ${theme.color.secondary};
+	line-height: 27px;
+	color: #002E5D;
 `;
 
 export const Heading = styled.h1`
@@ -39,6 +43,19 @@ export const Heading = styled.h1`
 	margin-bottom: ${theme.gutter * 3}px;
 	font-weight: lighter;
 	${variantStyles}
+`;
+
+export const Logo = styled.div`
+	width: 238px;
+    height: 111px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+    background-image: url("${require("../assets/logo.svg")}");
+
+	margin: 41px auto;
+	margin-top: 127px
+
 `;
 
 const captionStyles = `

@@ -1,17 +1,24 @@
 import Container from "react-bootstrap/Container";
 import Header from "../components/Header";
-import LoginButton from "../components/LoginButton";
+import LoginButton, {Wrapper, WebLink} from "../components/LoginButton";
 import React from "react";
 
 export default () => {
 	return (
-		<Container>
-			<Header
-				heading={"Thames Christian School"}
-				subheading={"Please sign in to continue"}
-			/>
-			<LoginButton />
-		</Container>
+		<React.Fragment>
+			<Container style={{textAlign:"center"}}>
+				<Header
+					heading={"Thames Christian School"}
+					subheading={"Please sign in to continue"}
+				/>
+				
+			</Container>
+			<Wrapper>
+				<LoginButton />
+				<WebLink href="https://www.thameschristianschool.org.uk/">Back to the Thames website</WebLink>
+			</Wrapper>
+			
+		</React.Fragment>
 	);
 };
 
