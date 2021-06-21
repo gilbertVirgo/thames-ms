@@ -92,7 +92,7 @@ const Title = styled.h6`
 
 const Date = styled.h6`
 	/* grid-area: date; */
-	grid-column: span 2;
+	grid-column: span 3;
 	color: #5cbde5;
 	text-align: center;
 	/* color: ${({dueColor}) => dueColor ? "#CE0F69" : "#5cbde5"}; */

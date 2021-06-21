@@ -17,7 +17,10 @@ const Wrapper = styled.button`
     font-weight: 800;
     font-size: 14px;
     line-height: 14px;
+
 	text-align: center;
+	justify-self: center;
+	
     color: #C7C9C7;
 
 	cursor: pointer;
