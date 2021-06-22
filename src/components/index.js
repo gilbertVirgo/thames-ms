@@ -54,7 +54,7 @@ export const Logo = styled.div`
     background-image: url("${require("../assets/logo.svg")}");
 
 	margin: 41px auto;
-	margin-top: 127px
+	margin-top: 127px;
 
 `;
 
