@@ -5,20 +5,6 @@ import Section from "./Section";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-
-export const Wrapper=styled.div`
-	box-sizing: border-box;
-	width: 100%;
-	height: 45vh;
-
-	margin: 0;
-
-	background-color: #E3E3DD;
-	text-align: center;
-	padding: 34px 0;
-
-`;
-
 export const WebLink = styled.a`
 	font-style: normal;
 	font-weight: normal;
@@ -75,7 +61,6 @@ export default () => {
 	};
 
 	return (
-		// <Wrapper>
 		<Section error={error} loading={loading}>
 			<div onClick={handleClick} style={{backgroundColor:"#E3E3DD"}}>
 				<GoogleLogin
@@ -87,6 +72,5 @@ export default () => {
 				/>
 			</div>
 		</Section>
-		// </Wrapper>
 	);
 };
