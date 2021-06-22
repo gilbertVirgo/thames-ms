@@ -1,22 +1,44 @@
 import Container from "react-bootstrap/Container";
 import Header from "../components/Header";
-import LoginButton, {Wrapper, WebLink} from "../components/LoginButton";
+import LoginButton, {WebLink} from "../components/LoginButton";
 import React from "react";
+import styled from "styled-components";
+
+
+const HeaderWrapper = styled.div`
+	height: 55vh;
+    padding: 0;
+    margin: 0;
+	text-align: center;
+
+	display: flex; 
+	align-items: center;
+	justify-content: center;
+`;
+
+const LoginWrapper = styled.div`
+	box-sizing: border-box;
+	height: 45vh;
+
+	margin: 0;
+	padding: 34px 0;
+
+	background-color: #E3E3DD;
+	text-align: center;
+`;
 
 export default () => {
 	return (
 		<React.Fragment>
-			<Container style={{textAlign:"center"}}>
-				<Header
-					heading={"Thames Christian School"}
-					subheading={"Please sign in to continue"}
-				/>
-				
-			</Container>
-			<Wrapper>
+			{/* <Container style={{textAlign:"center"}}> */}
+			<HeaderWrapper>
+				<Header subheading={"Please sign in to continue"} />
+			</HeaderWrapper>	
+			{/* </Container> */}
+			<LoginWrapper>
 				<LoginButton />
 				<WebLink href="https://www.thameschristianschool.org.uk/">Back to the Thames website</WebLink>
-			</Wrapper>
+			</LoginWrapper>
 			
 		</React.Fragment>
 	);

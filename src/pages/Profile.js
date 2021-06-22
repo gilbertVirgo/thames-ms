@@ -6,6 +6,7 @@ import ProfileHeader from "../components/ProfileHeader";
 import ProfilePoints from "../components/ProfilePoints";
 import ProfileCommendations, {CommendationsWrapper} from "../components/ProfileCommendations";
 import ProfileContent from "../components/ProfileContent";
+import LogoutButton from "../components/LogoutButton";
 import styled from "styled-components";
 
 import cheerio from "cheerio";
