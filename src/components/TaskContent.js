@@ -8,7 +8,8 @@ const Wrapper = styled.div`
 
 	width: 100vw;
 	max-width: 540px;
-	height: calc(100vh - 152px);
+	height: auto;
+	/* calc(100vh - 152px); */
 
 	background: #f8f8f8;
 `;

@@ -8,6 +8,8 @@ import cheerio from "cheerio";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
+import StudentViewFeedback from "../components/StudentViewFeedback";
+
 
 export default () => {
 	const [role] = useRole();
@@ -97,7 +99,10 @@ export default () => {
 				onChange={handleCompletedChange}
 			>
 				<div dangerouslySetInnerHTML={{ __html: content }} />
+
+				
 			</TaskContent>
+			<StudentViewFeedback />
 			{role.staff && <ReviewAssignment assignmentId={id} />}
 			<Menu activeAssignment={true} activeAvatar={false} />
 		</React.Fragment>
