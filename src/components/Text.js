@@ -21,3 +21,14 @@ export const ProfileSectionContent = styled.p`
     margin: 0;
     padding: 0;
 `;
+
+export const LogoutTitle = styled.h1`
+    font-style: normal;
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 34px;
+
+    color: #002E5D;
+    margin: 0;
+    padding: 0;
+`;
