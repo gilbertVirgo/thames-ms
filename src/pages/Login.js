@@ -1,17 +1,17 @@
+import LoginButton, { WebLink } from "../components/LoginButton";
+
 import Container from "react-bootstrap/Container";
 import Header from "../components/Header";
-import LoginButton, {WebLink} from "../components/LoginButton";
 import React from "react";
 import styled from "styled-components";
 
-
 const HeaderWrapper = styled.div`
 	height: 55vh;
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 	text-align: center;
 
-	display: flex; 
+	display: flex;
 	align-items: center;
 	justify-content: center;
 `;
@@ -23,23 +23,22 @@ const LoginWrapper = styled.div`
 	margin: 0;
 	padding: 34px 0;
 
-	background-color: #E3E3DD;
+	background-color: #e3e3dd;
 	text-align: center;
 `;
 
 export default () => {
 	return (
 		<React.Fragment>
-			{/* <Container style={{textAlign:"center"}}> */}
 			<HeaderWrapper>
 				<Header subheading={"Please sign in to continue"} />
-			</HeaderWrapper>	
-			{/* </Container> */}
+			</HeaderWrapper>
 			<LoginWrapper>
 				<LoginButton />
-				<WebLink href="https://www.thameschristianschool.org.uk/">Back to the Thames website</WebLink>
+				<WebLink href="https://www.thameschristianschool.org.uk/">
+					Back to the Thames website
+				</WebLink>
 			</LoginWrapper>
-			
 		</React.Fragment>
 	);
 };
