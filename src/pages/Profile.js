@@ -1,17 +1,27 @@
+import ProfileCommendations, {
+	CommendationsWrapper,
+} from "../components/ProfileCommendations";
+
 import API from "../api";
+import LogoutButton from "../components/LogoutButton";
 import Menu from "../components/Menu";
-import React from "react";
-import ProfileInfo from "../components/ProfileInfo";
+import ProfileContent from "../components/ProfileContent";
 import ProfileHeader from "../components/ProfileHeader";
+import ProfileInfo from "../components/ProfileInfo";
 import ProfilePoints from "../components/ProfilePoints";
+<<<<<<< HEAD
 import ProfileCommendations, {CommendationsWrapper} from "../components/ProfileCommendations";
 import ProfileContent from "../components/ProfileContent";
 import LogoutButton from "../components/LogoutButton";
 import styled from "styled-components";
 import StudentViewFeedback from "../components/StudentViewFeedback";
 
+=======
+import React from "react";
+>>>>>>> production
 import cheerio from "cheerio";
 import moment from "moment";
+import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
 
@@ -26,16 +36,15 @@ const ContentWrapper = styled.div`
 	position: relative;
 	overflow: auto;
 
-	background: #E8E6DF;
+	background: #e8e6df;
 `;
 
 const Wrapper = styled.div`
 	box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 	overflow: hidden;
 	height: 100vh;
-
 `;
 
 export default () => {
@@ -46,23 +55,23 @@ export default () => {
 	const [error, setError] = React.useState();
 
 	const [show, setShow] = React.useState(false);
-	const [systemTitle, setSystemTitle] =  React.useState("Points:");
+	const [systemTitle, setSystemTitle] = React.useState("Points:");
 	const [systemCounter, setSystemCounter] = React.useState(0);
 	const [commendations, setCommendations] = React.useState([]);
 	const [reports, setReports] = React.useState();
 	const [achievement, setAchievement] = React.useState("");
-	
-	const CheckYear = (year, points, comms) =>{
+
+	const CheckYear = (year, points, comms) => {
 		const string = year.toString();
 		const number = string.replace(/\D/g, "");
-		console.log("My year :", number)
+		console.log("My year :", number);
 		setSystemCounter(points);
-		if(number > 9){
+		if (number > 9) {
 			setShow(true);
-			setSystemTitle("Commendations:")
+			setSystemTitle("Commendations:");
 			setSystemCounter(comms);
 		}
-	}
+	};
 
 	const parseContent = (content) => {
 		const $ = cheerio.load(content);
@@ -76,8 +85,6 @@ export default () => {
 			.replace("</body></html>", "");
 	};
 
-
-
 	React.useEffect(() => {
 		if (loading) {
 			(async function () {
@@ -90,17 +97,20 @@ export default () => {
 
 					const record = response.content[0].fields;
 					setRecord(record);
-					
+
 					console.log("Record is", record);
 
-					CheckYear(record.Year_Group, record.Green_Points, record.Commendations.length);
+					CheckYear(
+						record.Year_Group,
+						record.Green_Points,
+						record.Commendations.length
+					);
 					setAchievement(parseContent(record.Achievement));
 					setReports(parseContent(record.Reports));
 					console.log("reports", record.Reports);
 					setCommendations(record.Commendations_Name);
 
 					setLoading(false);
-
 				} catch (err) {
 					setError(err.toString());
 				}
@@ -110,39 +120,35 @@ export default () => {
 
 	return !loading ? (
 		<React.Fragment>
-		<Wrapper>
-			<ProfileHeader
-                name={record.Forename +" "+ record.Surname}
-				// {`${record.Forename} ${record.Surname}`}
-                pointssystem={systemTitle}
-                points={systemCounter}
-			/>
-			<ContentWrapper>
-				<ProfilePoints show={show} points={systemCounter} />
-				<ProfileInfo 
-					year={record.Year_Group}
-					tutor={record.Tutor}
-					email={record.Email}
+			<Wrapper>
+				<ProfileHeader
+					name={record.Forename + " " + record.Surname}
+					pointssystem={systemTitle}
+					points={systemCounter}
 				/>
-				
-				<CommendationsWrapper show={show}>
-				{commendations.length ? (
-					commendations.map(commendation => ( 
-					<ProfileCommendations>{commendation}</ProfileCommendations>
-				))
-				):('')}
-				</CommendationsWrapper>
-					
-				<ProfileContent achievement={achievement} report>
+				<ContentWrapper>
+					<ProfilePoints show={show} points={systemCounter} />
+					<ProfileInfo
+						year={record.Year_Group}
+						tutor={record.Tutor}
+						email={record.Email}
+					/>
+
+					<CommendationsWrapper show={show}>
+						{commendations.length
+							? commendations.map((commendation) => (
+									<ProfileCommendations>
+										{commendation}
+									</ProfileCommendations>
+							  ))
+							: ""}
+					</CommendationsWrapper>
+
+					<ProfileContent achievement={achievement} report>
 						<div dangerouslySetInnerHTML={{ __html: reports }} />
-				</ProfileContent>
-				
-				<StudentViewFeedback />
-				<LogoutButton />
+					</ProfileContent>
 				</ContentWrapper>
 				<Menu activeAssignment={false} activeAvatar={true} />
-
-				
 			</Wrapper>
 			
 		</React.Fragment>

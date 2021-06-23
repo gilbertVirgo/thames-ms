@@ -140,7 +140,6 @@ export default ({ query = null }) => {
 											fields.Assignment_Due
 										))
 								}
-								// title={fields.Class_Name}
 								title={CheckReminderTitle(
 									fields.Is_Reminder,
 									fields.Class_Name,
@@ -180,30 +179,32 @@ export default ({ query = null }) => {
 								new Date(a.fields.Assignment_Due)
 						)
 						.map(({ fields }, index) => (
-						<ListItem
-							hide={!fields.Student_Checked}
-							checked={
-								fields.Teacher_Checked && fields.Student_Checked
-							}
-							complete={
-								fields.Student_Checked &&
-								!fields.Teacher_Checked
-							}
-							// title={fields.Class_Name}
-							title={CheckReminderTitle(
-								fields.Is_Reminder,
-								fields.Class_Name,
-								fields.Assignment_Title
-							)}
-							date={translateCompleteDate(fields.Assignment_Due)}
-							onClick={() =>
-								history.push(
-									`/assignment/${fields.assignment_id}`
-								)
-							}
-							key={`assignment-${index}`}
-						/>
-					))
+							<ListItem
+								hide={!fields.Student_Checked}
+								checked={
+									fields.Teacher_Checked &&
+									fields.Student_Checked
+								}
+								complete={
+									fields.Student_Checked &&
+									!fields.Teacher_Checked
+								}
+								title={CheckReminderTitle(
+									fields.Is_Reminder,
+									fields.Class_Name,
+									fields.Assignment_Title
+								)}
+								date={translateCompleteDate(
+									fields.Assignment_Due
+								)}
+								onClick={() =>
+									history.push(
+										`/assignment/${fields.assignment_id}`
+									)
+								}
+								key={`assignment-${index}`}
+							/>
+						))
 				) : (
 					<p>No active assignments</p>
 				)}
