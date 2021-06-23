@@ -8,6 +8,7 @@ import ProfileCommendations, {CommendationsWrapper} from "../components/ProfileC
 import ProfileContent from "../components/ProfileContent";
 import LogoutButton from "../components/LogoutButton";
 import styled from "styled-components";
+import StudentViewFeedback from "../components/StudentViewFeedback";
 
 import cheerio from "cheerio";
 import moment from "moment";
@@ -133,13 +134,17 @@ export default () => {
 				</CommendationsWrapper>
 					
 				<ProfileContent achievement={achievement} report>
-					<div dangerouslySetInnerHTML={{ __html: reports }} />
+						<div dangerouslySetInnerHTML={{ __html: reports }} />
 				</ProfileContent>
-					{/* achievement={record.Achievement} */}
-				 
-			</ContentWrapper>
-            <Menu activeAssignment={false} activeAvatar={true} />
+				
+				<StudentViewFeedback />
+				<LogoutButton />
+				</ContentWrapper>
+				<Menu activeAssignment={false} activeAvatar={true} />
+
+				
 			</Wrapper>
+			
 		</React.Fragment>
 	) : (
 		"Loading..."

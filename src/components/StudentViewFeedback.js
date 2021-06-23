@@ -6,7 +6,7 @@ import Rating from "@material-ui/lab/Rating";
 
 const Wrapper = styled.div`
 	width: 100%;
-    height: 100%;
+    height: auto;
 	margin: 0 auto;
     padding: 19px 30px 115px 30px;
 

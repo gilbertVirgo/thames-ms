@@ -5,12 +5,12 @@ import API from "../api";
 
 const Wrapper = styled.div`
 	box-sizing: border-box;
-	padding: 0;
+	padding: 30px 0;
+    padding-top: 0;
 	margin: 0;
 
-	width: 100%;//100vw;
-	/* max-width: 540px; */
-	height: 100%;
+	width: 100%;
+	height: auto;
     /* calc(100vh - 65px); */
 
 	background: #E8E6DF;
@@ -20,6 +20,9 @@ const Achievement = styled.div`
 	background-color: #99D6EA;
     padding: 36px 39px;
     margin: 0;
+
+    width: 100%;
+	height: auto;
 `;
 
 const Title = styled.h6`
@@ -46,8 +49,12 @@ const Content = styled.div`
     padding: 10px;
 `;
 const GeneralLinks = styled.div`
-	padding: 30px;
+	padding: 0 30px;
 	margin: 0;
+    margin-top: 30px;
+
+    width: 100%;
+	height: auto;
 
     ${Title}{
         margin-bottom: 9px;
@@ -56,8 +63,11 @@ const GeneralLinks = styled.div`
 
 const Reports = styled.div`
 	padding: 0 30px;
-    padding-bottom: 30px;
-	margin: 0;
+    margin: 0;
+    margin-top: 30px;
+
+    width: 100%;
+	height: auto;
 
     ${Title}{
         margin-bottom: 9px;
@@ -70,7 +80,7 @@ const Link = styled.div`
     margin-bottom: 10px;
 
     width: 100%;
-    height: 20px;
+    height: auto;
 
 	display: grid;
     grid-template-columns: 31px auto;
@@ -90,6 +100,7 @@ const Link = styled.div`
         margin: 0;
         margin-bottom: 10px;
         display: block;
+        height: 20px;
 
         img {
 			padding-right: 7px;
@@ -179,13 +190,9 @@ const ProfileContent = ({children, achievement, report, ...props}) => {
             </GeneralLinks>
             <Reports>
                 <Title>Reports</Title>
-                {/* {reports.map(({link, title})=>( */}
                     <Link report={report}>
                         {children}
-                        {/* <AttachmentImage />
-                        <a href={link}>{repo}</a> */}
                     </Link>
-                {/* ))} */}
             </Reports>
 		</Wrapper>
 	) : (

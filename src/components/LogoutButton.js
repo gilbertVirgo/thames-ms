@@ -4,7 +4,7 @@ import styled, {keyframes} from "styled-components";
 
 const Wrapper = styled.div`
 	width: 100%;
-    height: 100%;
+    height: auto;
 	margin: 0 auto;
     padding: 30px 0;
 
