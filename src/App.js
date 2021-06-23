@@ -8,12 +8,12 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Nav from "./components/Nav";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 import React from "react";
 import StaffAssignment from "./pages/StaffAssignment";
 import Student from "./pages/Student";
 import Test from "./pages/Test";
 import useRole from "./hooks/useRole";
-import Profile from "./pages/Profile";
 
 const App = () => {
 	const [role] = useRole();
@@ -24,26 +24,40 @@ const App = () => {
 
 			<Route exact path="/" component={role.none ? Login : Dashboard} />
 			<Switch>
-				{(role.student || role.parent) && (
+				{role.student || role.parent ? (
 					<Route path="/assignment/:id" component={Assignment} />
+				) : (
+					""
 				)}
 
-				{(role.student || role.parent) && (
+				{role.student || role.parent ? (
 					<Route path="/profile" component={Profile} />
+				) : (
+					""
 				)}
-				{role.staff && (
+				{role.staff ? (
 					<Route path="/assignment/:id" component={StaffAssignment} />
+				) : (
+					""
 				)}
-				{!role.none && (
+				{!role.none ? (
 					<Route path="/student/:id" component={Student} />
+				) : (
+					""
 				)}
 
-				{role.staff && <Route path="/class/:id" component={Class} />}
-				{role.staff && (
+				{role.staff ? (
+					<Route path="/class/:id" component={Class} />
+				) : (
+					""
+				)}
+				{role.staff ? (
 					<Route
 						path="/createAssignment"
 						component={CreateAssignment}
 					/>
+				) : (
+					""
 				)}
 				<Route path="/login" component={Login} />
 				{/* {role.none && <Redirect from="/" to="/login" />} */}
