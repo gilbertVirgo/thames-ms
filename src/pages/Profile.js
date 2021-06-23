@@ -1,7 +1,3 @@
-import ProfileCommendations, {
-	CommendationsWrapper,
-} from "../components/ProfileCommendations";
-
 import API from "../api";
 import LogoutButton from "../components/LogoutButton";
 import Menu from "../components/Menu";
@@ -10,9 +6,6 @@ import ProfileHeader from "../components/ProfileHeader";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfilePoints from "../components/ProfilePoints";
 import ProfileCommendations, {CommendationsWrapper} from "../components/ProfileCommendations";
-import ProfileContent from "../components/ProfileContent";
-import LogoutButton from "../components/LogoutButton";
-import styled from "styled-components";
 import StudentViewFeedback from "../components/StudentViewFeedback";
 
 import React from "react";
@@ -144,6 +137,8 @@ export default () => {
 					<ProfileContent achievement={achievement} report>
 						<div dangerouslySetInnerHTML={{ __html: reports }} />
 					</ProfileContent>
+					<StudentViewFeedback />
+					<LogoutButton />
 				</ContentWrapper>
 				<Menu activeAssignment={false} activeAvatar={true} />
 			</Wrapper>
