@@ -38,38 +38,6 @@ export default () => {
 			if (!assignmentResponse.hasOwnProperty("content"))
 				throw new Error("Empty response");
 
-			// const assignment_id = assignmentResponse.content[0].id;
-			//
-			// // Create new reviews
-			// const reviewResponse = await API.create("review", {
-			// 	records: record.student_id.map((student_id) => ({
-			// 		student_id: [student_id],
-			// 		assignment_id: [assignment_id],
-			// 	})),
-			// });
-
-			// if (!reviewResponse.hasOwnProperty("content"))
-			// 	throw new Error("Empty response");
-
-			// // Add to class table
-			// const classResponse = await API.update(`class/${record.class_id}`, {
-			// 	assignment_id: [
-			// 		assignment_id,
-			// 		...table
-			// 			.map(({ fields }) => {
-			// 				if (
-			// 					fields.hasOwnProperty("assignment_id") &&
-			// 					fields.assignment_id.length
-			// 				)
-			// 					return fields.assignment_id[0];
-			// 			})
-			// 			.filter((id) => !!id),
-			// 	],
-			// });
-
-			// if (!classResponse.hasOwnProperty("content"))
-			// 	throw new Error("Empty response");
-
 			history.push("/");
 		} catch (err) {
 			console.error(err);
