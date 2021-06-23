@@ -9,16 +9,13 @@ import ProfileContent from "../components/ProfileContent";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfilePoints from "../components/ProfilePoints";
-<<<<<<< HEAD
 import ProfileCommendations, {CommendationsWrapper} from "../components/ProfileCommendations";
 import ProfileContent from "../components/ProfileContent";
 import LogoutButton from "../components/LogoutButton";
 import styled from "styled-components";
 import StudentViewFeedback from "../components/StudentViewFeedback";
 
-=======
 import React from "react";
->>>>>>> production
 import cheerio from "cheerio";
 import moment from "moment";
 import styled from "styled-components";
