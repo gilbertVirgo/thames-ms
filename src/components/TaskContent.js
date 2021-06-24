@@ -1,5 +1,6 @@
+import styled, { keyframes } from "styled-components";
+
 import React from "react";
-import styled, {keyframes} from "styled-components";
 import Sparkles from "../components/Sparkles";
 const Wrapper = styled.div`
 	box-sizing: border-box;
@@ -15,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const ContentWapper = styled.div`
-	font-weight: 600;
+	//font-weight: 600;
 	font-size: 15px;
 	line-height: 20px;
 
@@ -86,9 +87,8 @@ const AttachmentImage = styled.div`
 
 const ToggleWrapper = styled.div`
 	width: calc(100vw - 60px);
-    max-width: 480px;
+	max-width: 480px;
 	margin: 0 auto;
-
 `;
 const CompleteToggle = styled.div`
 	margin: 38px auto;
@@ -110,8 +110,6 @@ const CompleteToggle = styled.div`
 	grid-template-columns: 84% 16%;
 	/* 219px 35px; */
 	column-gap: 10px;
-
-	
 `;
 
 const ToggleButton = styled.button`
@@ -145,7 +143,7 @@ const TaskContent = ({ title, complete, children, onChange, ...props }) => {
 			<ContentWapper>{children}</ContentWapper>
 			<Sparkles effect={checked}>
 				<ToggleWrapper>
-					<CompleteToggle >
+					<CompleteToggle>
 						Have you completed the task?
 						<ToggleButton
 							id="togleImg"

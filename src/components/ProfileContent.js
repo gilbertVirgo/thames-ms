@@ -40,7 +40,7 @@ const Title = styled.h6`
 
 const Content = styled.div`
 	font-style: normal;
-	font-weight: 600;
+	//font-weight: 600;
 	font-size: 15px;
 	line-height: 20px;
 
@@ -94,7 +94,7 @@ const Link = styled.div`
     `}
 
 	font-style: normal;
-	font-weight: 600;
+	//font-weight: 600;
 	font-size: 15px;
 	line-height: 18px;
 

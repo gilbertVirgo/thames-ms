@@ -65,7 +65,7 @@ export default () => {
 	};
 
 	const parseContent = (content) => {
-		const $ = cheerio.load(content);
+		const $ = cheerio.load(marked(content));
 
 		const svg = require("../assets/icons/paperclip-pink.svg");
 
@@ -145,7 +145,8 @@ export default () => {
 							: ""}
 					</CommendationsWrapper>
 
-					<ProfileContent achievement={marked(achievement)} report>
+					{/* `achievement` already marked */}
+					<ProfileContent achievement={achievement} report>
 						<div
 							dangerouslySetInnerHTML={{
 								__html: marked(reports),
