@@ -44,7 +44,7 @@ const ButtonsWrapper = styled.div`
 export default () => {
 
     const handleSuccess = () => {
-		console.log("Success");
+		localStorage.clear();
 		window.location.href = "/login";
 	};
 
@@ -54,17 +54,19 @@ export default () => {
             
             <ButtonsWrapper>
                 <LogoutTitle onClick={() => 
-                    window.location.href = "/"
+                    window.location.href = "/profile"
 				    }>No</LogoutTitle>
-                <GoogleLogout
+                {/* <GoogleLogout
                     clientId="218807385555-cnlc8e780kouun416qag1fe5r0uenioq.apps.googleusercontent.com"
-                    buttonText="Yes"
+                    buttonText="Sign out"
                     onLogoutSuccess={handleSuccess}
                     // style={{}}
                     // disabledStyle
-                >
-                    {/* <LogoutTitle>Yes</LogoutTitle> */}
-                </GoogleLogout>
+                > */}
+                <LogoutTitle onClick={() => 
+                    handleSuccess()
+				    }>Yes</LogoutTitle>
+                {/* </GoogleLogout> */}
             </ButtonsWrapper>
         </HeaderWrapper>
 	);
