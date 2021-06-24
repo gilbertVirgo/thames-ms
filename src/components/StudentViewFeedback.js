@@ -71,14 +71,14 @@ const StatusWrapper = styled.div`
 `;
 
 
-const StudentViewFeedback = ({ ...props }) => {
-    const [status, setStatus] = React.useState("Pending");
+const StudentViewFeedback = ({content, status, effort, ...props }) => {
+    // const [status, setStatus] = React.useState("Pending");
     const [waiting, setWaiting] = React.useState(false);
 
 
     React.useEffect(() => {
 		(async function () {
-			setStatus(status);
+			// setStatus(status);
             setWaiting(false);
 		})();
 	}, []);
@@ -88,7 +88,7 @@ const StudentViewFeedback = ({ ...props }) => {
             <FeedbackWrapper waiting={waiting}>
                 <ProfileSectionTitle>Feedback</ProfileSectionTitle>
                 <ProfileSectionContent>
-                    Dignissim tincidunt consequat magna lectus vel tincidunt. Faucibus tristique adipiscing non vel tellus lectus. Sed nisl at eu sit odio et nulla. Et in volutpat vestibulum consectetur et et id felis. Ut in amet urna suscipit elit ut sed nulla. 
+                    {content}
                 </ProfileSectionContent>
             </FeedbackWrapper>
             <StatusWrapper>
@@ -98,7 +98,7 @@ const StudentViewFeedback = ({ ...props }) => {
             <StatusWrapper waiting={waiting}>
                 <ProfileSectionTitle>Effort</ProfileSectionTitle>
                 <Rating
-					value="4"
+					value={effort}
 					defaultValue={0}
 				/>
             </StatusWrapper>

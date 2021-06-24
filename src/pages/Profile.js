@@ -9,11 +9,13 @@ import ProfileContent from "../components/ProfileContent";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfilePoints from "../components/ProfilePoints";
+import ProfileCommendations, {
+	CommendationsWrapper,
+} from "../components/ProfileCommendations";
+
 import React from "react";
-import StudentViewFeedback from "../components/StudentViewFeedback";
 import cheerio from "cheerio";
 import marked from "marked";
-import moment from "moment";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
@@ -154,7 +156,7 @@ export default () => {
 							}}
 						/>
 					</ProfileContent>
-					<StudentViewFeedback />
+
 					<LogoutButton />
 				</ContentWrapper>
 				<Menu activeAssignment={false} activeAvatar={true} />

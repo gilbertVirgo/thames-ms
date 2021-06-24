@@ -45,12 +45,10 @@ export default ({ assignmentId }) => {
 
 		const {
 			Teacher_Checked,
-			Late,
+			Status,
 			Effort,
-			Grade,
-			Not_Applicable,
-			Green_Points,
-			Comments,
+			// Green_Points,
+			Feedback,
 		} = review.fields;
 
 		try {
@@ -58,12 +56,10 @@ export default ({ assignmentId }) => {
 
 			const response = await API.update(`review/${review_id}`, {
 				Teacher_Checked,
-				Late,
+				Status,
 				Effort,
-				Grade,
-				Not_Applicable,
-				Green_Points,
-				Comments,
+				// Green_Points,
+				Feedback,
 			});
 
 			if (!response.hasOwnProperty("content"))
@@ -83,7 +79,7 @@ export default ({ assignmentId }) => {
 	React.useEffect(() => {
 		fetchReviews();
 	}, []);
-
+// I have created new field called Status that is a dropdown menu with options Waiting for feedback as default, Re-submit, Handled In
 	return (
 		<Section title="Review" error={error}>
 			{loading && <ActivityIndicator inline>{loading}</ActivityIndicator>}
@@ -92,10 +88,10 @@ export default ({ assignmentId }) => {
 					<tr>
 						<th>Name</th>
 						<th>Handed in?</th>
-						<th>Late?</th>
+						<th>Status</th>
 						<th>Effort</th>
-						<th>Grade</th>
-						<th>N/A</th>
+						<th>Feedback</th>
+						{/* <th>Re-submit?</th> */}
 					</tr>
 				</thead>
 				<tbody>
@@ -121,11 +117,11 @@ export default ({ assignmentId }) => {
 								</td>
 								<td key={`td-${3}`}>
 									<Form.Check
-										value={fields.Late}
-										checked={fields.Late}
+										value={fields.Status}
+										checked={fields.Status}
 										onChange={({ target }) =>
 											editReview(fields.id, {
-												Late: target.checked,
+												Status: target.checked,
 											})
 										}
 									/>
@@ -143,15 +139,15 @@ export default ({ assignmentId }) => {
 								</td>
 								<td key={`td-${5}`}>
 									<Form.Control
-										value={fields.Grade}
+										value={fields.Feedback}
 										onBlur={({ target }) =>
 											editReview(fields.id, {
-												Grade: target.value,
+												Feedback: target.value,
 											})
 										}
 									/>
 								</td>
-								<td key={`td-${6}`}>
+								{/* <td key={`td-${6}`}>
 									<Form.Check
 										value={fields.Not_Applicable}
 										checked={fields.Not_Applicable}
@@ -161,7 +157,7 @@ export default ({ assignmentId }) => {
 											})
 										}
 									/>
-								</td>
+								</td> */}
 							</tr>
 						))}
 				</tbody>

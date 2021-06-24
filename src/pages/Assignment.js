@@ -8,6 +8,8 @@ import cheerio from "cheerio";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
+import StudentViewFeedback from "../components/StudentViewFeedback";
+
 
 export default () => {
 	const [role] = useRole();
@@ -63,6 +65,7 @@ export default () => {
 					setReviewId(reviewId);
 					setStudentCompleted(Student_Checked);
 					setRecord(record);
+					console.log("check this", record);
 					setContent(parseContent(record.Content));
 					setLoading(false);
 				} catch (err) {
@@ -97,8 +100,14 @@ export default () => {
 				onChange={handleCompletedChange}
 			>
 				<div dangerouslySetInnerHTML={{ __html: content }} />
+
+				
 			</TaskContent>
-			{role.staff && <ReviewAssignment assignmentId={id} />}
+			<StudentViewFeedback 
+				content="Hello"
+				status="pending"
+				effort="3"
+				/>
 			<Menu activeAssignment={true} activeAvatar={false} />
 		</React.Fragment>
 	) : (
