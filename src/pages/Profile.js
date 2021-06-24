@@ -9,10 +9,6 @@ import ProfileContent from "../components/ProfileContent";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfilePoints from "../components/ProfilePoints";
-import ProfileCommendations, {
-	CommendationsWrapper,
-} from "../components/ProfileCommendations";
-
 import React from "react";
 import cheerio from "cheerio";
 import marked from "marked";
