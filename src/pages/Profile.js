@@ -1,3 +1,7 @@
+import ProfileCommendations, {
+	CommendationsWrapper,
+} from "../components/ProfileCommendations";
+
 import API from "../api";
 import LogoutButton from "../components/LogoutButton";
 import Menu from "../components/Menu";
@@ -5,11 +9,10 @@ import ProfileContent from "../components/ProfileContent";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfilePoints from "../components/ProfilePoints";
-import ProfileCommendations, {CommendationsWrapper} from "../components/ProfileCommendations";
-import StudentViewFeedback from "../components/StudentViewFeedback";
-
 import React from "react";
+import StudentViewFeedback from "../components/StudentViewFeedback";
 import cheerio from "cheerio";
+import marked from "marked";
 import moment from "moment";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -66,9 +69,13 @@ export default () => {
 	const parseContent = (content) => {
 		const $ = cheerio.load(content);
 
-		$("a").prepend(
-			`<img src='${require("../assets/icons/paperclip-pink.svg")}' />`
-		);
+		const svg = require("../assets/icons/paperclip-pink.svg");
+
+		console.log({ svg });
+
+		$("a").prepend(`<img src='${svg}' />`);
+
+		console.log("html", $.html());
 
 		return $.html()
 			.replace("<html><head></head><body>", "")
@@ -80,13 +87,15 @@ export default () => {
 			(async function () {
 				try {
 					const response = await API.get(`/me`);
-					// const response = await API.get(`student/${id}`);
 
 					if (!response.hasOwnProperty("content"))
 						throw new Error("Empty response");
 
 					const record = response.content[0].fields;
 					setRecord(record);
+
+					// Seems that when there aren't any commendations present,
+					// this page never loads. Needs to be fixed
 
 					console.log("Record is", record);
 
@@ -96,8 +105,10 @@ export default () => {
 						record.Commendations.length
 					);
 					setAchievement(parseContent(record.Achievement));
+
+					console.log(record);
+
 					setReports(parseContent(record.Reports));
-					console.log("reports", record.Reports);
 					setCommendations(record.Commendations_Name);
 
 					setLoading(false);
@@ -127,22 +138,27 @@ export default () => {
 					<CommendationsWrapper show={show}>
 						{commendations.length
 							? commendations.map((commendation) => (
-									<ProfileCommendations>
-										{commendation}
-									</ProfileCommendations>
+									<ProfileCommendations
+										dangerouslySetInnerHTML={{
+											__html: marked(commendation),
+										}}
+									/>
 							  ))
 							: ""}
 					</CommendationsWrapper>
 
-					<ProfileContent achievement={achievement} report>
-						<div dangerouslySetInnerHTML={{ __html: reports }} />
+					<ProfileContent achievement={marked(achievement)} report>
+						<div
+							dangerouslySetInnerHTML={{
+								__html: marked(reports),
+							}}
+						/>
 					</ProfileContent>
 					<StudentViewFeedback />
 					<LogoutButton />
 				</ContentWrapper>
 				<Menu activeAssignment={false} activeAvatar={true} />
 			</Wrapper>
-			
 		</React.Fragment>
 	) : (
 		"Loading..."
