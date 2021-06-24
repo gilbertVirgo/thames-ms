@@ -65,6 +65,7 @@ export default () => {
 					setReviewId(reviewId);
 					setStudentCompleted(Student_Checked);
 					setRecord(record);
+					console.log("check this", record);
 					setContent(parseContent(record.Content));
 					setLoading(false);
 				} catch (err) {
@@ -102,8 +103,11 @@ export default () => {
 
 				
 			</TaskContent>
-			<StudentViewFeedback />
-			{role.staff && <ReviewAssignment assignmentId={id} />}
+			<StudentViewFeedback 
+				content="Hello"
+				status="pending"
+				effort="3"
+				/>
 			<Menu activeAssignment={true} activeAvatar={false} />
 		</React.Fragment>
 	) : (

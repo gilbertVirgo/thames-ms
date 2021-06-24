@@ -6,7 +6,6 @@ import ProfileHeader from "../components/ProfileHeader";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfilePoints from "../components/ProfilePoints";
 import ProfileCommendations, {CommendationsWrapper} from "../components/ProfileCommendations";
-import StudentViewFeedback from "../components/StudentViewFeedback";
 
 import React from "react";
 import cheerio from "cheerio";
@@ -137,7 +136,7 @@ export default () => {
 					<ProfileContent achievement={achievement} report>
 						<div dangerouslySetInnerHTML={{ __html: reports }} />
 					</ProfileContent>
-					<StudentViewFeedback />
+					
 					<LogoutButton />
 				</ContentWrapper>
 				<Menu activeAssignment={false} activeAvatar={true} />
