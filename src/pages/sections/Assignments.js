@@ -35,17 +35,26 @@ export default ({ query = null }) => {
 	const [table, setTable] = React.useState([]);
 	const [dueDateSwitch, setDueDateSwitch] = React.useState(false);
 
+
 	const history = useHistory();
 
-	const translateDate = (date) => {
+	const translateDate = (date, status) => {
 		if (dueButtonText === "Count Down") {
+			
+			if (status=="Re-submit"){
+				return "Re-submit";
+			}
 			return moment(new Date(date)).format("ll");
 		} else {
 			date = moment(new Date(date));
 			const now = moment(new Date());
 			const diff = moment.duration(date.diff(now)).days();
 			const diffHours = moment.duration(date.diff(now)).hours();
-			if (diff > 0) {
+			if (status=="Re-submit"){
+				return "Re-submit";
+			}
+			else{
+				if (diff > 0) {
 				return `${Math.abs(diff)} day${diff !== 1 ? "s" : ""}`;
 			} else if (diff < 0) {
 				return `Overdue`;
@@ -56,6 +65,8 @@ export default ({ query = null }) => {
 				console.log("this is Diff", diff);
 				return `Today`;
 			}
+			}
+			
 		}
 	};
 
@@ -68,8 +79,14 @@ export default ({ query = null }) => {
 		}
 	};
 
-	const translateCompleteDate = (date) => {
-		return moment(new Date(date)).format("MMM Do YY");
+	const translateCompleteDate = (date, status) => {	
+		if (status=="Re-submit"){
+			return "Re-submit";
+		}else if(status=="Handed In"){
+			return moment(new Date(date)).format("MMM Do YY");
+		}else{
+			return "Pending";
+		}
 	};
 
 	const CheckReminderTitle = (isReminder, class_name, title) => {
@@ -134,7 +151,7 @@ export default ({ query = null }) => {
 								reminder={fields.Is_Reminder}
 								hide={
 									fields.Student_Checked ||
-									fields.Teacher_Checked ||
+									// fields.Teacher_Checked ||
 									(fields.Is_Reminder &&
 										CheckOverdueRreminder(
 											fields.Assignment_Due
@@ -145,14 +162,20 @@ export default ({ query = null }) => {
 									fields.Class_Name,
 									fields.Assignment_Title
 								)}
-								date={translateDate(fields.Assignment_Due)}
+								date={translateDate(fields.Assignment_Due, fields.Status)}
 								overdue={
-									translateDate(fields.Assignment_Due) ==
+									translateDate(fields.Assignment_Due, fields.Status) ==
 										"Overdue" ||
-									translateDate(fields.Assignment_Due) ==
+									translateDate(fields.Assignment_Due, fields.Status) ==
 										"Today" ||
-									translateDate(fields.Assignment_Due) ==
+									translateDate(fields.Assignment_Due, fields.Status) ==
 										"Tomorrow"
+								}
+								resubmit={
+									fields.Status=="Re-submit"
+								}
+								handed={
+									fields.Status=="Handed In"
 								}
 								onClick={() =>
 									history.push(
@@ -180,7 +203,7 @@ export default ({ query = null }) => {
 						)
 						.map(({ fields }, index) => (
 							<ListItem
-								hide={!fields.Student_Checked}
+								hide={!fields.Student_Checked }
 								checked={
 									fields.Teacher_Checked &&
 									fields.Student_Checked
@@ -189,13 +212,17 @@ export default ({ query = null }) => {
 									fields.Student_Checked &&
 									!fields.Teacher_Checked
 								}
+								resubmit={
+									fields.Status=="Re-submit"
+								}
 								title={CheckReminderTitle(
 									fields.Is_Reminder,
 									fields.Class_Name,
 									fields.Assignment_Title
 								)}
 								date={translateCompleteDate(
-									fields.Assignment_Due
+									fields.Assignment_Due,
+									fields.Status
 								)}
 								onClick={() =>
 									history.push(
