@@ -30,7 +30,7 @@ export default () => {
 	const [content, setContent] = React.useState("");
 	const [studentCompleted, setStudentCompleted] = React.useState();
 	const [reviewId, setReviewId] = React.useState();
-	// const [feedbackStatus, setFeedbackStatus] = React.useState();
+	const [feedbackStatus, setFeedbackStatus] = React.useState();
 	// const [feedbackEffort, setFeedbackEffort] = React.useState();
 	// const [feedbackMessage, setFeedbackMessage] = React.useState();
 
@@ -70,6 +70,11 @@ export default () => {
 					const assignmentReviews = await API.get(`reviews?assignment_id=${id}`);
 					const feedbackContent = assignmentReviews.content[0].fields;
 					setFeedbackContent(feedbackContent);
+					setFeedbackStatus(feedbackContent.Status);
+					if(feedbackContent.Status==null){
+						setFeedbackStatus("Pending")
+					}
+					
 					
 					console.log(feedbackContent);
 
@@ -130,11 +135,11 @@ export default () => {
 			</TaskContent>
 			<StudentViewFeedback 
 				content={feedbackContent.Feedback}
-				status={feedbackContent.Status}
+				status={feedbackStatus}
 				effort={feedbackContent.Effort}
-				pending={feedbackContent.Status=="Pending"}
-				handed={feedbackContent.Status=="Handed In"}
-				resubmit={feedbackContent.Status=="Re-submit"}
+				pending={feedbackStatus=="Pending"}
+				handed={feedbackStatus=="Handed In"}
+				resubmit={feedbackStatus=="Re-submit"}
 				/>
 			</Wrapper>
 			<Menu activeAssignment={true} activeAvatar={false} />
