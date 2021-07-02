@@ -13,6 +13,9 @@ export default ({ assignmentId }) => {
 	const [loading, setLoading] = React.useState("Loading reviews...");
 	const [error, setError] = React.useState();
 	const [reviews, setReviews] = React.useState();
+	const [record, setRecord] = React.useState({});
+	const [currentStatus, setCurrentStatus] = React.useState();
+
 
 	const fetchReviews = async () => {
 		try {
@@ -36,6 +39,18 @@ export default ({ assignmentId }) => {
 		}
 	};
 
+	const editRecord = (props) => {
+		const copy = { ...record };
+
+		Object.keys(props).forEach((key) => {
+			copy[key] = props[key];
+		});
+
+		console.log("Edit => ", copy);
+		console.log("Props", props);
+		setRecord(copy);
+	};
+
 	const editReview = async (review_id, props) => {
 		const review = reviews.find(({ id }) => id === review_id);
 
@@ -43,11 +58,12 @@ export default ({ assignmentId }) => {
 			review.fields[key] = props[key];
 		});
 
+		console.log("Status", props);
+
 		const {
-			Teacher_Checked,
+			// Teacher_Checked,
 			Status,
 			Effort,
-			// Green_Points,
 			Feedback,
 		} = review.fields;
 
@@ -55,10 +71,9 @@ export default ({ assignmentId }) => {
 			setLoading("Updating reviews...");
 
 			const response = await API.update(`review/${review_id}`, {
-				Teacher_Checked,
+				// Teacher_Checked,
 				Status,
 				Effort,
-				// Green_Points,
 				Feedback,
 			});
 
@@ -79,7 +94,7 @@ export default ({ assignmentId }) => {
 	React.useEffect(() => {
 		fetchReviews();
 	}, []);
-// I have created new field called Status that is a dropdown menu with options Waiting for feedback as default, Re-submit, Handled In
+
 	return (
 		<Section title="Review" error={error}>
 			{loading && <ActivityIndicator inline>{loading}</ActivityIndicator>}
@@ -87,11 +102,9 @@ export default ({ assignmentId }) => {
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Handed in?</th>
 						<th>Status</th>
 						<th>Effort</th>
 						<th>Feedback</th>
-						{/* <th>Re-submit?</th> */}
 					</tr>
 				</thead>
 				<tbody>
@@ -105,28 +118,28 @@ export default ({ assignmentId }) => {
 									</Link>
 								</td>
 								<td key={`td-${2}`}>
-									<Form.Check
-										value={fields.Teacher_Checked}
-										checked={fields.Teacher_Checked}
-										onChange={({ target }) =>
-											editReview(fields.id, {
-												Teacher_Checked: target.checked,
-											})
-										}
-									/>
+								<Form.Control
+									as="select"
+									required
+									defaultValue={fields.Status}
+									onChange={({ target }) =>
+									
+									editReview(fields.id, {
+											Status: 
+												target.options[target.selectedIndex]
+													.value,
+										})
+									}
+								>	
+									{/* <option value="Current Status">{fields.Status}</option> */}
+									<option value="Pending">
+										Pending
+									</option>
+									<option value="Handed In">Handed In</option>
+									<option value="Re-submit">Re-submit</option>
+								</Form.Control>
 								</td>
 								<td key={`td-${3}`}>
-									<Form.Check
-										value={fields.Status}
-										checked={fields.Status}
-										onChange={({ target }) =>
-											editReview(fields.id, {
-												Status: target.checked,
-											})
-										}
-									/>
-								</td>
-								<td key={`td-${4}`}>
 									<Rating
 										value={fields.Effort}
 										defaultValue={0}
@@ -147,17 +160,6 @@ export default ({ assignmentId }) => {
 										}
 									/>
 								</td>
-								{/* <td key={`td-${6}`}>
-									<Form.Check
-										value={fields.Not_Applicable}
-										checked={fields.Not_Applicable}
-										onChange={({ target }) =>
-											editReview(fields.id, {
-												Not_Applicable: target.checked,
-											})
-										}
-									/>
-								</td> */}
 							</tr>
 						))}
 				</tbody>
