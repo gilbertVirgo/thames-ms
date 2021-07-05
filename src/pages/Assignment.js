@@ -15,8 +15,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
 	box-sizing: border-box;
 	width: 100%;
-	height: 100%; 
-	/* calc(100vh - 139px); */
+	height: calc(100vh - 312px);
 `;
 
 export default () => {
@@ -113,8 +112,7 @@ export default () => {
 	}
 
 	return !loading ? (
-		<React.Fragment>
-			<Wrapper>
+		<Wrapper>
 			<TaskHeader
 				image={record.Class_Icon[0].url}
 				subject={record.Class_Name}
@@ -141,9 +139,9 @@ export default () => {
 				handed={feedbackStatus=="Handed In"}
 				resubmit={feedbackStatus=="Re-submit"}
 				/>
-			</Wrapper>
+			
 			<Menu activeAssignment={true} activeAvatar={false} />
-		</React.Fragment>
+		</Wrapper>
 	) : (
 		"Loading..."
 	);
