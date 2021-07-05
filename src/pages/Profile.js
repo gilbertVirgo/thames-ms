@@ -60,7 +60,12 @@ export default () => {
 		if (number > 9) {
 			setShow(true);
 			setSystemTitle("Commendations:");
-			setSystemCounter(comms);
+			if(comms.length){
+				setSystemCounter(comms);
+			} else{
+				setSystemCounter(0);
+			}
+			
 		}
 	};
 
@@ -100,7 +105,7 @@ export default () => {
 					CheckYear(
 						record.Year_Group,
 						record.Green_Points,
-						record.Commendations.length
+						record.Commendations
 					);
 					setAchievement(parseContent(record.Achievement));
 
@@ -133,7 +138,7 @@ export default () => {
 						email={record.Email}
 					/>
 
-					<CommendationsWrapper show={show}>
+					{/* <CommendationsWrapper show={show}>
 						{commendations.length
 							? commendations.map((commendation) => (
 									<ProfileCommendations
@@ -143,7 +148,7 @@ export default () => {
 									/>
 							  ))
 							: ""}
-					</CommendationsWrapper>
+					</CommendationsWrapper> */}
 
 					{/* `achievement` already marked */}
 					<ProfileContent achievement={achievement} report>
