@@ -4,6 +4,7 @@ from courses import courses
 from requests import get
 from urllib.parse import quote, unquote
 from re import findall
+from json import dump
 
 
 def words_related_to(course):
@@ -11,23 +12,30 @@ def words_related_to(course):
   
   # find all synonyms
 
-  syns = findall('"/browse/((\w+|%\d{2})+)" data-linkid="nn1ov4" class="css-1[^5]', page)
+  syns = findall('"/browse/((\w+|%\d{2})+)"', page)[:10]
 
   return [unquote(syn[0]) for syn in syns]
 
 
 def scrape():
   print('[*] starting')
-  batch = []
+  batch = {}
 
   for course in courses:
     try:
-      batch[course] = words_related_to[course.lower()]
-    except:
+      batch[course] = words_related_to(course.lower())
+      print(f'[*] scraped {course}')
+      
+      if not batch[course]: batch.pop(course)
+
+    except Exception as e:
       print(f'[!] failed on {course}')
+      print(e)
 
   print('[*] finished')
-  print(batch)
+
+  with open('./tmp.json', 'w+') as file:
+    dump(batch, file)
 
 
 if __name__ == '__main__':
