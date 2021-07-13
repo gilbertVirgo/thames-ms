@@ -1,15 +1,15 @@
-# associate.py, a scraper uses thesaurus.com to associate words with university courses
+# associate.py, a scraper uses thesaurus.com to associate words with university topics
 
-from courses import courses
+from topics import topics
 from requests import get
 from urllib.parse import quote, unquote
 from re import findall
 from json import dump
 
 
-def words_related_to(course):
-  page = get(f'https://www.thesaurus.com/browse/{quote(course)}').text
-  print(f'- {course}')  
+def words_related_to(topic):
+  page = get(f'https://www.thesaurus.com/browse/{quote(topic)}').text
+  print(f'- {topic}')  
   # find all synonyms
 
   syns = findall('"/browse/((\w+|%\d{2})+)"', page)[:10]
@@ -21,21 +21,21 @@ def scrape():
   print('[*] starting')
   batch = {}
 
-  for course in courses:
+  for topic in topics:
     
-    batch[course] = words_related_to(course.lower())
+    batch[topic] = words_related_to(topic.lower())
       
-    if not batch[course]:
-      batch.pop(course)
+    if not batch[topic]:
+      batch.pop(topic)
       continue
 
     # scrape second degree relations
     subbatch = []
 
-    for syn in batch[course]: subbatch += words_related_to(syn)
-    batch[course] += subbatch
+    for syn in batch[topic]: subbatch += words_related_to(syn)
+    batch[topic] += subbatch
       
-    print(f'[*] scraped {course}')
+    print(f'[*] scraped {topic}')
 
   print('[*] finished')
 
