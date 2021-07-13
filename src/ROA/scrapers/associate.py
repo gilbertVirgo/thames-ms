@@ -9,7 +9,7 @@ from json import dump
 
 def words_related_to(course):
   page = get(f'https://www.thesaurus.com/browse/{quote(course)}').text
-  
+  print(f'- {course}')  
   # find all synonyms
 
   syns = findall('"/browse/((\w+|%\d{2})+)"', page)[:10]
@@ -22,15 +22,20 @@ def scrape():
   batch = {}
 
   for course in courses:
-    try:
-      batch[course] = words_related_to(course.lower())
-      print(f'[*] scraped {course}')
+    
+    batch[course] = words_related_to(course.lower())
       
-      if not batch[course]: batch.pop(course)
+    if not batch[course]:
+      batch.pop(course)
+      continue
 
-    except Exception as e:
-      print(f'[!] failed on {course}')
-      print(e)
+    # scrape second degree relations
+    subbatch = []
+
+    for syn in batch[course]: subbatch += words_related_to(syn)
+    batch[course] += subbatch
+      
+    print(f'[*] scraped {course}')
 
   print('[*] finished')
 
