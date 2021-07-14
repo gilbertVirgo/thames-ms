@@ -9,13 +9,31 @@ import Modal from 'react-modal';
 
 const AchieveCardWrapper = styled.button`
 	border-radius: 5px;
-	border = 1px;
+	font-family: "Nunito Sans", sans-serif;
+	padding: 2rem;
+	margin: 1rem 0;
+	background: white;
+	border: none;
+	box-shadow: 2px 3px 21px #bbb;
+	width: 100%;
+	text-align: inherit;
 `
 
 const TemporaryModalStyle = styled.div`
   
 `
 
+const AchieveButton = styled.button`
+	border-radius: 5px;
+	font-family: "Nunito Sans", sans-serif;
+	padding: 2rem;
+	margin: 1rem 0;
+	background: white;
+	border: 1px;
+	box-shadow: 2px 3px 21px #bbb;
+	width: 100%;
+	text-align: inherit;
+`
 
 function ModalContent({ achievement }) {
 
@@ -65,9 +83,9 @@ class AchievementCard extends React.Component {
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
         >
+		<AchieveButton onClick={this.handleCloseModal}>X</AchieveButton>
 		<ModalContent achievement={this.props.achievement}/>
-		<button onClick={this.handleCloseModal}>X</button>
-		<button onClick={this.handleDelete}>Delete</button>
+		<AchieveButton onClick={this.handleDelete}>Delete</AchieveButton>
         </Modal>
       </TemporaryModalStyle>
     );
