@@ -26,12 +26,10 @@ const TemporaryModalStyle = styled.div`
 const AchieveButton = styled.button`
 	border-radius: 5px;
 	font-family: "Nunito Sans", sans-serif;
-	padding: 2rem;
 	margin: 1rem 0;
 	background: white;
 	border: 1px;
 	box-shadow: 2px 3px 21px #bbb;
-	width: 100%;
 	text-align: inherit;
 `
 
