@@ -76,8 +76,14 @@ class AchievementCard extends React.Component {
   render() {
     return (
       <TemporaryModalStyle>
-        <AchieveCardWrapper onClick={this.handleOpenModal}> {this.props.achievement.Name} </AchieveCardWrapper>
-        <Modal
+        <AchieveCardWrapper onClick={this.handleOpenModal}>
+	  <h4>{this.props.achievement.Name}</h4>
+	  <p>
+	    <b>{ this.props.achievement.Type }</b> (this.props.achievement.Role)
+	  </p>
+	</AchieveCardWrapper>
+        
+	<Modal
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
         >
