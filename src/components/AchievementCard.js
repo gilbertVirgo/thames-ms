@@ -12,6 +12,27 @@ const AchieveCardWrapper = styled.button`
 	border = 1px;
 `
 
+const TemporaryModalStyle = styled.div`
+  
+`
+
+
+function ModalContent({ achievement }) {
+
+  return (
+    <>
+      <h1>{ achievement.Name }- { achievement.Type }</h1>
+      <h3>Details</h3>
+      <ul>
+	<li>Role: { achievement.Role }</li>
+	<li>Subjects: { achievement.Associations.join(', ') }</li>
+      </ul>
+      <h3>Description</h3>
+      <p>{ achievement.Description }</p>
+    </>
+  )
+}
+
 class AchievementCard extends React.Component {
   constructor(props) {
     super();
@@ -32,19 +53,23 @@ class AchievementCard extends React.Component {
     this.setState({ showModal: false });
   }
 
+  handleDelete() {
+    // todo
+  }
+
   render() {
     return (
-      <div>
+      <TemporaryModalStyle>
         <AchieveCardWrapper onClick={this.handleOpenModal}> {this.props.achievement.Name} </AchieveCardWrapper>
         <Modal
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
         >
-		<h1> {this.props.achievement.Name} </h1>
-		<p> {this.props.achievement.Description} </p>
+		<ModalContent achievement={this.props.achievement}/>
 		<button onClick={this.handleCloseModal}>X</button>
+		<button onClick={this.handleDelete}>Delete</button>
         </Modal>
-      </div>
+      </TemporaryModalStyle>
     );
   }
 }
