@@ -2,6 +2,7 @@ import { Grid } from "./index";
 import React from "react";
 import styled from "styled-components";
 import ReactDOM from 'react-dom';
+import API from '../api'
 import Modal from 'react-modal';
 
 
@@ -19,9 +20,6 @@ const AchieveCardWrapper = styled.button`
 	text-align: inherit;
 `
 
-const TemporaryModalStyle = styled.div`
-  
-`
 
 const AchieveButton = styled.button`
 	border-radius: 5px;
@@ -33,13 +31,15 @@ const AchieveButton = styled.button`
 	text-align: inherit;
 `
 
+
 function ModalContent({ achievement }) {
 
   return (
     <>
-      <h1>{ achievement.Name }- { achievement.Type }</h1>
+      <h1>{ achievement.Name }</h1>
       <h3>Details</h3>
       <ul>
+	<li>Type: { achievement.Type }</li>
 	<li>Role: { achievement.Role }</li>
 	<li>Subjects: { achievement.Associations.join(', ') }</li>
       </ul>
@@ -48,6 +48,7 @@ function ModalContent({ achievement }) {
     </>
   )
 }
+
 
 class AchievementCard extends React.Component {
   constructor(props) {
@@ -59,6 +60,7 @@ class AchievementCard extends React.Component {
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleOpenModal () {
@@ -69,13 +71,15 @@ class AchievementCard extends React.Component {
     this.setState({ showModal: false });
   }
 
-  handleDelete() {
-    // todo
+  async handleDelete() {
+    await API.delete(`achievement/${ this.props.achievement.id }`)
+    this.setState({ showModal: false });
+    window.location.reload(false);
   }
 
   render() {
     return (
-      <TemporaryModalStyle>
+      <>
         <AchieveCardWrapper onClick={this.handleOpenModal}>
 	  <h4>{this.props.achievement.Name}</h4>
 	  <p>
@@ -91,7 +95,7 @@ class AchievementCard extends React.Component {
 		<ModalContent achievement={this.props.achievement}/>
 		<AchieveButton onClick={this.handleDelete}>Delete</AchieveButton>
         </Modal>
-      </TemporaryModalStyle>
+      </>
     );
   }
 }
