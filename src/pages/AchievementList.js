@@ -1,32 +1,17 @@
 import API from "../api";
 import React from "react";
-import ListItem from "../components/ListItem";
-import ListHeader from "../components/ListHeader";
-import styled from "styled-components";
+import AchievementCard from "../components/AchievementCard";
 import Menu from "../components/Menu";
+
 import { useParams } from "react-router-dom";
+import useRole from "../hooks/useRole";
+import styled from "styled-components";
 
 
-
-const AchievementWrapper = styled.div`
-	height: 50vh;
-	padding = 0;
-	margin = 0;
-	position: realtive;
-	overflow: auto;
-`;
-
-
-const AchievementsDisplay = ({list}) => (
-	<React.Fragment>
-		{list.map(({ Name, Type, Role }) => (
-			<div>
-			  <p>{ Name }</p>
-			  <p>{ Type }</p>
-			  <p>{ Role }</p>
-			</div>
-		))}
-	</React.Fragment>
+const AchievementsList = ({list}) => (
+  <>
+    {list.map(AchievementCard)}
+  </>
 )
 
 
@@ -67,8 +52,8 @@ export default () => {
 
 	return !loading ? (
 		<React.Fragment>
-			<h1> Achivements </h1>
-			<AchievementsDisplay list={record}/>
+			<h1> Achivements</h1>
+			<AchievementsList list={record}/>
 		</React.Fragment>
 	) : (
 		"Loading..."
