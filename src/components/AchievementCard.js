@@ -13,8 +13,9 @@ const AchieveCardWrapper = styled.button`
 `
 
 class AchievementCard extends React.Component {
-  constructor () {
+  constructor(props) {
     super();
+    this.props = props
     this.state = {
       showModal: false
     };
@@ -31,16 +32,16 @@ class AchievementCard extends React.Component {
     this.setState({ showModal: false });
   }
 
-  render (props) {
+  render() {
     return (
       <div>
-        <AchieveCardWrapper onClick={this.handleOpenModal}> {props.achievement.Name} </AchieveCardWrapper>
+        <AchieveCardWrapper onClick={this.handleOpenModal}> {this.props.achievement.Name} </AchieveCardWrapper>
         <Modal
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
         >
-		<h1> {props.achievement.Name} </h1>
-		<p> {props.achievement.Description} </p>
+		<h1> {this.props.achievement.Name} </h1>
+		<p> {this.props.achievement.Description} </p>
 		<button onClick={this.handleCloseModal}>X</button>
         </Modal>
       </div>
