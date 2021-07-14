@@ -27,9 +27,9 @@ const AchieveButton = styled.button`
 	border-radius: 5px;
 	font-family: "Nunito Sans", sans-serif;
 	margin: 1rem 0;
-	background: white;
+	background: grey;
 	border: 1px;
-	box-shadow: 2px 3px 21px #bbb;
+	box-shadow: 1px 1px1 0px #bbb;
 	text-align: inherit;
 `
 
