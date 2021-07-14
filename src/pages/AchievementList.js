@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 const AchievementsList = ({list}) => (
   <>
-    {list.map(AchievementCard)}
+    {list.map(achievement => <AchievementCard achievement = {achievement} /> )}
   </>
 )
 
@@ -37,10 +37,9 @@ export default () => {
 					if (! response.hasOwnProperty('content')) {
 					  throw new Error('no response content')
 					}
-					
+
 					const achievements = response.content.map(({ fields }) => fields)
-					
-					
+
 					setRecord(achievements);
 					setLoading(false);
 				} catch (err) {
