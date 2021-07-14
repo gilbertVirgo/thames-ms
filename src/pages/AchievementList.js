@@ -19,9 +19,11 @@ const AchievementWrapper = styled.div`
 
 const AchievementsDisplay = ({list}) => (
 	<React.Fragment>
-		{list.map((item) => (
+		{list.map(({ Name, Type, Role }) => (
 			<div>
-			  <p>{ item }</p>
+			  <p>{ Name }</p>
+			  <p>{ Type }</p>
+			  <p>{ Role }</p>
 			</div>
 		))}
 	</React.Fragment>
@@ -44,16 +46,17 @@ export default () => {
 		if (loading) {
 			(async function () {
 				try {
-					const response = await API.get(`achievement/${id}`) /*await API.get(`achievement/${id}`);*/
-					if (!response.hasOwnProperty("AchievementList"))
-						throw new Error("No AchievementList");
+					const response = await API.get(`achievements/${id}`) /*await API.get(`achievement/${id}`);*/
 
-					const AchievementList = response.AchievementList;
-					const record = []
-					for (let i = 0; i < AchievementList.length; i++) {
-						record[i] = await API.get(AchievementList[i])
+
+					if (! response.hasOwnProperty('content')) {
+					  throw new Error('no response content')
 					}
-					setRecord(record);
+					
+					const achievements = response.content.map(({ fields }) => fields)
+					
+					
+					setRecord(achievements);
 					setLoading(false);
 				} catch (err) {
 					setError(err.toString());
