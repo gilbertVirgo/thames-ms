@@ -90,10 +90,10 @@ const Menu = ({
 	const [record, setRecord] = React.useState(null);
 	const [count, setCount] = React.useState();
 	const [totalAssignment, setTotalAssignment] = React.useState(0);
-
+	const [loading, setLoading] = React.useState("Loading assignment data...");
 	const countComms = (comms) => {
 		if(comms == 'undefined'){
-			return 0; 
+			return 0;
 		}else{
 			return comms.length;
 		}
@@ -121,6 +121,7 @@ const Menu = ({
 			if (me.fields.Year_Group[0].toString().replace(/\D/g, "") > 9) {
 				setCount(me.fields.Commendations.length);
 			}
+			setLoading(false);
 		})();
 	}, []);
 
@@ -129,6 +130,9 @@ const Menu = ({
 			<MenuWrapper href="/">
 				<NavItem activeAssignment={activeAssignment} />
 				<Counters assignmentColor={true}>{totalAssignment}</Counters>
+			</MenuWrapper>
+			<MenuWrapper href= {!loading ? `/achievements/${record.id}` : ("/") }>
+				<NavItem activeAssignment={activeAssignment} />
 			</MenuWrapper>
 			<MenuWrapper href="/profile">
 				<NavProfile activeAvatar={activeAvatar} />
