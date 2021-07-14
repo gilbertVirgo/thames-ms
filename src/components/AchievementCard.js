@@ -79,7 +79,7 @@ class AchievementCard extends React.Component {
         <AchieveCardWrapper onClick={this.handleOpenModal}>
 	  <h4>{this.props.achievement.Name}</h4>
 	  <p>
-	    <b>{ this.props.achievement.Type }</b> (this.props.achievement.Role)
+	    <b>{ this.props.achievement.Type }</b> ({this.props.achievement.Role})
 	  </p>
 	</AchieveCardWrapper>
         
@@ -87,7 +87,7 @@ class AchievementCard extends React.Component {
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
         >
-		<AchieveButton onClick={this.handleCloseModal}>X</AchieveButton>
+		<AchieveButton onClick={this.handleCloseModal}>Close</AchieveButton>
 		<ModalContent achievement={this.props.achievement}/>
 		<AchieveButton onClick={this.handleDelete}>Delete</AchieveButton>
         </Modal>
