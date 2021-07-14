@@ -7,10 +7,6 @@ import Menu from "../components/Menu";
 import { useParams } from "react-router-dom";
 
 
-// remove when we have backend access
-
-import stubAPI from "./stubAPI"
-
 
 const AchievementWrapper = styled.div`
 	height: 50vh;
@@ -20,31 +16,17 @@ const AchievementWrapper = styled.div`
 	overflow: auto;
 `;
 
+
 const AchievementsDisplay = ({list}) => (
 	<React.Fragment>
-		{list.map(({Title,Description,Type,Role,Independent,Subjects}) => (
+		{list.map((item) => (
 			<div>
-				<ListHeader title = {Title}>
-				</ListHeader>
-				<React.Fragment>
-					<p>{Description}</p>
-				</React.Fragment>
-				<React.Fragment>
-					<p>{Type}</p>
-				</React.Fragment>
-				<React.Fragment>
-					<p>{Role}</p>
-				</React.Fragment>
-				<React.Fragment>
-					<p>{Independent}</p>
-				</React.Fragment>
-				<React.Fragment>
-					<p>{Subjects}</p>
-				</React.Fragment>
+			  <p>{ item }</p>
 			</div>
 		))}
 	</React.Fragment>
 )
+
 
 export default () => {
 
@@ -62,7 +44,7 @@ export default () => {
 		if (loading) {
 			(async function () {
 				try {
-					const response = stubAPI.get(`achievement/${id}`) /*await API.get(`achievement/${id}`);*/
+					const response = await API.get(`achievement/${id}`) /*await API.get(`achievement/${id}`);*/
 					if (!response.hasOwnProperty("AchievementList"))
 						throw new Error("No AchievementList");
 
