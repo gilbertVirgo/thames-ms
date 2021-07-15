@@ -59,6 +59,12 @@ export default class extends Component {
 						<option value="Work experience">Work experience</option>
 						<option value="Other">Other</option>
 					</select>
+				<h2>Description</h2>
+				<input
+					name="Description"
+					type="text"
+					value={this.state.Description}
+					onChange={this.handleInputChange} />
 
 				<button onClick={() => this.onSave(this.state)}>Done</button>
 			</ModalForm>
