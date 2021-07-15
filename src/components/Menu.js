@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 	justify-items: center;
 	align-items: center;
 	/* grid-template-areas: "left right"; */
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 `;
 
 const NavItem = styled.div`
@@ -132,7 +132,7 @@ const Menu = ({
 				<Counters assignmentColor={true}>{totalAssignment}</Counters>
 			</MenuWrapper>
 			<MenuWrapper href= {!loading ? `/achievements/${record.id}` : ("/") }>
-				<NavItem activeAssignment={activeAssignment} />
+				<NavItem activeAssignment={activeAvatar} />
 			</MenuWrapper>
 			<MenuWrapper href="/profile">
 				<NavProfile activeAvatar={activeAvatar} />
