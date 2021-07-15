@@ -2,17 +2,9 @@ import API from "../api";
 import React from "react";
 import AchievementCard from "../components/AchievementCard";
 import Menu from "../components/Menu";
-
 import { useParams } from "react-router-dom";
 import useRole from "../hooks/useRole";
 import styled from "styled-components";
-
-
-const AchievementsList = ({list}) => (
-  <>
-    {list.map(achievement => <AchievementCard achievement = {achievement} /> )}
-  </>
-)
 
 
 export default () => {
@@ -52,7 +44,7 @@ export default () => {
 	return !loading ? (
 		<React.Fragment>
 			<h1> Achivements</h1>
-			<AchievementsList list={record}/>
+			<div>{ list.map(ach => <AchievementCard achievement={achievement} list={list} />) }</div>
 		</React.Fragment>
 	) : (
 		"Loading..."
