@@ -15,7 +15,7 @@ export default () => {
   const { id: student_id } = useParams()
   const [ achievements, setAchievements ] = React.useState(null)
   const [ isModalOpen, setIsModalOpen ] = React.useState(false)
-  const [ selectedAchievement, setSelectedAchievement ] = React.useState(null)
+  const [ index, setIndex ] = React.useState(null)
 
 
   React.useEffect(() => {
@@ -34,10 +34,10 @@ export default () => {
     <>
       <h1>Achievements</h1>
       <div>
-	{achievements.map(({ Name, Description, Type, Role, Associations }, index) => (
+	{achievements.map(({ Name, Description, Type, Role, Associations }, i) => (
 	  <AchievementCard onClick={() => {
 
-	    setSelectedAchievement(achievements[index])
+	    setIndex(i)
 	    setIsModalOpen(true)
 	  }}>
 	    <h3>{Name} {Type && `(${Type})`}</h3>
@@ -65,9 +65,14 @@ export default () => {
       {isModalOpen && (
 	<AchievementModal>
 	  <main>
-	    <AchievementForm selected={selectedAchievement} onSave={data => {
+	    <AchievementForm selected={achievements[index]} onSave={data => {
 	      // use form data to update database
 	      // and update list
+	    }}/>
+
+	    <button onClick={() => {
+	      deleteAchievement(achievements[index].id)
+	      setAchievements([...achievements.slice(0, index), ...achievements.slice(index + 1)])
 	    }}/>
 	  </main>
 	</AchievementModal>
