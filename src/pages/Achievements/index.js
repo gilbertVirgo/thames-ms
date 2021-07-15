@@ -5,7 +5,7 @@ import AchievementForm from './AchievementForm'
 import { AchievementCard, AchievementModal } from './styles'
 import {
   getAchievements, 
-  createEmptyAchievement, 
+  createAchievement, 
   deleteAchievement,
   editAchievement
 } from './actions'
@@ -40,26 +40,25 @@ export default () => {
 	    setSelectedAchievement(achievements[index])
 	    setIsModalOpen(true)
 	  }}>
-	    <h3>{Name} ({Type})</h3>
+	    <h3>{Name} {Type && `(${Type})`}</h3>
 	    <p>Related to: {Associations.join(', ')}</p>
 	    <p>{Description}</p>
 	  </AchievementCard>
 	))}
 
 	<AchievementCard onClick={() => {
-	  let addition = { Name: 'Untitled', Role: 'Participant', Description: 'No description', Associations: [] }
+	  let addition = { Name: 'Untitled', student_id: [ student_id ], Role: 'Participant', Description: 'No description', Associations: [] }
+	  createAchievement(addition)
 	  setAchievements([...achievements, addition])
 	}}>
-	  <center>
-	    Add achievement
-	  </center>
+	  <center>Add achievement</center>
 	</AchievementCard>
       </div>
 
-      { isModalOpen && (
+      {isModalOpen && (
 	<AchievementModal>
 	  <main>
-	    <AchievementForm onSave={( data ) => {
+	    <AchievementForm selected={selectedAchievement} onSave={data => {
 	      // use form data to update database
 	      // and update list
 	    }}/>
@@ -69,50 +68,3 @@ export default () => {
     </>
   )
 }
-
-
-
-/*
-export default () => {
-
-	const { id } = useParams();
-	const [record, setRecord] = React.useState(null);
-	const [loading, setLoading] = React.useState("Loading assignment data...")
-	const [error, setError] = React.useState();
-
-
-
-
-
-
-	React.useEffect(() => {
-		if (loading) {
-			(async function () {
-				try {
-					const response = await API.get(`achievements/${id}`) /*await API.get(`achievement/${id}`);
-
-
-					if (! response.hasOwnProperty('content')) {
-					  throw new Error('no response content')
-					}
-
-					const achievements = response.content.map(({ fields }) => fields)
-
-					setRecord(achievements);
-					setLoading(false);
-				} catch (err) {
-					setError(err.toString());
-				}
-			})();
-		}
-	}, [loading]);
-
-	return !loading ? (
-		<React.Fragment>
-			<h1> Achivements</h1>
-			<div>{ list.map(ach => <AchievementCard achievement={achievement} list={list} />) }</div>
-		</React.Fragment>
-	) : (
-		"Loading..."
-	);
-};*/

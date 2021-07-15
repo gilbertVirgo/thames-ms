@@ -17,18 +17,11 @@ export async function deleteAchievement(id) {
 }
 
 
-export async function createEmptyAchievement(author, student) {
-  await API.create('achievement', [{ fields: {
-    Author: author,
-    student_id: student,
-    Name: 'Untitled achievement',
-    Description: 'No description',
-    Role: 'Participant',
-    Associations: [],
-  }}])
+export async function createAchievement(data) {
+  await API.create(`achievement`, [{ fields: data }])
 }
 
 
 export async function editAchievement(id, data) {
-  await API.update(`achievement/${id}`, data)
+  await API.update(`achievement/${id}`, [{ fields: data }])
 }
