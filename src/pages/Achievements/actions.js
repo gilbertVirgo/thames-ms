@@ -25,6 +25,7 @@ export async function createAchievement(data) {
 
 
 export async function editAchievement(id, data) {
+  data = {...data}
   delete data.id
   await API.update(`achievement/${id}`, data)
 }
@@ -38,15 +39,18 @@ export async function downloadAchievements(achievements) {
 	width: 100%;
 	max-width: 630px;
 	padding: 2rem 19;
+	font-family: sans-serif;
+	margin: auto;
       }
 
       section {
-	border-top: 2px solid #999;
+	border-top: 1px solid #aaa;
       }
     </style>
     <script>
-      window.onload = print()
-      window.close()
+      window.onload = () => {
+	print()
+      }
     </script>
     <h1>&#128162; Record of Achievement</h1>
     
@@ -55,7 +59,7 @@ export async function downloadAchievements(achievements) {
 	<section>
 	  <h3>${achievement.Date}, ${achievement.Name} ${achievement.Type ? `(${achievement.Type})` : ''}</h3>
 	  <p>Role: ${achievement.Role}</p>
-	  <p>${achievement.description || 'No description'}</p>
+	  <p>${achievement.Description || 'No description'}</p>
 	</section>
       `).join('')}
     <div>

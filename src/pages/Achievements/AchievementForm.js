@@ -48,10 +48,9 @@ export default class extends Component {
 				<label>Type:</label>
 					<select
 						name="Type"
-						value={this.state.Role}
+						value={this.state.Type}
 						onChange={this.handleInputChange}>
 						<option value="Competition">Competition</option>
-						<option value="Leardership">Leadership</option>
 						<option value="Masterclass">Masterclass</option>
 						<option value="Online course">Online Course</option>
 						<option value="Personal project">Personal Project</option>
