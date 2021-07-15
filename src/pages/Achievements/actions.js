@@ -31,5 +31,39 @@ export async function editAchievement(id, data) {
 
 
 export async function downloadAchievements(achievements) {
-  console.log(achievements)
+  
+  const html = `
+    <style>
+      body {
+	width: 100%;
+	max-width: 630px;
+	padding: 2rem 19;
+      }
+
+      section {
+	border-top: 2px solid #999;
+      }
+    </style>
+    <script>
+      window.onload = print()
+      window.close()
+    </script>
+    <h1>&#128162; Record of Achievement</h1>
+    
+    <div>
+      ${achievements.map(achievement => `
+	<section>
+	  <h3>${achievement.Date}, ${achievement.Name} ${achievement.Type ? `(${achievement.Type})` : ''}</h3>
+	  <p>Role: ${achievement.Role}</p>
+	  <p>${achievement.description || 'No description'}</p>
+	</section>
+      `).join('')}
+    <div>
+  `
+
+  let blob = new Blob([ html ], { type: 'text/html' })
+   
+  window.open(URL.createObjectURL(blob))
+
+
 }

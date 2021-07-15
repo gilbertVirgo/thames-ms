@@ -41,7 +41,7 @@ export default class extends Component {
 						<option value="Creator">Creator</option>
 						<option value="Organiser">Organiser</option>
 						<option value="Participant">Participant</option>
-						<option value="Team Leader">Team Leader</option>
+						<option value="Team leader">Team Leader</option>
 						<option value="Volunteer">Volunteer"</option>
 						<option value="Other">Other</option>
 					</select>
@@ -53,8 +53,8 @@ export default class extends Component {
 						<option value="Competition">Competition</option>
 						<option value="Leardership">Leadership</option>
 						<option value="Masterclass">Masterclass</option>
-						<option value="Online Course">Online Course</option>
-						<option value="Personal Project">Personal Project</option>
+						<option value="Online course">Online Course</option>
+						<option value="Personal project">Personal Project</option>
 						<option value="Reading">Reading</option>
 						<option value="Work experience">Work experience</option>
 						<option value="Other">Other</option>
