@@ -18,7 +18,9 @@ export async function deleteAchievement(id) {
 
 
 export async function createAchievement(data) {
-  await API.create(`achievement`, [{ fields: data }])
+  let response = await API.create(`achievement`, [{ fields: data }])
+  
+  return response.content[0].id
 }
 
 

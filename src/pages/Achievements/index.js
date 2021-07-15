@@ -53,7 +53,7 @@ export default () => {
 	  </AchievementCard>
 	))}
 
-	<AchievementCard onClick={() => {
+	<AchievementCard onClick={async () => {
 	  
 	  let addition = {
 	    Name: 'Untitled', 
@@ -62,8 +62,9 @@ export default () => {
 	    Description: 'No description'
 	  }
 
-	  createAchievement(addition)
-	  setAchievements([...achievements, addition])
+	  addition.id = await createAchievement(addition)
+          setAchievements([...achievements, addition])
+
 	}}>
 	  <center>
 	    <b>Add achievement</b>
