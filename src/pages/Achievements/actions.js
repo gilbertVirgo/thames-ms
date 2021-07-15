@@ -59,7 +59,7 @@ export async function downloadAchievements(achievements) {
 	<section>
 	  <h3>${achievement.Date}, ${achievement.Name} ${achievement.Type ? `(${achievement.Type})` : ''}</h3>
 	  <p>Role: ${achievement.Role}</p>
-	  <p>${achievement.Description || 'No description'}</p>
+	  <p>Descripton: ${achievement.Description || 'No description'}</p>
 	</section>
       `).join('')}
     <div>
