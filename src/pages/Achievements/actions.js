@@ -25,11 +25,49 @@ export async function createAchievement(data) {
 
 
 export async function editAchievement(id, data) {
+  data = {...data}
   delete data.id
   await API.update(`achievement/${id}`, data)
 }
 
 
 export async function downloadAchievements(achievements) {
-  console.log(achievements)
+  
+  const html = `
+    <style>
+      body {
+	width: 100%;
+	max-width: 630px;
+	padding: 2rem 19;
+	font-family: sans-serif;
+	margin: auto;
+      }
+
+      section {
+	border-top: 1px solid #aaa;
+      }
+    </style>
+    <script>
+      window.onload = () => {
+	print()
+      }
+    </script>
+    <h1>&#128162; Record of Achievement</h1>
+    
+    <div>
+      ${achievements.map(achievement => `
+	<section>
+	  <h3>${achievement.Date}, ${achievement.Name} ${achievement.Type ? `(${achievement.Type})` : ''}</h3>
+	  <p>Role: ${achievement.Role}</p>
+	  <p>Descripton: ${achievement.Description || 'No description'}</p>
+	</section>
+      `).join('')}
+    <div>
+  `
+
+  let blob = new Blob([ html ], { type: 'text/html' })
+   
+  window.open(URL.createObjectURL(blob))
+
+
 }
