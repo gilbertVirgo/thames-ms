@@ -83,6 +83,7 @@ export default () => {
 	<AchievementModal>
 	  <main>
 	    <AchievementForm selected={achievements[index]} onSave={data => {
+	      editAchievement(achievements[index].id, data)
 	      setAchievements([ ...achievements.slice(0, index), data, ...achievements.slice(index + 1)])
 	      setIsModalOpen(false)
 	    }}/>

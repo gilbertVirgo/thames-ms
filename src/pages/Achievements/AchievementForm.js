@@ -5,15 +5,7 @@ import { ModalForm } from './styles'
 export default class extends Component {
 	constructor({ selected, onSave }) {
 		super()
-
-		this.state = {
-			Name: selected.Name,
-			Description: selected.Description,
-			Role: selected.Role,
-			Date: selected.Date,
-			Type: selected.Type,
-			Attachment: selected.Attachment,
-		};
+		this.state = { ...selected }
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.onSave = onSave
 	}
@@ -22,9 +14,7 @@ export default class extends Component {
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
-		this.setState({
-			[name]: value
-		});
+		this.setState({ [name]: value })
 	}
 
 	render() {
@@ -59,7 +49,7 @@ export default class extends Component {
 					<select
 						name="Type"
 						value={this.state.Role}
-						onChange={this.handleInputChange} >
+						onChange={this.handleInputChange}>
 						<option value="Competition">Competition</option>
 						<option value="Leardership">Leadership</option>
 						<option value="Masterclass">Masterclass</option>

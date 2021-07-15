@@ -23,5 +23,5 @@ export async function createAchievement(data) {
 
 
 export async function editAchievement(id, data) {
-  await API.update(`achievement/${id}`, [{ fields: data }])
+  await API.update(`achievement/${id}`, [{ id, fields: data }])
 }
