@@ -83,9 +83,7 @@ export default () => {
 	<AchievementModal>
 	  <main>
 	    <AchievementForm selected={achievements[index]} onSave={data => {
-	      // use form data to update database
-	      // and update list
-
+	      setAchievements([ achievements.slice(0, index), data, achievements.slice(index + 1)])
 	      setIsModalOpen(false)
 	    }}/>
 

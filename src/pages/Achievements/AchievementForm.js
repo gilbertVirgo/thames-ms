@@ -7,12 +7,12 @@ export default class extends Component {
 		super()
 
 		this.state = {
-			originName: selected.Name,
-			originDescription: selected.Description,
-			originRole: selected.Role,
-			originDate: selected.Date,
-			originType: selected.Type,
-			originAttachment: selected.Attachment,
+			Name: selected.Name,
+			Description: selected.Description,
+			Role: selected.Role,
+			Date: selected.Date,
+			Type: selected.Type,
+			Attachment: selected.Attachment,
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.onSave = onSave
@@ -34,19 +34,19 @@ export default class extends Component {
 				<input
 					name="Name"
 					type="text"
-					value={this.state.originName}
+					value={this.state.Name}
 					onChange={this.handleInputChange} />
 				<h2> Details </h2>
 				<label>Date:</label>
 					<input
 						name="Date"
 						type="date"
-						value={this.state.originDate}
+						value={this.state.Date}
 						onChange={this.handleInputChange} />
 				<label>Role:</label>
 					<select
 						name="Role"
-						value={this.state.originRole}
+						value={this.state.Role}
 						onChange={this.handleInputChange} >
 						<option value="Creator">Creator</option>
 						<option value="Organiser">Organiser</option>
@@ -58,7 +58,7 @@ export default class extends Component {
 				<label>Type:</label>
 					<select
 						name="Type"
-						value={this.state.originRole}
+						value={this.state.Role}
 						onChange={this.handleInputChange} >
 						<option value="Competition">Competition</option>
 						<option value="Leardership">Leadership</option>
@@ -70,7 +70,7 @@ export default class extends Component {
 						<option value="Other">Other</option>
 					</select>
 
-				<button onClick={ this.onSave }>Save</button>
+				<button onClick={() => this.onSave(this.state)}>Done</button>
 			</ModalForm>
 		)
 	}
