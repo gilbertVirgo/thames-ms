@@ -7,7 +7,8 @@ import {
   getAchievements, 
   createAchievement, 
   deleteAchievement,
-  editAchievement
+  editAchievement,
+  downloadAchievements
 } from './actions'
 
 
@@ -76,7 +77,7 @@ export default () => {
       <div>
 	<h2>Recommendations</h2>
 	<section>
-	  <p>Based on your achievements, we think you might like these courses in sixth-form or University</p>
+	  <p>Based on your achievements, we think you might like these courses in sixth-form or university &#127891;.</p>
 	</section>
       </div>
 
@@ -84,6 +85,7 @@ export default () => {
 	<h2>Download</h2>
 	<section>
 	  <p>Download all your achievements as a perminent document</p>
+	  <button onClick={() => downloadAchievements(achievements)}>Download now</button>
 	</section>
       </div>
 
@@ -92,7 +94,6 @@ export default () => {
 	  <main>
 	    <AchievementForm selected={achievements[index]} onSave={data => {
 	      setAchievements([ ...achievements.slice(0, index), data, ...achievements.slice(index + 1)])
-	      //data.student_id = [ data.student_id ]
 	      editAchievement(achievements[index].id, data)
 	      setIsModalOpen(false)
 	    }}/>

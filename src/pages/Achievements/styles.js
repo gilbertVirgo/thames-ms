@@ -5,7 +5,7 @@ import styled from 'styled-components'
 export const AchievementsWrapper = styled.div`
   section p {
     font-size: 1.1rem;
-    padding: 3.4rem;
+    padding: 0;
   }
 
   h1, h2 {
@@ -14,6 +14,18 @@ export const AchievementsWrapper = styled.div`
 
   section {
     background: #f2f2f2;
+    padding: 3.4rem;
+  }
+
+
+  button {
+    padding: .2rem 1.2rem;
+    margin-right: 1rem;
+    border: 2px solid #999;
+  }
+
+  button:hover {
+    cursor: pointer
   }
 `
 
@@ -45,12 +57,6 @@ export const AchievementModal = styled.div`
     background: white;
     padding: 2rem;
     border: 2px solid black;
-  }
-
-  button {
-    padding: .2rem 1.2rem;
-    margin-right: 1rem;
-    border: 2px solid #999;
   }
 `
 

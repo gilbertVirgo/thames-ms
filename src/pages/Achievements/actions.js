@@ -28,3 +28,8 @@ export async function editAchievement(id, data) {
   delete data.id
   await API.update(`achievement/${id}`, data)
 }
+
+
+export async function downloadAchievements(achievements) {
+  console.log(achievements)
+}
