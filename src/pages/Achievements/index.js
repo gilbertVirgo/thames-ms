@@ -30,7 +30,7 @@ export default () => {
 
   return !achievements ? (
     <p>Loading...</p>
-  ) : (
+  ) : (console.log(achievements),
     <>
       <h1>Achievements</h1>
       <div>
@@ -41,13 +41,20 @@ export default () => {
 	    setIsModalOpen(true)
 	  }}>
 	    <h3>{Name} {Type && `(${Type})`}</h3>
-	    <p>Related to: {Associations.join(', ')}</p>
+	    <p>{Associations && `Related to: ${Associations.join(', ')}`}</p>
 	    <p>{Description}</p>
 	  </AchievementCard>
 	))}
 
 	<AchievementCard onClick={() => {
-	  let addition = { Name: 'Untitled', student_id: [ student_id ], Role: 'Participant', Description: 'No description', Associations: [] }
+	  
+	  let addition = {
+	    Name: 'Untitled', 
+	    student_id: [ student_id ], 
+	    Role: 'Participant', 
+	    Description: 'No description'
+	  }
+
 	  createAchievement(addition)
 	  setAchievements([...achievements, addition])
 	}}>
