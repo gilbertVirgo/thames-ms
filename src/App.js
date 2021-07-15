@@ -15,7 +15,7 @@ import Student from "./pages/Student";
 import Test from "./pages/Test";
 import useRole from "./hooks/useRole";
 import Logout from "./pages/Logout";
-import Achievements from "./pages/Ach" //"./pages/AchievementList"
+import Achievements from "./pages/Achievements" //"./pages/AchievementList"
 
 const App = () => {
 	const [role] = useRole();

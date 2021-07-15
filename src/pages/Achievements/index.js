@@ -1,72 +1,14 @@
-import API from "../api";
-import React from "react";
-import Menu from "../components/Menu";
-import { useParams } from "react-router-dom";
-import useRole from "../hooks/useRole";
-import styled from "styled-components";
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
-
-async function getAchievements(id) {
-  const response = await API.get(`achievements/${id}`)
-
-  if (! response.hasOwnProperty('content')) {
-    throw new Error('no response content')
-  }
-
-  return response.content.map(({ fields }) => fields)
-}
-
-
-async function deleteAchievement(id) {
-  await API.delete(`achievement/${id}`)
-}
-
-
-async function createEmptyAchievement(author, student) {
-  await API.create('achievement', [{ fields: {
-    Author: author,
-    student_id: student,
-    Name: 'Untitled achievement',
-    Description: 'No description',
-    Role: 'Participant',
-    Associations: [],
-  }}])
-}
-
-
-async function editAchievement(id, data) {
-  await API.update(`achievement/${id}`, data)
-}
-
-
-const AchievementCard = styled.div`
-  border: 2px solid black;
-  padding: 2rem;
-  margin: 1rem 0;
-
-  :hover {
-    background: #f2f2f2;
-  }
-`
-
-const AchievementModal = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #0a14274a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  main {
-    background: white;
-    padding: 2rem;
-    border: 2px solid black;
-  }
-`
+import AchievementForm from './AchievementForm'
+import { AchievementCard, AchievementModal } from './styles'
+import {
+  getAchievements, 
+  createEmptyAchievement, 
+  deleteAchievement,
+  editAchievement
+} from './actions'
 
 
 export default () => {
@@ -117,8 +59,10 @@ export default () => {
       { isModalOpen && (
 	<AchievementModal>
 	  <main>
-	    <h1>{ selectedAchievement.Name } ({ selectedAchievement.Role })</h1>
-	    <p> { selectedAchievement.Description }</p>
+	    <AchievementForm onSave={( data ) => {
+	      // use form data to update database
+	      // and update list
+	    }}/>
 	  </main>
 	</AchievementModal>
       )}
