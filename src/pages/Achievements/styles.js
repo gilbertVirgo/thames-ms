@@ -9,6 +9,7 @@ export const AchievementCard = styled.div`
 
   :hover {
     background: #f2f2f2;
+    cursor: pointer;
   }
 `
 
@@ -23,7 +24,7 @@ export const AchievementModal = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
+  
   main {
     background: white;
     padding: 2rem;
@@ -37,3 +38,22 @@ export const AchievementModal = styled.div`
   }
 `
 
+
+export const ModalForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 640px;
+  line-height: 2;
+
+  * {
+    margin: 0.6rem 0;
+  }
+
+  label {
+    padding-right: 2rem;
+  }
+
+  button {
+    margin-right: 0;
+  }
+`

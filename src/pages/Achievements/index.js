@@ -68,15 +68,20 @@ export default () => {
 	    <AchievementForm selected={achievements[index]} onSave={data => {
 	      // use form data to update database
 	      // and update list
+
+	      setIsModalOpen(false)
 	    }}/>
 
 	    <button onClick={() => {
 	      deleteAchievement(achievements[index].id)
 	      setAchievements([...achievements.slice(0, index), ...achievements.slice(index + 1)])
-	    }}/>
+	      setIsModalOpen(false)
+	    }}>
+	      Delete
+	    </button>
 	  </main>
 	</AchievementModal>
       )}
     </>
-  )
-}
+    )
+  }
