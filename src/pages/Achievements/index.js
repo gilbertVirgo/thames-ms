@@ -33,7 +33,7 @@ export default () => {
   ) : (console.log(achievements),
     <AchievementsWrapper>
       <header>
-	<h1>Record of Achievement</h1>
+	<h1>&#128162; Record of Achievement</h1>
 	<section>
 	  <p>This is your <b>record of achievement</b>, a collection of things you've achieved in and outside of school, all in one place.</p>
 	</section>
@@ -77,6 +77,13 @@ export default () => {
 	<h2>Recommendations</h2>
 	<section>
 	  <p>Based on your achievements, we think you might like these courses in sixth-form or University</p>
+	</section>
+      </div>
+
+      <div>
+	<h2>Download</h2>
+	<section>
+	  <p>Download all your achievements as a perminent document</p>
 	</section>
       </div>
 
