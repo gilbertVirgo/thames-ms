@@ -58,8 +58,7 @@ export default () => {
 	  
 	  let addition = {
 	    Name: 'Untitled', 
-	    student_id: [ student_id ], 
-	    Role: 'Participant', 
+	    student_id: [ student_id ],  
 	    Description: 'No description'
 	  }
 

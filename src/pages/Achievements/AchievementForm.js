@@ -33,18 +33,6 @@ export default class extends Component {
 						type="date"
 						value={this.state.Date}
 						onChange={this.handleInputChange} />
-				<label>Role:</label>
-					<select
-						name="Role"
-						value={this.state.Role}
-						onChange={this.handleInputChange} >
-						<option value="Creator">Creator</option>
-						<option value="Organiser">Organiser</option>
-						<option value="Participant">Participant</option>
-						<option value="Team leader">Team Leader</option>
-						<option value="Volunteer">Volunteer"</option>
-						<option value="Other">Other</option>
-					</select>
 				<label>Type:</label>
 					<select
 						name="Type"
