@@ -2,6 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 
 
+export const AchievementsWrapper = styled.div`
+  section p {
+    font-size: 1.1rem;
+    padding: 3.4rem;
+  }
+
+  h1, h2 {
+    margin: 2rem 0 ;
+  }
+
+  section {
+    background: #f2f2f2;
+  }
+`
+
+
 export const AchievementCard = styled.div`
   border: 2px solid black;
   padding: 2rem;
@@ -14,7 +30,7 @@ export const AchievementCard = styled.div`
 `
 
 export const AchievementModal = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100vw;

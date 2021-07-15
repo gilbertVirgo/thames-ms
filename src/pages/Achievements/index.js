@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import AchievementForm from './AchievementForm'
-import { AchievementCard, AchievementModal } from './styles'
+import { AchievementCard, AchievementModal, AchievementsWrapper } from './styles'
 import {
   getAchievements, 
   createAchievement, 
@@ -31,8 +31,15 @@ export default () => {
   return !achievements ? (
     <p>Loading...</p>
   ) : (console.log(achievements),
-    <>
-      <h1>Achievements</h1>
+    <AchievementsWrapper>
+      <header>
+	<h1>Record of Achievement</h1>
+	<section>
+	  <p>This is your <b>record of achievement</b>, a collection of things you've achieved in and outside of school, all in one place.</p>
+	</section>
+	<h2>Achievements ({ achievements.length })</h2>
+      </header>
+
       <div>
 	{achievements.map(({ Name, Description, Type, Role, Associations }, i) => (
 	  <AchievementCard onClick={() => {
@@ -58,8 +65,18 @@ export default () => {
 	  createAchievement(addition)
 	  setAchievements([...achievements, addition])
 	}}>
-	  <center>Add achievement</center>
+	  <center>
+	    <b>Add achievement</b>
+	  </center>
 	</AchievementCard>
+      </div>
+
+
+      <div>
+	<h2>Recommendations</h2>
+	<section>
+	  <p>Based on your achievements, we think you might like these courses in sixth-form or University</p>
+	</section>
       </div>
 
       {isModalOpen && (
@@ -82,6 +99,6 @@ export default () => {
 	  </main>
 	</AchievementModal>
       )}
-    </>
+    </AchievementsWrapper>
     )
   }
