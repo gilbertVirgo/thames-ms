@@ -12,6 +12,9 @@ import {
 } from './actions'
 
 
+import recommend from './algorithm'
+
+
 export default () => {
   const { id: student_id } = useParams()
   const [ achievements, setAchievements ] = React.useState(null)
@@ -31,7 +34,7 @@ export default () => {
 
   return !achievements ? (
     <p>Loading...</p>
-  ) : (console.log(achievements),
+  ) : (
     <AchievementsWrapper>
       <header>
 	<h1>&#128162; Record of Achievement</h1>
@@ -76,7 +79,10 @@ export default () => {
       <div>
 	<h2>Recommendations</h2>
 	<section>
-	  <p>Based on your achievements, we think you might like these courses in sixth-form or university &#127891;.</p>
+	  <p>Based on your achievements, we think you might like these courses in sixth-form or university &#127891;:</p>
+	  <ul>
+	    <li><b>{ recommend(achievements) }</b></li>
+	  </ul>
 	</section>
       </div>
 

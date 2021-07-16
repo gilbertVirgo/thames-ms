@@ -20,20 +20,19 @@ export default class extends Component {
 	render() {
 		return (
 			<ModalForm>
-				<h2> Name </h2>
+				<h2> Edit {this.state.Name} </h2>
+				<h5>Details</h5>
+				
 				<input
 					name="Name"
 					type="text"
 					value={this.state.Name}
 					onChange={this.handleInputChange} />
-				<h2> Details </h2>
-				<label>Date:</label>
 					<input
 						name="Date"
 						type="date"
 						value={this.state.Date}
 						onChange={this.handleInputChange} />
-				<label>Type:</label>
 					<select
 						name="Type"
 						value={this.state.Type}
@@ -47,19 +46,21 @@ export default class extends Component {
 						<option value="Other">Other</option>
 					</select>
 
-				<label>Attachment: </label>
-				<input 
-				  name="Attachment" 
-				  type='file' 
-				  onChange={this.state.Attachment}
-				/>
-
-				<h2>Description</h2>
-				<input
+				<h5>About</h5>
+				<textarea
+					rows='6'
 					name="Description"
 					type="text"
 					value={this.state.Description}
 					onChange={this.handleInputChange} />
+
+				<h5>References</h5>
+				<textarea
+				  name="References"
+				  type="text"
+				  value={this.state.References}
+				  onChange={this.handleInputChange}
+				/>
 
 				<br/>
 				<button onClick={() => this.onSave(this.state)}>Done</button>

@@ -33,7 +33,7 @@ export async function editAchievement(id, data) {
 
 export async function downloadAchievements(achievements) {
   
-  const html = `
+  window.open(URL.createObjectURL(new Blob([`
     <style>
       body {
 	width: 100%;
@@ -48,26 +48,20 @@ export async function downloadAchievements(achievements) {
       }
     </style>
     <script>
-      window.onload = () => {
-	print()
-      }
+      window.onload = print
     </script>
     <h1>&#128162; Record of Achievement</h1>
-    
     <div>
       ${achievements.map(achievement => `
 	<section>
-	  <h3>${achievement.Date}, ${achievement.Name} ${achievement.Type ? `(${achievement.Type})` : ''}</h3>
-	  <p>Role: ${achievement.Role}</p>
-	  <p>Descripton: ${achievement.Description || 'No description'}</p>
+	  <h3>${achievement.Date || '(Undated)'}, ${achievement.Name} ${achievement.Type ? `(${achievement.Type})` : ''}</h3>
+	  <p>Subjects: ${achievement.Associations.join(', ')}</p>
+	  <p>Description: ${achievement.Description || 'No description'}</p>
+	  <p>References: ${achievement.References || 'None'}</p>
 	</section>
       `).join('')}
     <div>
-  `
-
-  let blob = new Blob([ html ], { type: 'text/html' })
-   
-  window.open(URL.createObjectURL(blob))
-
-
+  `],
+  { type: 'text/html' }
+  )))
 }

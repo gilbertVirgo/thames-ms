@@ -55,8 +55,16 @@ export const AchievementModal = styled.div`
   
   main {
     background: white;
-    padding: 2rem;
-    border: 2px solid black;
+    border: 3px solid black;
+    padding: 3rem 8rem;
+    max-width: 760px;
+    width: 100%;
+  }
+
+  textarea {
+    padding: 1rem;
+    outline: none;
+    border: 2px solid #999
   }
 `
 
@@ -64,9 +72,7 @@ export const AchievementModal = styled.div`
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 640px;
-  line-height: 2;
-
+    
   * {
     margin: 0.6rem 0;
   }
