@@ -1,0 +1,74 @@
+<style>
+  body {
+    font-family: system-ui;
+    max-width: 640px;
+    width: 100%;
+    margin: auto;
+    padding: 4rem 17;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 25rem;
+    resize: none;
+  }
+
+  input, textarea, pre {
+    font-size: 1rem;
+    font-family: system-ui;
+    padding: 1rem;
+    border: 3px solid black;
+    outline: none;
+  }
+
+  input {
+    margin-top: 1rem;
+  }
+
+  input:hover {
+    cursor: pointer;
+  }
+
+  input:active {
+    background: #bbb;
+  }
+
+  pre {
+    display: block;
+    margin-top: 1rem;
+    color: blue;
+    height: 100%;
+    max-height: 7rem;
+    overflow: scroll;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+<h1>Achievement topic predictor</h1>
+<p>Describe an achievement below:</p>
+<textarea resizable=false></textarea>
+<div>
+<input onclick=predict() type=submit value='See prediction'>
+<pre><code></code></pre>
+</div>
+<script>
+  const prediction_content = document.querySelector('code')
+  const prediction_input = document.querySelector('textarea')
+
+  async function predict() {
+    prediction_content.innerText = '...'
+
+    let result = await fetch(`/predict/${encodeURIComponent(
+      prediction_input.value
+    )}`).then(resp => resp.json())
+
+    let sum = Object.entries(result).map(([_, w]) => w).reduce((a, b) => a + b)
+    let normalised = Object.entries(result).map(([topic, weight]) => {
+      return `${topic}: ${Math.round(weight / sum * 100)}%`
+    })
+
+    prediction_content.innerText = normalised.join('\n')
+  }
+</script>

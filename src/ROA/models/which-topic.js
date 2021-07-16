@@ -2,14 +2,14 @@
 // accuracy is dependent of the quality of words-to-topics.json
 
 
-const words = require('../data/words-to-topics.json')
+const words = require('../data/v1.json')
 
 
 module.exports = function(string) {
   let topics = {}
 
   string.toLowerCase().split(/\W+/).forEach(word => {
-    words.hasOwnProperty(word) && words[word].forEach(topic => topics[topic] = ~~topics[topic] + 1)
+    words.hasOwnProperty(word) && words[word].forEach(([topic, weight]) => topics[topic] = ~~topics[topic] + weight)
   })
 
   return topics
