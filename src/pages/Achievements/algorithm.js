@@ -1,23 +1,23 @@
 function isIn(ob, arr) {
-	position = -1;
-	i = 0;
+	let position = -1;
+	let i = 0;
 	while (i < arr.length && position < 0) {
 		if (ob == arr[i]) {
 			position = i
 		}
 		i += 1;
 	}
-	return inside;
+	return position;
 }
 
 
 export async function calculateCourse(achievements) {
-	courseList = []
+	let courseList = []
 	for (let i = 0; i < achievements.length; i++) {
-		courseList.concat(achievements[i]
+		courseList.concat(achievements[i])
 	};
-	courseNames = [];
-	courseNumbers = [];
+	let courseNames = [];
+	let courseNumbers = [];
 	for (let j = 0; j < courseList.length; j++) {
 		check = isIn(courseList[i], courseNames)
 		if (check == -1) {
@@ -28,8 +28,8 @@ export async function calculateCourse(achievements) {
 			courseNumbers[check] += 1
 		}
 	}
-	max = 0;
-	suggestion = "";
+	let max = 0;
+	let suggestion = "";
 	for ( let k = 0; k < courseNumbers.length; k++) {
 		if (courseNumbers[k] >= max) {
 		max = courseNumbers[k]
