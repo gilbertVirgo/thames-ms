@@ -9,7 +9,8 @@ const courpus = {
   'chemistry': fs.readFileSync('../courpus/chemistry-terms.json'),
   'biology': fs.readFileSync('../courpus/biology-terms.json'),
   'physics': fs.readFileSync('../courpus/physics-terms.json'),
-  'history': fs.readFileSync('../courpus/history-terms.json')
+  'history': fs.readFileSync('../courpus/history-terms.json'),
+  'maths': fs.readFileSync('../courpus/maths-notes.txt')
 }
 
 
@@ -50,12 +51,14 @@ const processed1 = {}
 
 for (let topic in processed) {
   for (let word in processed[topic]) {
-    let weight = processed[topic][word]
+    let weight = Math.floor(processed[topic][word] * 1e5)
+
+    if (! weight) continue
 
     if (! processed1.hasOwnProperty(word)) {
-      processed1[word] = [[ topic, Math.floor(weight * 1e5) ]]
+      processed1[word] = [[ topic, weight ]]
     } else {
-      processed1[word].push([ topic, Math.floor(weight * 1e5) ])
+      processed1[word].push([ topic, weight ])
     }
   }
 }
