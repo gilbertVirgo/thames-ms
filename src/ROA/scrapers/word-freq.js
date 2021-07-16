@@ -2,12 +2,14 @@ const fs = require('fs')
 
 console.log('[*] reading courpus...')
 
+
 const courpus = {
   'computer science': fs.readFileSync('../courpus/computer-science.txt'),
   'english': fs.readFileSync('../courpus/english-language.txt'),
   'chemistry': fs.readFileSync('../courpus/chemistry-terms.json'),
   'biology': fs.readFileSync('../courpus/biology-terms.json'),
-  'physics': fs.readFileSync('../courpus/physics-terms.json')
+  'physics': fs.readFileSync('../courpus/physics-terms.json'),
+  'history': fs.readFileSync('../courpus/history-terms.json')
 }
 
 
