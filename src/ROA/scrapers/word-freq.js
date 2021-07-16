@@ -1,5 +1,7 @@
 const fs = require('fs')
 
+console.log('[*] reading courpus...')
+
 const courpus = {
   'computer science': fs.readFileSync('../courpus/computer-science.txt'),
   'english': fs.readFileSync('../courpus/english-language.txt'),
@@ -9,7 +11,9 @@ const courpus = {
 }
 
 
-const processed = Object.entries(courpus).map(([topic, text]) => {
+console.log('[*] creating frequency table...')
+
+const processed = Object.fromEntries(Object.entries(courpus).map(([topic, text]) => {
 
   text = text.toString('utf8').toLowerCase()
 
@@ -32,7 +36,33 @@ const processed = Object.entries(courpus).map(([topic, text]) => {
 
   return [ topic, freqs ]
 
-})
+}))
 
 
-module.exports = Object.fromEntries(processed)
+// second pass, convert to an inverted index
+
+console.log('[*] creating inverted index...')
+
+const processed1 = {}
+
+
+for (let topic in processed) {
+  for (let word in processed[topic]) {
+    let weight = processed[topic][word]
+
+    if (! processed1.hasOwnProperty(word)) {
+      processed1[word] = [[ topic, Math.floor(weight * 1e5) ]]
+    } else {
+      processed1[word].push([ topic, Math.floor(weight * 1e5) ])
+    }
+  }
+}
+
+
+// save results 
+
+console.log('[*] saving results...')
+
+fs.writeFileSync('../data/v1.json', JSON.stringify(processed1))
+
+console.log('[*] finished')
