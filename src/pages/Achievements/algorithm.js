@@ -11,7 +11,7 @@ function isIn(ob, arr) {
 }
 
 
-export async function calculateCourse(achievements) {
+export default function(achievements) {
 	let courseList = []
 	for (let i = 0; i < achievements.length; i++) {
 		courseList.concat(achievements[i])
@@ -19,9 +19,9 @@ export async function calculateCourse(achievements) {
 	let courseNames = [];
 	let courseNumbers = [];
 	for (let j = 0; j < courseList.length; j++) {
-		check = isIn(courseList[i], courseNames)
+		let check = isIn(courseList[j], courseNames)
 		if (check == -1) {
-			courseNames.push(courseList[i])
+			courseNames.push(courseList[j])
 			courseNumbers.push(1)
 		}
 		else {
@@ -36,5 +36,6 @@ export async function calculateCourse(achievements) {
 		suggestion = courseNames[k]
 		}
 	}
+
 	return suggestion
 }
