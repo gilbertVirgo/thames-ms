@@ -12,7 +12,7 @@ import {
 } from './actions'
 
 
-import recommend from './algorithm'
+import recommend from './recommend'
 
 
 export default () => {
