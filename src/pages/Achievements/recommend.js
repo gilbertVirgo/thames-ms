@@ -28,12 +28,15 @@ const CourseList = styled.ul`
 
 export default ({ achievements  }) => {
   const [ courses, setCourses ] = React.useState(null)
+  const [ previous, setPrevious ] = React.useState(achievements)
+
 
   useEffect(() => {
-    !courses && (async () => {
+    (!courses || (achievements != previous)) && (async () => {
       let subject = mostCommonSubject(achievements)
       let courses = await coursesFromSubject(subject)
       setCourses(courses)
+      setPrevious(achievements)
     })()
   })
 
