@@ -57,13 +57,14 @@ export default () => {
           placeholder="Type..."
           onChange={({ value }) => setFilterType(value)}
           options={[
+            { value: null, label: 'Any' },
             { value: 'Competition', label: 'Competition' },
             { value: 'Masterclass', label: 'Masterclass' },
             { value: 'Online course', label: 'Online course' },
             { value: 'Personal project', label: 'Personal project' },
             { value: 'Reading', label: 'Reading' },
             { value: 'Work experience', label: 'Work experience' },
-            { value: null, label: 'Any' },
+            { value: 'Other', label: 'Other' },
           ]}
         />
       </header>
