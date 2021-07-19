@@ -18,7 +18,8 @@ const list = {
   ],
   'english': [
     '../courpus/english-terms.json',
-    '../courpus/english-language.txt'
+    '../courpus/english-language.txt',
+    '../corpus/english-writers.json'
   ]
 }
 
