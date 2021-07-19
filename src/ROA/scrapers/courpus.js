@@ -5,21 +5,15 @@ const list = {
   'chemistry': [
     '../courpus/chemistry-terms.json'
   ],
-  'biology': ['../courpus/biology-terms.json'],
-  'physics': ['../courpus/physics-terms.json'],
-  'history': ['../courpus/history-terms.json'],
+  'biology': ['../courpus/biology-own.json'],
+  'physics': ['../courpus/physics-own.json'],
+  'history': ['../courpus/history-own.json'],
   'geography': [
-    '../courpus/geography-terms.json',
-    '../courpus/geography.txt'
-  ],
+    '../courpus/geography-own.json'  ],
   'maths': [
-    '../courpus/maths-terms.json',
-    '../courpus/maths-notes.txt'
-  ],
+    '../courpus/maths-own.json' ],
   'english': [
-    '../courpus/english-terms.json',
-    '../courpus/english-language.txt',
-    '../corpus/english-writers.json'
+    '../courpus/english-own.json'
   ]
 }
 
