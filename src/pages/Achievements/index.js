@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Select from 'react-select'
 import AchievementForm from './AchievementForm';
 import Recommend from './Recommend';
 
@@ -24,6 +25,8 @@ export default () => {
   const [achievements, setAchievements] = React.useState(null);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [index, setIndex] = React.useState(null);
+  const [ filterType, setFilterType ] = React.useState(null);
+
 
   React.useEffect(() => {
     if (!achievements) {
@@ -47,11 +50,28 @@ export default () => {
           </p>
         </section>
         <h2>Achievements ({achievements.length})</h2>
+
+
+        <Select
+          name="Type"
+          placeholder="Type..."
+          onChange={({ value }) => setFilterType(value)}
+          options={[
+            { value: 'Competition', label: 'Competition' },
+            { value: 'Masterclass', label: 'Masterclass' },
+            { value: 'Online course', label: 'Online course' },
+            { value: 'Personal project', label: 'Personal project' },
+            { value: 'Reading', label: 'Reading' },
+            { value: 'Work experience', label: 'Work experience' },
+            { value: null, label: 'Any' },
+          ]}
+        />
       </header>
 
       <div>
         {achievements.map(
-          ({ Name, Description, Type, Role, Associations }, i) => (
+          ({ Name, Description, Type, Role, Associations }, i) =>
+            (!filterType || filterType == Type) && (
             <AchievementCard
               onClick={() => {
                 setIndex(i);
@@ -60,7 +80,7 @@ export default () => {
               <h3>
                 {Name} {Type!=='Other' && `(${Type})`}
               </h3>
-              <p>{Associations && `Related to: ${Associations.join(', ')}`}</p>
+              <p>{Associations && `Subjects: ${Associations.join(', ')}`}</p>
               <p>{Description}</p>
             </AchievementCard>
           )

@@ -30,7 +30,6 @@ export default ({ achievements  }) => {
   const [ courses, setCourses ] = React.useState(null)
   const [ previous, setPrevious ] = React.useState(achievements)
 
-
   useEffect(() => {
     (!courses || (achievements != previous)) && (async () => {
       let subject = mostCommonSubject(achievements)
