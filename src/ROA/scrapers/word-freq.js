@@ -1,5 +1,3 @@
-console.log('[*] reading courpus...')
-
 const fs = require('fs')
 const courpus = require('./courpus')
 

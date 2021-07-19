@@ -19,7 +19,7 @@ export async function deleteAchievement(id) {
 
 export async function createAchievement(data) {
   let response = await API.create(`achievement`, [{ fields: data }])
-  
+
   return response.content[0].id
 }
 
@@ -32,35 +32,32 @@ export async function editAchievement(id, data) {
 
 
 export async function downloadAchievements(achievements) {
-  
   window.open(URL.createObjectURL(new Blob([`
     <style>
       body {
-	width: 100%;
-	max-width: 630px;
-	padding: 2rem 19;
-	font-family: sans-serif;
-	margin: auto;
+        width: 100%;
+        max-width: 630px;
+        padding: 2rem 19;
+        font-family: sans-serif;
+        margin: auto;
       }
 
       section {
-	border-top: 1px solid #aaa;
+        border-top: 1px solid #aaa;
       }
     </style>
-    <script>
-      window.onload = print
-    </script>
+    <script>window.onload = print</script>
     <h1>&#128162; Record of Achievement</h1>
     <div>
       ${achievements.map(achievement => `
-	<section>
-	  <h3>${achievement.Date || '(Undated)'}, ${achievement.Name} ${achievement.Type ? `(${achievement.Type})` : ''}</h3>
-	  <p>Subjects: ${achievement.Associations.join(', ')}</p>
-	  <p>Description: ${achievement.Description || 'No description'}</p>
-	  <p>References: ${achievement.References || 'None'}</p>
-	</section>
+        <section>
+          <h3>${achievement.Date || '(Undated)'}, ${achievement.Name} ${achievement.Type ? `(${achievement.Type})` : ''}</h3>
+          <p>Subjects: ${achievement.Associations.join(', ')}</p>
+          <p>Description: ${achievement.Description || 'No description'}</p>
+          <p>References: ${achievement.References || 'None'}</p>
+        </section>
       `).join('')}
-    <div>
+    </div>
   `],
   { type: 'text/html' }
   )))

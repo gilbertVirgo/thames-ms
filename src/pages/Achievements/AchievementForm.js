@@ -1,71 +1,102 @@
-import React, { Component } from 'react'
-import { ModalForm } from './styles'
-
+import React, { Component } from 'react';
+import Select from 'react-select';
+import { ModalForm } from './styles';
 
 export default class extends Component {
-	constructor({ selected, onSave }) {
-		super()
-		this.state = { ...selected }
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.onSave = onSave
-	}
+  constructor({ selected, onSave }) {
+    super();
+    this.state = { ...selected };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onSave = onSave;
+  }
 
-	handleInputChange(event) {
-		const target = event.target;
-		const value = target.value;
-		const name = target.name;
-		this.setState({ [name]: value })
-	}
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({ [name]: value });
+  }
 
-	render() {
-		return (
-			<ModalForm>
-				<h2> Edit {this.state.Name} </h2>
-				<h5>Details</h5>
-				
-				<input
-					name="Name"
-					type="text"
-					value={this.state.Name}
-					onChange={this.handleInputChange} />
-					<input
-						name="Date"
-						type="date"
-						value={this.state.Date}
-						onChange={this.handleInputChange} />
-					<select
-						name="Type"
-						value={this.state.Type}
-						onChange={this.handleInputChange}>
-						<option value="Competition">Competition</option>
-						<option value="Masterclass">Masterclass</option>
-						<option value="Online course">Online Course</option>
-						<option value="Personal project">Personal Project</option>
-						<option value="Reading">Reading</option>
-						<option value="Work experience">Work experience</option>
-						<option value="Other">Other</option>
-					</select>
+  render() {
+    return (
+      <ModalForm>
+        <h1>
+          {this.state.Name.length > 32
+            ? this.state.Name.slice(0, 32) + '...'
+            : this.state.Name}
+        </h1>
+        <input
+          name="Name"
+          placeholder="Name..."
+          onChange={this.handleInputChange}
+        />
 
-				<h5>About</h5>
-				<textarea
-					rows='6'
-					name="Description"
-					type="text"
-					value={this.state.Description}
-					onChange={this.handleInputChange} />
+        <Select
+					name="Type"
+          placeholder="Type..."
+					onChange={({ value }) => this.setState({ Type: value })}
+          options={[
+            { value: 'Competition', label: 'Competition' },
+            { value: 'Masterclass', label: 'Masterclass' },
+            { value: 'Online course', label: 'Online course' },
+            { value: 'Personal project', label: 'Personal project' },
+            { value: 'Reading', label: 'Reading' },
+            { value: 'Work experience', label: 'Work experience' },
+            { value: 'Other', label: 'Other' },
+          ]}
+        />
 
-				<h5>References</h5>
-				<textarea
-				  name="References"
-				  type="text"
-				  value={this.state.References}
-				  onChange={this.handleInputChange}
-				/>
+				<Select
+					name="Associations"
+					isMulti
+          placeholder="Subjects..."
+					onChange={(values) => this.setState({ Associations: values.map(({ value }) => value) })}
+          options={[
+            { value: 'Art', label: 'Art' },
+            { value: 'Biology', label: 'Biology' },
+            { value: 'Business studies', label: 'Business studies' },
+            { value: 'Chemistry', label: 'Chemistry' },
+            { value: 'Computer science', label: 'Computer science' },
+            { value: 'French', label: 'French' },
+            { value: 'Geogrpahy', label: 'Geogrpahy' },
+            { value: 'Graphics', label: 'Graphics' },
+            { value: 'History', label: 'History' },
+            { value: 'Maths', label: 'Maths' },
+            { value: 'Physics', label: 'Physics' },
+            { value: 'Spanish', label: 'Spanish' },
+            { value: 'Sport', label: 'Sport' },
+            { value: 'Other', label: 'Other' },
+          ]}
+        />
 
-				<br/>
-				<button onClick={() => this.onSave(this.state)}>Done</button>
-			</ModalForm>
-		)
-	}
+        <input
+          name="Date"
+          type="date"
+          placeholder="Date..."
+          value={this.state.Date}
+          onChange={this.handleInputChange}
+        />
 
+        <textarea
+          placeholder="Description..."
+          rows="6"
+          name="Description"
+          type="text"
+          value={this.state.Description}
+          onChange={this.handleInputChange}
+        />
+
+        <textarea
+          placeholder="References..."
+          name="References"
+          type="text"
+          value={this.state.References}
+          onChange={this.handleInputChange}
+        />
+
+        <br />
+        <button onClick={() => this.onSave(this.state)}>Done</button>
+      </ModalForm>
+    );
+  }
 }

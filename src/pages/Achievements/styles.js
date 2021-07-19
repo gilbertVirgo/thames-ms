@@ -9,7 +9,7 @@ export const AchievementsWrapper = styled.div`
   }
 
   h1, h2 {
-    margin: 2rem 0 ;
+    margin: 2rem 0;
   }
 
   section {
@@ -35,6 +35,11 @@ export const AchievementCard = styled.div`
   padding: 2rem;
   margin: 1rem 0;
 
+  h3 {
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+
   :hover {
     background: #f2f2f2;
     cursor: pointer;
@@ -52,7 +57,11 @@ export const AchievementModal = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  
+
+  h1 {
+    overflow-wrap: break-word;
+  }
+
   main {
     background: white;
     border: 3px solid black;
@@ -61,10 +70,24 @@ export const AchievementModal = styled.div`
     width: 100%;
   }
 
+  button {
+    background: white;
+  }
+
+  button:hover {
+    background: #f2f2f2;
+    cursor: pointer;
+  }
+
   textarea {
-    padding: 1rem;
+    resize: none
+  }
+
+  textarea, input, data, .select {
+    border: none;
     outline: none;
-    border: 2px solid #999
+    background: #eee;
+    padding: 1rem;
   }
 `
 
@@ -72,8 +95,8 @@ export const AchievementModal = styled.div`
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
-    
-  * {
+
+  > * {
     margin: 0.6rem 0;
   }
 
