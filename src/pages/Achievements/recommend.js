@@ -22,6 +22,7 @@ function mostCommonSubject(achievements) {
 const CourseList = styled.ul`
   li {
     text-transform: Capitalize;
+    line-height: 2
   }
 `
 

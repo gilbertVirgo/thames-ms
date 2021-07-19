@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import { ModalForm } from './styles';
 
+
 export default class extends Component {
   constructor({ selected, onSave }) {
     super();
