@@ -1,11 +1,45 @@
-export default function(achievements) {
-    let tab = {}
-    let list = []
-    achievements.forEach(({ Associations }) => list.push(...Associations));
-    list.forEach(subject => tab[subject] = ~~tab[subject] + 1)
+import React, { useEffect } from 'react';
+import styled from 'styled-components'
+import API from '../../api'
 
-    // sorry for this eyesore, it works tho. basically, it sorts the subjects by frequency
-    // and returns the most frequent
 
-    return Object.entries(tab).map(([k, v]) => `${v}: ${k}`).sort().slice(-1)[0].split(': ')[1]
+function coursesFromSubject(subject) {
+  return API.get(`/courses/${subject}`)
+}
+
+
+function mostCommonSubject(achievements) {
+  let tab = {}
+  let list = []
+
+  achievements.forEach(({ Associations }) => list.push(...Associations));
+  list.forEach(subject => tab[subject] = ~~tab[subject] + 1)
+
+  return Object.entries(tab).map(([k, v]) => `${v}: ${k}`).sort().slice(-1)[0].split(': ')[1]
+}
+
+
+const CourseList = styled.ul`
+  text-transform: capitalised;
+`
+
+
+export default ({ achievements  }) => {
+  const [ courses, setCourses ] = React.useState(null)
+
+  useEffect(() => {
+    !courses && (async () => {
+      let subject = mostCommonSubject(achievements)
+      let courses = await coursesFromSubject(subject)
+      setCourses(courses)
+    })()
+  })
+
+  return courses ? (
+    <CourseList>
+      {courses.map(({ name }) => <li>{ name }</li>)}
+    </CourseList>
+  ) : (
+    <div></div>
+  )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AchievementForm from './AchievementForm';
-import recommend from './recommend';
+import Recommend from './Recommend';
 
 import {
   AchievementCard,
@@ -92,11 +92,7 @@ export default () => {
             Based on your achievements, we think you might like these courses in
             sixth-form or university &#127891;:
           </p>
-          <ul>
-            <li>
-              <b>{recommend(achievements)}</b>
-            </li>
-          </ul>
+          <Recommend achievements={achievements}/>
         </section>
       </div>
 
