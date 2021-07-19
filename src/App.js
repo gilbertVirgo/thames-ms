@@ -15,7 +15,8 @@ import Student from "./pages/Student";
 import Test from "./pages/Test";
 import useRole from "./hooks/useRole";
 import Logout from "./pages/Logout";
-import Achievements from "./pages/Achievements" //"./pages/AchievementList"
+import Ach from "./pages/Ach"
+
 
 const App = () => {
 	const [role] = useRole();
@@ -67,7 +68,7 @@ const App = () => {
 					""
 				)}
 				{role.staff || role.student ? (
-					<Route path="/achievements/:id" component={Achievements} />
+					<Route path="/achievements/:id" component={Ach} />
 				) : (
 					""
 				)}
