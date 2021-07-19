@@ -20,7 +20,9 @@ function mostCommonSubject(achievements) {
 
 
 const CourseList = styled.ul`
-  text-transform: capitalised;
+  li {
+    text-transform: Capitalize;
+  }
 `
 
 
@@ -37,7 +39,7 @@ export default ({ achievements  }) => {
 
   return courses ? (
     <CourseList>
-      {courses.map(({ name }) => <li>{ name }</li>)}
+      {courses.map(({ name, link }) => <li><a href={ link }>{ name }</a></li>)}
     </CourseList>
   ) : (
     <div></div>

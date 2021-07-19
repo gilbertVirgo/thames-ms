@@ -86,11 +86,11 @@ export default () => {
       </div>
 
       <div>
-        <h2>Recommendations</h2>
+        <h2>Recommandations</h2>
         <section>
           <p>
             Based on your achievements, we think you might like these courses in
-            sixth-form or university &#127891;:
+            university &#127891;:
           </p>
           <Recommend achievements={achievements}/>
         </section>
