@@ -28,12 +28,13 @@ export default class extends Component {
         <input
           name="Name"
           placeholder="Name..."
+	  value={this.state.Name}
           onChange={this.handleInputChange}
         />
 
         <Select
 					name="Type"
-          placeholder="Type..."
+					placeholder={this.state.Type}
 					onChange={({ value }) => this.setState({ Type: value })}
           options={[
             { value: 'Competition', label: 'Competition' },
@@ -49,7 +50,7 @@ export default class extends Component {
 				<Select
 					name="Associations"
 					isMulti
-          placeholder="Subjects..."
+					placeholder={this.state.Associations.join(", ")}
 					onChange={values => this.setState({ Associations: values.map(({ value }) => value) })}
           options={[
             { value: 'Art', label: 'Art' },
