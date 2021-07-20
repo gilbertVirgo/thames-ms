@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Select from 'react-select'
 import AchievementForm from './AchievementForm';
-import Recommend from './Recommend';
+import Recommend from './Rec';
 
 import {
   AchievementCard,
