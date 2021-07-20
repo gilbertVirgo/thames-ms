@@ -24,6 +24,7 @@ async function mostLikelySubject(achievements) {
   console.log(combinedText)
 
   const subjectPercentages = await API.get(`/topics/${encodeURIComponent(combinedText)}`)
+  console.log(subjectPercentages)
 
   return 'maths'
 }
