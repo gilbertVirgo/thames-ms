@@ -1,13 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-
-// import AchList from '../components/AchList'
-// import AchRecommend from '../components/AchRecommend'
-// import AchDownload from '../components/AchDownload'
-
-
-
 import AchClickable from '../components/AchClickable'
+import AchParagraph from '../components/AchParagraph'
+import AchCard from '../components/AchCard'
+
 
 export default () => {
   const { id } = useParams()
@@ -25,6 +21,16 @@ export default () => {
         <p>I read a book about particle physics and the use of vectors.</p>
       </AchClickable>
 
+
+      <p>Information paragraph</p>
+      <AchParagraph>
+        This is a paragraph containing helpful information.
+      </AchParagraph>
+
+      <p>Achivement cards</p>
+      <AchCard ach={{
+        Name: 'Maths competition'
+      }}/>
     </>
   )
   // return achieved && (
