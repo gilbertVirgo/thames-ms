@@ -56,6 +56,7 @@ for (let topic in processed) {
 
 console.log('[*] saving results...')
 
+delete processed1[""]
 fs.writeFileSync('../data/v1.json', JSON.stringify(processed1))
 
 console.log('[*] finished')
