@@ -8,7 +8,7 @@ function coursesFromSubject(subject) {
 }
 
 
-function mostCommonSubject(achievements) {
+async function mostCommonSubject(achievements) {
   let tab = {}
   let list = []
 
@@ -16,6 +16,16 @@ function mostCommonSubject(achievements) {
   list.forEach(subject => tab[subject] = ~~tab[subject] + 1)
 
   return Object.entries(tab).map(([k, v]) => `${v}: ${k}`).sort().slice(-1)[0].split(': ')[1]
+}
+
+
+async function mostLikelySubject(achievements) {
+  const combinedText = achievements.map(({ Description, Name }) => `${Description} ${Name}`).join(' ')
+  console.log(combinedText)
+
+  const subjectPercentages = await API.get(`/topics/${encodeURIComponent(combinedText)}`)
+
+  return 'maths'
 }
 
 
@@ -33,7 +43,7 @@ export default ({ achievements  }) => {
 
   useEffect(() => {
     (!courses || (achievements != previous)) && (async () => {
-      let subject = mostCommonSubject(achievements)
+      let subject = await mostLikelySubject(achievements)
       let courses = await coursesFromSubject(subject)
       setCourses(courses)
       setPrevious(achievements)
