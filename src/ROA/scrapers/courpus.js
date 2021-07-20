@@ -3,11 +3,12 @@ const fs = require('fs')
 
 const list = {
   'chemistry': [
-    '../courpus/chemistry-terms.json'
+    '../courpus/chemistry-own.json'
   ],
   'biology': ['../courpus/biology-own.json'],
   'physics': ['../courpus/physics-own.json'],
   'history': ['../courpus/history-own.json'],
+  'computer science': ['../courpus/computer-own.json'],
   'geography': [
     '../courpus/geography-own.json'  ],
   'maths': [
@@ -15,6 +16,7 @@ const list = {
   'english': [
     '../courpus/english-own.json'
   ]
+
 }
 
 console.log('[*] reading courpus...')

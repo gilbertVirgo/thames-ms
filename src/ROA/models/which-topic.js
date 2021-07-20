@@ -9,7 +9,7 @@ module.exports = function(string) {
   let topics = {}
 
   string.toLowerCase().split(/\W+/).forEach(word => {
-    words.hasOwnProperty(word) && words[word].forEach(([topic, weight]) => topics[topic] = ~~topics[topic] + weight)
+    words.hasOwnProperty(word) && words[word].forEach(([topic, weight]) => topics[topic] = ~~topics[topic] + 1)
   })
 
   return topics
