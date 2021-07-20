@@ -7,7 +7,7 @@ export default styled.div`
   border: 3px solid black;
   background: white;
   padding: .3rem 1rem;
-  > * { outline: none; }
+  > * { outline: none }
 
   :hover {
     background: ${theme.color.light};

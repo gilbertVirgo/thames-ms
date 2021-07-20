@@ -7,15 +7,10 @@ export default ({ ach, onEdit }) => {
   return (
     <AchClickable
       onKeyPress={e => e.which == 13 && e.preventDefault()}
-      onBlur={() => {
-        // find change values
-        // pass to un onEdit
-        // onEdit(changed values)
-      }}
+      onBlur={({ target }) => onEdit(target.getAttribute('field'), target.innerText)}
     >
-
-      <h1 contentEditable>{ach.Name}</h1>
+      <h2 field='Name' contentEditable>{ach.Name}</h2>
+      <p field='About' contentEditable>{ach.About}</p>
     </AchClickable>
   )
-
 }
